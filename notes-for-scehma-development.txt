@@ -1,0 +1,52 @@
+/*
+questions I want to be able to answer:
+
+Who won the majors last year?
+What tournament had the most aces?
+When is the next elite series event?
+Show me Gannon's scores from the last 5 MVP opens
+Does the course ever change at Krokol open?
+
+Who won the 2024 USDGC?
+*/
+
+Concepts:
+- Tournaments
+- Rounds
+- Holes
+- Shots
+- Courses
+
+holes_played:
+- player_id
+- course_id
+- hole_id
+- date_played
+- score
+
+holes:
+- hole_id
+  - concatenation of tournament_round_id and int 1-18 for hole number
+- tournament_id
+- placement
+- distance
+- par
+
+tournament:
+- tournament_id
+
+tournament_round:
+- tournament_round_id
+- tournament_id
+- round_number
+- date
+- layout_id
+
+layout:
+- layout_id
+- hole_id
+
+
+
+view on top on db:
+hole averages?
