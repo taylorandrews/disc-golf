@@ -50,3 +50,71 @@ layout:
 
 view on top on db:
 hole averages?
+
+
+
+additional notes:
+Tables
+- player
+    - player_id
+    - name
+    - state
+    - dob
+- course
+    - course_id
+    - location
+    - state
+- tournament
+    - tournament_id
+    - name
+    - year
+    - classification
+    - total_rounds
+    - cutoff_score
+    - cutoff_day
+- round
+    - round_id
+    - tournament_id
+    - tournament_round_num
+    - course_id
+    - player_id
+    - score
+    - date
+- hole
+    - hole_id
+    - course_id
+    - round_id
+    - hole_number
+    - par
+    - distance
+    - score
+
+
+Questions:
+- Who won the world championship last year?
+select player.name, sum(score) as total
+from round
+join player 
+    on round.player_id = player.id
+join tournament
+    on round.tournament_id = tournament.id
+where 
+    tournament.name = 'World Championship'
+    and tournament.year = strftime('%Y', 'now') - 1
+group by player.name
+having max(total)
+
+Questions if would be annoying to answer with this schema:
+What courses were played at Champions Cup in 2022?
+What were the 10 hardest holes to par this year?
+
+dg-reference site:
+Elite series page
+- list of years
+- clickthrough to list of events
+- clickthrough to result table: player.name, course.name, score
+  - this is basically a recreation of dgpt.com
+- clickthrough to player
+  - list details about player
+  - list of 50 most recent events played with links to those events
+    - place, points, score, course
