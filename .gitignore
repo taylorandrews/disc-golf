@@ -1,1 +1,4 @@
 pgdata/
+.vscode/
+.venv/
+data/
