@@ -53,7 +53,7 @@ def upgrade() -> None:
 
     def run_inserts(courses):
         tables = {
-            "course": schema["courses"]
+            "course": schema["course"]
         }
         op.bulk_insert(tables["course"], courses)
 
