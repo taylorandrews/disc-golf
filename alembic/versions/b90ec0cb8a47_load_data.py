@@ -9,6 +9,8 @@ from typing import Sequence, Union
 
 from alembic import op
 import sqlalchemy as sa
+import os
+import json
 
 
 # revision identifiers, used by Alembic.
@@ -17,10 +19,56 @@ down_revision: Union[str, Sequence[str], None] = 'c196f70ad0b6'
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
 
+path_to_data = "data/tournament_90947_MPO_round12.json"
+path_to_inserts = "inserts/alembic_data_inserts.sql"
 
 def upgrade() -> None:
     """Loading Data."""
-    pass
+
+    def get_courses(data):
+        courses = []
+        for pool in data["data"]:
+            for layout in pool["layouts"]:
+                if not layout["Name"] == "Default Layout":
+                    courses.append({
+                            "course_id": layout["CourseID"], 
+                            "course_name": layout["CourseName"], 
+                            "name": layout["Name"], 
+                            "holes": layout["Holes"], 
+                            "par": layout["Par"], 
+                            "length": layout["Length"], 
+                            "units": layout["Units"]
+                        })
+        return courses
+        
+    def read_data():
+        with open(path_to_data, 'r') as file:
+            data_str = file.read()
+            data = json.loads(data_str)
+        return data
+
+    def run_inserts(courses):
+        tables = {
+            "course": sa.table(
+                "course",
+                sa.Column("course_id", sa.Integer, primary_key=True),
+                sa.Column("course_name", sa.Text),
+                sa.Column("name", sa.Text),
+                sa.Column("holes", sa.Integer),
+                sa.Column("par", sa.Integer),
+                sa.Column("length", sa.Integer),
+                sa.Column("units", sa.Text),
+            )
+        }
+        op.bulk_insert(tables["course"], courses)
+    
+    data = read_data()
+    courses = get_courses(data)
+    # TODO: add more get functions here
+    run_inserts(courses)
+
+
+    
 
 
 def downgrade() -> None:

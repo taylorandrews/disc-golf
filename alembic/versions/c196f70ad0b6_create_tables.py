@@ -31,8 +31,12 @@ def upgrade():
     op.create_table(
         "course",
         sa.Column("course_id", sa.Integer, primary_key=True),
-        sa.Column("location", sa.Text),
-        sa.Column("state", sa.Text),
+        sa.Column("course_name", sa.Text),
+        sa.Column("name", sa.Text),
+        sa.Column("holes", sa.Integer),
+        sa.Column("par", sa.Integer),
+        sa.Column("length", sa.Integer),
+        sa.Column("units", sa.Text),
     )
 
     # Tournament table
@@ -53,6 +57,7 @@ def upgrade():
         sa.Column("round_id", sa.Integer, primary_key=True),
         sa.Column("tournament_id", sa.Integer, sa.ForeignKey("tournament.tournament_id"), nullable=False),
         sa.Column("tournament_round_num", sa.Integer, nullable=False),
+        sa.Column("tee_time", sa.DateTime, nullable=False),
         sa.Column("course_id", sa.Integer, sa.ForeignKey("course.course_id"), nullable=False),
         sa.Column("player_id", sa.Integer, sa.ForeignKey("player.player_id"), nullable=False),
         sa.Column("score", sa.Integer),
