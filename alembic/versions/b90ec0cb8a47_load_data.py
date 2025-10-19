@@ -7,6 +7,7 @@ Create Date: 2025-10-18 16:30:52.717929
 """
 
 from typing import Sequence, Union
+from helpers.disc_golf_schema import schema
 
 from alembic import op
 import sqlalchemy as sa
@@ -21,7 +22,6 @@ branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
 
 path_to_data = "data/tournament_90947_MPO_round12.json"
-path_to_inserts = "inserts/alembic_data_inserts.sql"
 
 
 def upgrade() -> None:
@@ -53,16 +53,7 @@ def upgrade() -> None:
 
     def run_inserts(courses):
         tables = {
-            "course": sa.table(
-                "course",
-                sa.Column("course_id", sa.Integer, primary_key=True),
-                sa.Column("course_name", sa.Text),
-                sa.Column("name", sa.Text),
-                sa.Column("holes", sa.Integer),
-                sa.Column("par", sa.Integer),
-                sa.Column("length", sa.Integer),
-                sa.Column("units", sa.Text),
-            )
+            "course": schema["courses"]
         }
         op.bulk_insert(tables["course"], courses)
 
@@ -74,4 +65,4 @@ def upgrade() -> None:
 
 def downgrade() -> None:
     """Truncating Tables."""
-    pass
+    op.execute("TRUNCATE TABLE course CASCADE;")
