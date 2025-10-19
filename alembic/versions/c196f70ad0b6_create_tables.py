@@ -5,6 +5,7 @@ Revises:
 Create Date: 2025-10-18 16:45:00.000000
 
 """
+
 from typing import Sequence, Union
 
 from alembic import op
@@ -55,7 +56,12 @@ def upgrade():
     op.create_table(
         "round",
         sa.Column("round_id", sa.Integer, primary_key=True),
-        sa.Column("tournament_id", sa.Integer, sa.ForeignKey("tournament.tournament_id"), nullable=False),
+        sa.Column(
+            "tournament_id",
+            sa.Integer,
+            sa.ForeignKey("tournament.tournament_id"),
+            nullable=False,
+        ),
         sa.Column("tournament_round_num", sa.Integer, nullable=False),
         sa.Column("tee_time", sa.DateTime, nullable=False),
         sa.Column("course_id", sa.Integer, sa.ForeignKey("course.course_id"), nullable=False),
