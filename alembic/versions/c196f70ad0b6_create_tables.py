@@ -7,6 +7,7 @@ Create Date: 2025-10-18 16:45:00.000000
 """
 
 from typing import Sequence, Union
+from helpers.disc_golf_schema import schema
 import json
 
 from alembic import op
@@ -20,55 +21,13 @@ depends_on: Union[str, Sequence[str], None] = None
 
 
 def upgrade():
-    op.create_table(
-        "player",
-        sa.Column("player_id", sa.Integer, primary_key=True),
-        sa.Column("name", sa.Text, nullable=False),
-        sa.Column("state", sa.Text),
-        sa.Column("dob", sa.Date),
-    )
-    op.create_table(
-        "course",
-        sa.Column("course_id", sa.Integer, primary_key=True),
-        sa.Column("course_name", sa.Text),
-        sa.Column("name", sa.Text),
-        sa.Column("holes", sa.Integer),
-        sa.Column("par", sa.Integer),
-        sa.Column("length", sa.Integer),
-        sa.Column("units", sa.Text),
-    )
-    op.create_table(
-        "tournament",
-        sa.Column("tournament_id", sa.Integer, primary_key=True),
-        sa.Column("name", sa.Text, nullable=False),
-        sa.Column("year", sa.Integer),
-        sa.Column("classification", sa.Text),
-        sa.Column("total_rounds", sa.Integer),
-        sa.Column("cutoff_score", sa.Integer),
-        sa.Column("cutoff_day", sa.Text),
-    )
-    op.create_table(
-        "round",
-        sa.Column("round_id", sa.Integer, primary_key=True),
-        sa.Column("tournament_id", sa.Integer, sa.ForeignKey("tournament.tournament_id"), nullable=False),
-        sa.Column("tournament_round_num", sa.Integer, nullable=False),
-        sa.Column("tee_time", sa.DateTime, nullable=False),
-        sa.Column("course_id", sa.Integer, sa.ForeignKey("course.course_id"), nullable=False),
-        sa.Column("player_id", sa.Integer, sa.ForeignKey("player.player_id"), nullable=False),
-        sa.Column("score", sa.Integer),
-        sa.Column("date", sa.Date),
-    )
-    op.create_table(
-        "hole",
-        sa.Column("hole_id", sa.Integer, primary_key=True),
-        sa.Column("course_id", sa.Integer, sa.ForeignKey("course.course_id"), nullable=False),
-        sa.Column("round_id", sa.Integer, sa.ForeignKey("round.round_id"), nullable=False),
-        sa.Column("hole_number", sa.Integer, nullable=False),
-        sa.Column("par", sa.Integer),
-        sa.Column("distance", sa.Integer),
-        sa.Column("score", sa.Integer),
-    )
+    """
+    Create Table
+    Based on the schema defined in helpers/disc_golf_schema.py
+    """
 
+    for table_name in schema:
+        op.create_table(table_name, *schema[table_name].columns)
 
 def downgrade():
     op.drop_table("hole")

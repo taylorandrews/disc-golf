@@ -27,6 +27,12 @@ path_to_data = "data/tournament_90947_MPO_round12.json"
 def upgrade() -> None:
     """Loading Data."""
 
+    def read_data():
+        with open(path_to_data, "r") as file:
+            data_str = file.read()
+            data = json.loads(data_str)
+        return data
+
     def get_courses(data):
         courses = []
         for pool in data["data"]:
@@ -45,12 +51,6 @@ def upgrade() -> None:
                     )
         return courses
 
-    def read_data():
-        with open(path_to_data, "r") as file:
-            data_str = file.read()
-            data = json.loads(data_str)
-        return data
-
     def run_inserts(courses):
         tables = {
             "course": schema["course"]
@@ -60,6 +60,7 @@ def upgrade() -> None:
     data = read_data()
     courses = get_courses(data)
     # TODO: add more get functions here
+
     run_inserts(courses)
 
 
