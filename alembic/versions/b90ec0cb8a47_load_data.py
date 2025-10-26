@@ -27,9 +27,6 @@ path_to_data = "data/"
 
 def upgrade() -> None:
     """Loading Data."""
-    # setup
-    # meta = sa.MetaData(bind=op.get_bind())
-
     def read_round(file_path):
         with open(file_path, "r") as file:
             data_str = file.read()
@@ -87,7 +84,7 @@ def upgrade() -> None:
         courses = get_courses(round_data)
         # players = get_players(round_data)
 
-        # alembic bulk inserts
+        # alembic bulk inserts/upserts
         run_upserts(courses)
         # run_inserts(players)
 
