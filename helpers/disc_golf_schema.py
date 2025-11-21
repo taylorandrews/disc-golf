@@ -26,11 +26,11 @@ schema = {
             "tournament",
             sa.Column("tournament_id", sa.Integer, primary_key=True),
             sa.Column("name", sa.Text, nullable=False),
-            sa.Column("year", sa.Integer),
-            sa.Column("classification", sa.Text),
-            sa.Column("total_rounds", sa.Integer),
-            sa.Column("cutoff_score", sa.Integer),
-            sa.Column("cutoff_day", sa.Text),
+            sa.Column("start_date", sa.Date, nullable=False),
+            sa.Column("classification", sa.Text, nullable=False),
+            sa.Column("director", sa.Text),
+            sa.Column("is_worlds", sa.Boolean),
+            sa.Column("total_rounds", sa.Integer, nullable=False),
         ),
     "round":
         sa.table(

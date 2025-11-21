@@ -14,6 +14,7 @@ import sqlalchemy as sa
 from sqlalchemy.dialects import postgresql
 import os
 import json
+import csv
 
 
 # revision identifiers, used by Alembic.
@@ -22,7 +23,8 @@ down_revision: Union[str, Sequence[str], None] = "c196f70ad0b6"
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
 
-path_to_data = "data/"
+path_to_pdga_data = "data/pdga/"
+path_to_seeds = "data/seed/"
 
 
 def upgrade() -> None:
@@ -65,14 +67,39 @@ def upgrade() -> None:
                     }
                 )
         return players
+    
+    def to_bool(value: str) -> bool:
+        return value.lower() in ("yes", "true", "t", "1")
+    
+    def get_tournaments(path_to_tournament_seed):
+        with open(path_to_tournament_seed, mode='r', newline='') as seed_file:
+            dictreader = csv.DictReader(seed_file)
+            tournaments = []
+            for tournament in dictreader:
+                tournaments.append(
+                    {
+                        "tournament_id": tournament["tournament_id"],
+                        "name": tournament["name"],
+                        "start_date": tournament["start_date"],
+                        "classification": tournament["classification"],
+                        "director": tournament["director"],
+                        "is_worlds": to_bool(tournament["is_worlds"]),
+                        "total_rounds": tournament["total_rounds"],
+                    }
+                )
+            return tournaments
 
-    def run_inserts(courses):
-        tables = {
-            "course": schema["course"]
-        }
-        op.bulk_insert(tables["course"], courses)
+    def run_upserts(
+        tournaments,
+        courses,
+        players
+    ):
+        # Tournaments
+        tournaments_insert = postgresql.insert(schema["tournament"]).values(tournaments)
+        tournaments_upsert = tournaments_insert.on_conflict_do_nothing(
+            index_elements=['tournament_id']
+        )
 
-    def run_upserts(courses):
         # Courses
         courses_insert = postgresql.insert(schema["course"]).values(courses)
         courses_upsert = courses_insert.on_conflict_do_nothing(
@@ -84,13 +111,17 @@ def upgrade() -> None:
         players_upsert = players_insert.on_conflict_do_nothing(
             index_elements=['pdga_number']
         )
-
+        
+        op.execute(tournaments_upsert)
         op.execute(courses_upsert)
         op.execute(players_upsert)
+        
 
-    for file_name in os.listdir(path_to_data):
+    tournaments = get_tournaments(path_to_seeds + "tournament_data.csv")
+
+    for file_name in os.listdir(path_to_pdga_data):
         # read 1 round of data
-        round_data = read_round("/".join([path_to_data, file_name]))
+        round_data = read_round("/".join([path_to_pdga_data, file_name]))
 
         # make list of dicts for each table
         preprocessed_round_data = round_data["data"]
@@ -99,9 +130,12 @@ def upgrade() -> None:
         courses = get_courses(preprocessed_round_data)
         players = get_players(preprocessed_round_data)
 
-        # alembic bulk inserts/upserts
-        run_upserts(courses)
-        # run_inserts(players)
+        # alembic bulk upserts
+        run_upserts(
+            tournaments,
+            courses,
+            players
+        )
 
 
 def downgrade() -> None:
