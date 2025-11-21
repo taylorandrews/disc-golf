@@ -13,10 +13,13 @@ schema = {
     "player":
         sa.table(
             "player",
-            sa.Column("player_id", sa.Integer, primary_key=True),
-            sa.Column("name", sa.Text, nullable=False),
+            sa.Column("pdga_number", sa.Integer, primary_key=True),
+            sa.Column("first_name", sa.Text, nullable=False),
+            sa.Column("last_name", sa.Text, nullable=False),
             sa.Column("state", sa.Text),
-            sa.Column("dob", sa.Date),
+            sa.Column("city", sa.Text),
+            sa.Column("country", sa.Text),
+            sa.Column("division", sa.Text),
         ),
     "tournament":
         sa.table(
@@ -37,7 +40,7 @@ schema = {
             sa.Column("tournament_round_num", sa.Integer, nullable=False),
             sa.Column("tee_time", sa.DateTime, nullable=False),
             sa.Column("course_id", sa.Integer, sa.ForeignKey("course.course_id"), nullable=False),
-            sa.Column("player_id", sa.Integer, sa.ForeignKey("player.player_id"), nullable=False),
+            sa.Column("pdga_number", sa.Integer, sa.ForeignKey("player.pdga_number"), nullable=False),
             sa.Column("score", sa.Integer),
             sa.Column("date", sa.Date),
         ),

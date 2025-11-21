@@ -35,9 +35,6 @@ def upgrade() -> None:
 
     def get_courses(data):
         courses = []
-        data = data["data"]
-        if type(data) is not list:
-            data = [data]
         for pool in data:
             for layout in pool["layouts"]:
                 if not layout["Name"] == "Default Layout":
@@ -54,11 +51,19 @@ def upgrade() -> None:
     
     def get_players(data):
         players = []
-        for player in data["players"]:
-            players.append(
-                {
-                }
-            )
+        for pool in data:
+            for scores in pool["scores"]:
+                players.append(
+                    {
+                        "first_name": scores["FirstName"],
+                        "last_name": scores["LastName"],
+                        "city": scores["City"],
+                        "country": scores["Country"],
+                        "state": scores["StateProv"],
+                        "pdga_number": scores.get("PDGANum"),
+                        "division": scores["Division"],
+                    }
+                )
         return players
 
     def run_inserts(courses):
@@ -68,21 +73,31 @@ def upgrade() -> None:
         op.bulk_insert(tables["course"], courses)
 
     def run_upserts(courses):
-        insert_stmt = postgresql.insert(schema["course"]).values(courses)
-
-        on_conflict_stmt = insert_stmt.on_conflict_do_nothing(
-            index_elements=['course_id'] # Specify the column(s) that define uniqueness
+        # Courses
+        courses_insert = postgresql.insert(schema["course"]).values(courses)
+        courses_upsert = courses_insert.on_conflict_do_nothing(
+            index_elements=['course_id']
         )
 
-        op.execute(on_conflict_stmt)
+        # Players
+        players_insert = postgresql.insert(schema["player"]).values(players)
+        players_upsert = players_insert.on_conflict_do_nothing(
+            index_elements=['pdga_number']
+        )
+
+        op.execute(courses_upsert)
+        op.execute(players_upsert)
 
     for file_name in os.listdir(path_to_data):
         # read 1 round of data
         round_data = read_round("/".join([path_to_data, file_name]))
 
         # make list of dicts for each table
-        courses = get_courses(round_data)
-        # players = get_players(round_data)
+        preprocessed_round_data = round_data["data"]
+        if type(preprocessed_round_data) is not list:
+            preprocessed_round_data = [preprocessed_round_data]
+        courses = get_courses(preprocessed_round_data)
+        players = get_players(preprocessed_round_data)
 
         # alembic bulk inserts/upserts
         run_upserts(courses)
