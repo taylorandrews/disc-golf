@@ -47,12 +47,23 @@ schema = {
     "hole":
         sa.table(
             "hole",
-            sa.Column("hole_id", sa.Integer, primary_key=True),
+            sa.Column("hole_id", sa.Text, primary_key=True, nullable=False),
+            sa.Column("layout_id", sa.Integer, nullable=False),
             sa.Column("course_id", sa.Integer, sa.ForeignKey("course.course_id"), nullable=False),
-            sa.Column("round_id", sa.Integer, sa.ForeignKey("round.round_id"), nullable=False),
+            sa.Column("round_id", sa.Integer, nullable=False),
+            sa.Column("person_round_id", sa.Integer),
+            sa.Column("pdga_number", sa.Integer, sa.ForeignKey("player.pdga_number"), nullable=False),
+            sa.Column("tournament_round_num", sa.Integer),
+            sa.Column("won_playoff", sa.Text),
+            sa.Column("prize", sa.Text),
+            sa.Column("round_status", sa.Text),
+            sa.Column("hole_count", sa.Integer),
+            sa.Column("card_number", sa.Integer),
+            sa.Column("tee_time",  sa.Text),
+            sa.Column("round_rating", sa.Integer),
             sa.Column("hole_number", sa.Integer, nullable=False),
             sa.Column("par", sa.Integer),
-            sa.Column("distance", sa.Integer),
+            sa.Column("length", sa.Integer),
             sa.Column("score", sa.Integer),
     )
 }
