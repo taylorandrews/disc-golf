@@ -23,7 +23,7 @@ down_revision: Union[str, Sequence[str], None] = "c196f70ad0b6"
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
 
-path_to_pdga_data = "data/pdga_once/"
+path_to_pdga_data = "data/pdga/"
 path_to_seeds = "data/seed/"
 
 
@@ -107,40 +107,42 @@ def upgrade() -> None:
                     # ex. {"H1": {"Hole": "H1", "HoleOrdinal": 1, "Label": "1", "Par": 4, "Length": 237, "Ordinal": 1}}
                     # Get at this like: hole_reference["H1"]["Length"]
                 for person_round in pool["scores"]:
-                    person_round_id = person_round["ResultID"]
-                    pdga_number = person_round["PDGANum"]
-                    tournament_round_num = person_round["Round"]
-                    won_playoff = person_round["WonPlayoff"]
-                    prize = person_round["Prize"]
-                    round_status = person_round["RoundStatus"]
-                    hole_count = person_round["Holes"]
-                    card_number = person_round["CardNum"]
-                    tee_time = person_round["TeeTime"]
-                    round_rating = person_round["RoundRating"]
-                    for i, hole_score in enumerate(person_round["HoleScores"]):
-                        hole_ref = hole_reference[f"H{i+1}"]
-                        holes.append(
-                            {
-                                "hole_id": str(layout_id) + "_H" + str(i+1),
-                                "layout_id": layout_id,
-                                "course_id": course_id,
-                                "round_id": round_id,
-                                "person_round_id": person_round_id,
-                                "pdga_number": pdga_number,
-                                "tournament_round_num": tournament_round_num,
-                                "won_playoff": won_playoff,
-                                "prize": prize,
-                                "round_status": round_status,
-                                "hole_count": hole_count,
-                                "card_number": card_number,
-                                "tee_time": tee_time,
-                                "round_rating": round_rating,
-                                "hole_number": hole_ref["HoleOrdinal"],
-                                "par": hole_ref["Par"],
-                                "length": hole_ref["Length"] if length_units == "Feet" else hole_ref["Length"]*3.280833,
-                                "score": hole_score,
-                            }
-                        )
+                    if person_round["HasRoundScore"] == 1:
+                        person_round_id = person_round["ResultID"]
+                        pdga_number = person_round["PDGANum"]
+                        tournament_round_num = person_round["Round"]
+                        won_playoff = person_round["WonPlayoff"]
+                        prize = person_round["Prize"]
+                        round_status = person_round["RoundStatus"]
+                        hole_count = person_round["Holes"]
+                        card_number = person_round["CardNum"]
+                        tee_time = person_round["TeeTime"]
+                        round_rating = person_round["RoundRating"]
+                        for i, hole_score in enumerate(person_round["HoleScores"]):
+                            hole_ref = hole_reference[f"H{i+1}"]
+                            holes.append(
+                                {
+                                    "hole_id": str(layout_id) + "_H" + str(i+1),
+                                    "layout_id": layout_id,
+                                    "course_id": course_id,
+                                    "round_id": round_id,
+                                    "person_round_id": person_round_id,
+                                    "pdga_number": pdga_number,
+                                    "tournament_round_num": tournament_round_num,
+                                    "won_playoff": won_playoff,
+                                    "prize": prize,
+                                    "round_status": round_status,
+                                    "hole_count": hole_count,
+                                    "card_number": card_number,
+                                    "tee_time": tee_time,
+                                    "round_rating": round_rating,
+                                    "hole_number": hole_ref["HoleOrdinal"],
+                                    "par": hole_ref["Par"],
+                                    "length": hole_ref["Length"] if length_units == "Feet" else hole_ref["Length"]*3.280833,
+                                    "score": hole_score,
+                                }
+                            )
+        print(f"Loaded {len(holes)} holes")
         return holes
 
     def run_upserts(
