@@ -220,7 +220,7 @@ def upgrade() -> None:
         op.execute(courses_upsert)
         op.execute(players_upsert)
         op.execute(rounds_upsert)
-        # op.execute(holes_upsert)
+        op.execute(holes_upsert)
 
     tournaments = get_tournaments(path_to_seeds + "tournament_data.csv")
     print("Found", len(tournaments) , "tournaments in the seed file")
