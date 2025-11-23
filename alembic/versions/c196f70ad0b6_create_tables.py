@@ -8,7 +8,6 @@ Create Date: 2025-10-18 16:45:00.000000
 
 from typing import Sequence, Union
 from helpers.disc_golf_schema import schema
-import json
 
 from alembic import op
 import sqlalchemy as sa
