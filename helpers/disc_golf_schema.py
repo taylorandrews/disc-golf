@@ -13,7 +13,7 @@ schema = {
     "player":
         sa.table(
             "player",
-            sa.Column("pdga_number", sa.Integer, primary_key=True),
+            sa.Column("player_id", sa.Integer, primary_key=True),
             sa.Column("first_name", sa.Text, nullable=False),
             sa.Column("last_name", sa.Text, nullable=False),
             sa.Column("state", sa.Text),
@@ -38,7 +38,7 @@ schema = {
             sa.Column("round_id", sa.Integer, primary_key=True),
             sa.Column("layout_id", sa.Integer, nullable=False),
             sa.Column("course_id", sa.Integer, sa.ForeignKey("course.course_id"), nullable=False),
-            sa.Column("pdga_number", sa.Integer, sa.ForeignKey("player.pdga_number"), nullable=False),
+            sa.Column("player_id", sa.Integer, sa.ForeignKey("player.player_id"), nullable=False),
             sa.Column("tournament_id", sa.Integer, sa.ForeignKey("tournament.tournament_id"), nullable=False),
             sa.Column("tournament_round_id", sa.Integer, nullable=False),
             sa.Column("tournament_round_num", sa.Integer, nullable=False),
@@ -57,7 +57,7 @@ schema = {
             "hole",
             sa.Column("hole_id", sa.Text, primary_key=True, nullable=False),
             sa.Column("round_id", sa.Integer, sa.ForeignKey("round.round_id"), nullable=False),
-            sa.Column("pdga_number", sa.Integer, sa.ForeignKey("player.pdga_number"), nullable=False),
+            sa.Column("player_id", sa.Integer, sa.ForeignKey("player.player_id"), nullable=False),
             sa.Column("hole_number", sa.Integer, nullable=False),
             sa.Column("par", sa.Integer),
             sa.Column("length", sa.Integer),

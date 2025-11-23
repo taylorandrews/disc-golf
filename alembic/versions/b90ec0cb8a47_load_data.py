@@ -15,6 +15,7 @@ from sqlalchemy.dialects import postgresql
 import os
 import json
 import csv
+import datetime
 
 
 # revision identifiers, used by Alembic.
@@ -25,7 +26,7 @@ depends_on: Union[str, Sequence[str], None] = None
 
 path_to_pdga_data = "data/pdga/"
 path_to_seeds = "data/seed/"
-verbose = True
+verbose = False
 
 def upgrade() -> None:
     """Loading Data."""
@@ -62,7 +63,7 @@ def upgrade() -> None:
                         "city": scores["City"],
                         "country": scores["Country"],
                         "state": scores["StateProv"],
-                        "pdga_number": scores.get("PDGANum"),
+                        "player_id": scores.get("PDGANum"),
                         "division": scores["Division"],
                     }
                 )
@@ -78,11 +79,18 @@ def upgrade() -> None:
             if tournament["tournament_id"] == tournament_id:
                 tournament_name = tournament["name"]
                 tournament_start_date = tournament["start_date"]
+                year = int(tournament_start_date.split("-")[0])
+                month = int(tournament_start_date.split("-")[1])
+                day = int(tournament_start_date.split("-")[2])
+                tournament_start_date = datetime.date(year, month, day)
         round_num = file_name_parts[-1].replace(".json", "")
+        if round_num == "12":
+            round_num = "5"
+        round_date = tournament_start_date + datetime.timedelta(days=int(round_num)-1)
         round_info = {
             "tournament_name": tournament_name,
             "round_num": round_num,
-            "tournament_start_date": tournament_start_date
+            "round_date": round_date
         }
         return round_info
     
@@ -104,7 +112,7 @@ def upgrade() -> None:
                 )
             return tournaments
     
-    def get_holes_and_rounds(data, round_start_date):
+    def get_holes_and_rounds(data, round_date):
         holes = []
         rounds = []
         for pool in data:
@@ -126,22 +134,22 @@ def upgrade() -> None:
                 for person_round in pool["scores"]:
                     if person_round["HasRoundScore"] == 1:
                         person_round_id = person_round["ScoreID"]
-                        pdga_number = person_round["PDGANum"]
-                        tournament_round_num = person_round["Round"]
+                        player_id = person_round["PDGANum"]
+                        tournament_round_num = 5 if person_round["Round"] == 12 else person_round["Round"]
                         won_playoff = person_round["WonPlayoff"]
                         prize = person_round["Prize"]
                         round_status = person_round["RoundStatus"]
                         hole_count = person_round["Holes"]
                         card_number = person_round["CardNum"]
                         tee_time = person_round["TeeTime"]
-                        round_to_par = int(person_round["RoundtoPar"])
-                        round_rating = int(person_round["RoundRating"])
+                        round_to_par = person_round["RoundtoPar"]
+                        round_rating = person_round["RoundRating"]
                         rounds.append(
                             {
                                 "round_id": person_round_id,
                                 "layout_id": layout_id,
                                 "course_id": course_id,
-                                "pdga_number": pdga_number,
+                                "player_id": player_id,
                                 "tournament_id": tournament_id,
                                 "tournament_round_id": round_id,
                                 "tournament_round_num": tournament_round_num,
@@ -153,7 +161,7 @@ def upgrade() -> None:
                                 "tee_time": tee_time,
                                 "round_rating": round_rating,
                                 "round_score": round_to_par,
-                                "round_score": round_date
+                                "round_date": round_date
                             }
                         )
                         for i, hole_score in enumerate(person_round["HoleScores"]):
@@ -162,19 +170,20 @@ def upgrade() -> None:
                                 {
                                     "hole_id": str(person_round_id) + "_H" + str(i+1),
                                     "round_id": person_round_id,
-                                    "pdga_number": pdga_number,
+                                    "player_id": player_id,
                                     "hole_number": hole_ref["HoleOrdinal"],
                                     "par": hole_ref["Par"],
                                     "length": hole_ref["Length"] if length_units == "Feet" else hole_ref["Length"]*3.280833,
                                     "score": hole_score,
                                 }
                             )
-        return holes
+        return holes, rounds
 
     def run_upserts(
         tournaments,
         courses,
         players,
+        rounds,
         holes
     ):
         # Tournaments
@@ -192,7 +201,13 @@ def upgrade() -> None:
         # Players
         players_insert = postgresql.insert(schema["player"]).values(players)
         players_upsert = players_insert.on_conflict_do_nothing(
-            index_elements=['pdga_number']
+            index_elements=['player_id']
+        )
+
+        # Rounds
+        rounds_insert = postgresql.insert(schema["round"]).values(rounds)
+        rounds_upsert = rounds_insert.on_conflict_do_nothing(
+            index_elements=['round_id']
         )
 
         # Holes
@@ -204,7 +219,8 @@ def upgrade() -> None:
         op.execute(tournaments_upsert)
         op.execute(courses_upsert)
         op.execute(players_upsert)
-        op.execute(holes_upsert)
+        op.execute(rounds_upsert)
+        # op.execute(holes_upsert)
 
     tournaments = get_tournaments(path_to_seeds + "tournament_data.csv")
     print("Found", len(tournaments) , "tournaments in the seed file")
@@ -227,7 +243,7 @@ def upgrade() -> None:
         players = get_players(preprocessed_round_data)
         if verbose:
             print("Found", len(players) , "players")
-        holes = get_holes_and_rounds(preprocessed_round_data, round_info["stare_date"])
+        holes, rounds = get_holes_and_rounds(preprocessed_round_data, round_info["round_date"])
         if verbose:
             print("Found", len(holes) , "holes played")
 
@@ -236,6 +252,7 @@ def upgrade() -> None:
             tournaments,
             courses,
             players,
+            rounds,
             holes
         )
 
