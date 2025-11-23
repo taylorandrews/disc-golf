@@ -107,6 +107,7 @@ def upgrade() -> None:
                         "director": tournament["director"],
                         "is_worlds": to_bool(tournament["is_worlds"]),
                         "total_rounds": tournament["total_rounds"],
+                        "has_finals": to_bool(tournament["has_finals"]),
                     }
                 )
             return tournaments

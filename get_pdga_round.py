@@ -35,6 +35,7 @@ def get_round_seed_data(path_to_tournament_seed):
                         "director": tournament["director"],
                         "is_worlds": to_bool(tournament["is_worlds"]),
                         "total_rounds": tournament["total_rounds"],
+                        "has_finals": tournament["has_finals"],
                     }
                 )
     
@@ -70,7 +71,7 @@ if __name__ == "__main__":
         for i, api_round_num in enumerate(round_list):
             division = "MPO"
             round_data = fetch_pdga_round(tournament_id, division, api_round_num)
-            write_path = Path(f"{data_path}/test/tournament_{tournament_id}_{division}_round_{i+1}.json")
+            write_path = Path(f"{data_path}/temp/tournament_{tournament_id}_{division}_round_{i+1}.json")
 
             # Save to file with pretty-printing
             with write_path.open("w", encoding="utf-8") as f:

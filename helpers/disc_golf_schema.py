@@ -29,8 +29,9 @@ schema = {
             sa.Column("start_date", sa.Date, nullable=False),
             sa.Column("classification", sa.Text, nullable=False),
             sa.Column("director", sa.Text),
-            sa.Column("is_worlds", sa.Boolean),
+            sa.Column("is_worlds", sa.Boolean, nullable=False),
             sa.Column("total_rounds", sa.Integer, nullable=False),
+            sa.Column("has_finals", sa.Boolean, nullable=False),
         ),
     "round":
         sa.table(
