@@ -10,15 +10,14 @@ dry_run = True
 def to_bool(value: str) -> bool:
     return value.lower() in ("yes", "true", "t", "1")
 
-def get_rounds_nums_list(total_rounds):
-    round_list = ["1", "2"]
-    if total_rounds == "3":
-        round_list += ["3"]
-    elif total_rounds == "4":
-        round_list += ["3", "4"]
-    elif total_rounds == "5":
-        round_list += ["3", "4", "12"]
+def get_rounds_nums_list(total_rounds, has_finals):
+    round_list = []
+    for i in range(1, int(total_rounds)+1):
+        round_list.append(str(i))
     
+    if has_finals:
+        round_list[:-1].append("12")  
+
     return round_list
     
 
@@ -45,6 +44,7 @@ def fetch_pdga_round(tourn_id: int, division: str, round: int):
     """
     Fetch PDGA live JSON data for a given tournament, division, and round.
     """
+
     url = (
         "https://www.pdga.com/apps/tournament/live-api/live_results_fetch_round"
         f"?TournID={tourn_id}&Division={division}&Round={round}"
@@ -66,11 +66,11 @@ if __name__ == "__main__":
 
     for tournament in tournaments:
         tournament_id = tournament["tournament_id"]
-        round_list = get_rounds_nums_list(tournament["total_rounds"])
-        for round in round_list:
+        round_list = get_rounds_nums_list(tournament["total_rounds"], tournament["has_finals"])
+        for i, api_round_num in enumerate(round_list):
             division = "MPO"
-            round_data = fetch_pdga_round(tournament_id, division, round)
-            write_path = Path(f"{data_path}/test/tournament_{tournament_id}_{division}_round_{round}.json")
+            round_data = fetch_pdga_round(tournament_id, division, api_round_num)
+            write_path = Path(f"{data_path}/test/tournament_{tournament_id}_{division}_round_{i+1}.json")
 
             # Save to file with pretty-printing
             with write_path.open("w", encoding="utf-8") as f:

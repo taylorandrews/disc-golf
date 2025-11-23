@@ -83,13 +83,12 @@ def upgrade() -> None:
                 month = int(tournament_start_date.split("-")[1])
                 day = int(tournament_start_date.split("-")[2])
                 tournament_start_date = datetime.date(year, month, day)
+                tournament_rounds = int(tournament["total_rounds"])
         round_num = file_name_parts[-1].replace(".json", "")
-        if round_num == "12":
-            round_num = "5"
         round_date = tournament_start_date + datetime.timedelta(days=int(round_num)-1)
         round_info = {
             "tournament_name": tournament_name,
-            "round_num": round_num,
+            "round_num": tournament_rounds if round_num == "12" else int(round_num),
             "round_date": round_date
         }
         return round_info
@@ -112,7 +111,7 @@ def upgrade() -> None:
                 )
             return tournaments
     
-    def get_holes_and_rounds(data, round_date):
+    def get_holes_and_rounds(data, round_date, tournament_round_num):
         holes = []
         rounds = []
         for pool in data:
@@ -129,13 +128,10 @@ def upgrade() -> None:
                 hole_reference = {}
                 for hole in hole_detail:
                     hole_reference[hole["Hole"]] = hole
-                    # ex. {"H1": {"Hole": "H1", "HoleOrdinal": 1, "Label": "1", "Par": 4, "Length": 237, "Ordinal": 1}}
-                    # Get at this like: hole_reference["H1"]["Length"]
                 for person_round in pool["scores"]:
                     if person_round["HasRoundScore"] == 1:
                         person_round_id = person_round["ScoreID"]
                         player_id = person_round["PDGANum"]
-                        tournament_round_num = 5 if person_round["Round"] == 12 else person_round["Round"]
                         won_playoff = person_round["WonPlayoff"]
                         prize = person_round["Prize"]
                         round_status = person_round["RoundStatus"]
@@ -243,8 +239,9 @@ def upgrade() -> None:
         players = get_players(preprocessed_round_data)
         if verbose:
             print("Found", len(players) , "players")
-        holes, rounds = get_holes_and_rounds(preprocessed_round_data, round_info["round_date"])
+        holes, rounds = get_holes_and_rounds(preprocessed_round_data, round_info["round_date"], round_info["round_num"])
         if verbose:
+            print("Found", len(rounds) , "rounds played")
             print("Found", len(holes) , "holes played")
 
         # alembic bulk upserts
