@@ -26,6 +26,7 @@ schema = {
             "tournament",
             sa.Column("tournament_id", sa.Integer, primary_key=True),
             sa.Column("name", sa.Text, nullable=False),
+            sa.Column("long_name", sa.Text, nullable=False),
             sa.Column("start_date", sa.Date, nullable=False),
             sa.Column("classification", sa.Text, nullable=False),
             sa.Column("director", sa.Text),

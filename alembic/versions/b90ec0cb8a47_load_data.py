@@ -102,6 +102,7 @@ def upgrade() -> None:
                     {
                         "tournament_id": tournament["tournament_id"],
                         "name": tournament["name"],
+                        "long_name": tournament["long_name"],
                         "start_date": tournament["start_date"],
                         "classification": tournament["classification"],
                         "director": tournament["director"],

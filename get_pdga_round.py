@@ -5,7 +5,32 @@ from pathlib import Path
 
 path_to_tournament_seed = "data/seed/tournament_data.csv"
 data_path = "data"
-dry_run = True
+dry_run = False
+downloaded_tournaments = [
+    "88276",
+    "88277",
+    "88279",
+    "88282",
+    "88283",
+    "88638",
+    "88284",
+    "88285",
+    "88286",
+    "88287",
+    "88357",
+    "88288",
+    "88289",
+    "90652",
+    "89546",
+    "90947",
+    "88290",
+    "88293",
+    "88294",
+    "88296",
+    "88299",
+    "88301",
+    "88656"
+]
 
 def to_bool(value: str) -> bool:
     return value.lower() in ("yes", "true", "t", "1")
@@ -15,11 +40,10 @@ def get_rounds_nums_list(total_rounds, has_finals):
     for i in range(1, int(total_rounds)+1):
         round_list.append(str(i))
     
-    if has_finals:
-        round_list[:-1].append("12")  
-
+    if to_bool(has_finals):
+        round_list = round_list[:-1]
+        round_list.append("12")
     return round_list
-    
 
 def get_round_seed_data(path_to_tournament_seed):
     tournaments = []
@@ -30,6 +54,7 @@ def get_round_seed_data(path_to_tournament_seed):
                     {
                         "tournament_id": tournament["tournament_id"],
                         "name": tournament["name"],
+                        "long_name": tournament["long_name"],
                         "start_date": tournament["start_date"],
                         "classification": tournament["classification"],
                         "director": tournament["director"],
@@ -67,11 +92,14 @@ if __name__ == "__main__":
 
     for tournament in tournaments:
         tournament_id = tournament["tournament_id"]
+        if tournament_id in downloaded_tournaments:
+            continue
         round_list = get_rounds_nums_list(tournament["total_rounds"], tournament["has_finals"])
         for i, api_round_num in enumerate(round_list):
             division = "MPO"
             round_data = fetch_pdga_round(tournament_id, division, api_round_num)
             write_path = Path(f"{data_path}/temp/tournament_{tournament_id}_{division}_round_{i+1}.json")
+            write_path.parent.mkdir(parents=True, exist_ok=True)
 
             # Save to file with pretty-printing
             with write_path.open("w", encoding="utf-8") as f:
