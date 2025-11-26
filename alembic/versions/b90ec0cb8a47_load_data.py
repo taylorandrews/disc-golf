@@ -26,7 +26,7 @@ depends_on: Union[str, Sequence[str], None] = None
 
 path_to_pdga_data = "data/pdga/"
 path_to_seeds = "data/seed/"
-verbose = False
+verbose = True
 
 def upgrade() -> None:
     """Loading Data."""
@@ -36,14 +36,16 @@ def upgrade() -> None:
             data = json.loads(data_str)
         return data
 
-    def get_courses(data):
+    def get_courses(data, year):
         courses = []
         for pool in data:
             for layout in pool["layouts"]:
-                if not layout["Name"] == "Default Layout":
+                if layout["CourseID"] == -1:
+                    layout["CourseID"] = layout["LayoutID"]
+                if layout["Name"] != "Default Layout" and layout["Par"] not in [9, 11] and layout["Length"] != 5000:
                     courses.append(
                         {
-                            "course_id": layout["CourseID"],
+                            "course_id": int(str(layout["CourseID"]) + str(year)),
                             "course_name": layout["CourseName"],
                             "name": layout["Name"],
                             "holes": layout["Holes"],
@@ -78,6 +80,7 @@ def upgrade() -> None:
         for tournament in tournaments:
             if tournament["tournament_id"] == tournament_id:
                 tournament_name = tournament["name"]
+                tournament_year = tournament["season"]
                 tournament_start_date = tournament["start_date"]
                 year = int(tournament_start_date.split("-")[0])
                 month = int(tournament_start_date.split("-")[1])
@@ -88,6 +91,7 @@ def upgrade() -> None:
         round_date = tournament_start_date + datetime.timedelta(days=int(round_num)-1)
         round_info = {
             "tournament_name": tournament_name,
+            "tournament_year": tournament_year,
             "round_num": tournament_rounds if round_num == "12" else int(round_num),
             "round_date": round_date
         }
@@ -101,6 +105,7 @@ def upgrade() -> None:
                 tournaments.append(
                     {
                         "tournament_id": tournament["tournament_id"],
+                        "season": tournament["season"],
                         "name": tournament["name"],
                         "long_name": tournament["long_name"],
                         "start_date": tournament["start_date"],
@@ -113,7 +118,7 @@ def upgrade() -> None:
                 )
             return tournaments
     
-    def get_holes_and_rounds(data, round_date, tournament_round_num):
+    def get_holes_and_rounds(data, round_date, tournament_round_num, year):
         holes = []
         rounds = []
         for pool in data:
@@ -122,7 +127,9 @@ def upgrade() -> None:
                 print('There is an issue!!')
                 break
             for layout in pool["layouts"]:
-                course_id = layout["CourseID"]
+                if layout["CourseID"] in [-1, None]:
+                    layout["CourseID"] = layout["LayoutID"]
+                course_id = int(str(layout["CourseID"]) + str(year))
                 layout_id = layout["LayoutID"]
                 tournament_id = layout["TournID"]
                 hole_detail = layout["Detail"]
@@ -131,8 +138,8 @@ def upgrade() -> None:
                 for hole in hole_detail:
                     hole_reference[hole["Hole"]] = hole
                 for person_round in pool["scores"]:
-                    if person_round["HasRoundScore"] == 1:
-                        person_round_id = person_round["ScoreID"]
+                    if person_round["RoundStarted"] == 1:
+                        person_round_id = person_round["ScoreID"] if person_round["ScoreID"] == "" else person_round["ResultID"] + tournament_round_num
                         player_id = person_round["PDGANum"]
                         won_playoff = person_round["WonPlayoff"]
                         prize = person_round["Prize"]
@@ -162,7 +169,7 @@ def upgrade() -> None:
                                 "round_date": round_date
                             }
                         )
-                        for i, hole_score in enumerate(person_round["HoleScores"]):
+                        for i, hole_score in enumerate([hs for hs in person_round["HoleScores"] if hs != ""]):
                             hole_ref = hole_reference[f"H{i+1}"]
                             holes.append(
                                 {
@@ -177,6 +184,127 @@ def upgrade() -> None:
                             )
         return holes, rounds
 
+    def validate_data(
+        tournaments,
+        courses,
+        players,
+        rounds,
+        holes
+    ):
+        """
+        Validate that all rows match the expected SQLAlchemy schema types.
+        Fail fast and print the offending row if anything would break Postgres inserts.
+        """
+
+        def is_int_like(v):
+            if v is None:
+                return True
+            if isinstance(v, int):
+                return True
+            if isinstance(v, str):
+                return v.strip().isdigit()
+            return False
+
+        def is_float_like(v):
+            if v is None:
+                return True
+            if isinstance(v, (float, int)):
+                return True
+            if isinstance(v, str):
+                try:
+                    float(v)
+                    return True
+                except Exception:
+                    return False
+            return False
+
+        def is_bool_like(v):
+            if v is None:
+                return True
+            if isinstance(v, bool):
+                return True
+            if isinstance(v, str):
+                return v.lower() in ("true", "t", "yes", "1", "false", "f", "no", "0")
+            return False
+
+        def is_date_like(v):
+            if v is None:
+                return True
+            if isinstance(v, datetime.date):
+                return True
+            if isinstance(v, str):
+                try:
+                    datetime.date.fromisoformat(v)
+                    return True
+                except Exception:
+                    return False
+            return False
+
+        # mapping from column type → validation function
+        type_validators = {
+            sa.Integer: is_int_like,
+            sa.Float: is_float_like,
+            sa.Boolean: is_bool_like,
+            sa.Date: is_date_like,
+            sa.Text: lambda v: True,  # always allow text
+        }
+
+        def validate_table_row(table_name, rows, table):
+            try:
+                for idx, row in enumerate(rows):
+                    for col in table.columns:
+
+                        colname = col.name
+                        val = row.get(colname)
+
+                        # Required field (nullable=False)
+                        if val in (None, "") and not col.nullable:
+                            ValueError(
+                                f"[{table_name}] Row {idx}: required column '{colname}' "
+                                f"is NULL or empty. Row: {row}"
+                            )
+
+                        # Skip NULLs if nullable
+                        if val in (None, ""):
+                            continue
+
+                        # Validate type
+                        validator = None
+                        for sqlalchemy_type, fn in type_validators.items():
+                            if isinstance(col.type, sqlalchemy_type):
+                                validator = fn
+                                break
+
+                        if validator is None:
+                            # Unknown type → skip
+                            continue
+
+                        if not validator(val):
+                            ValueError(
+                                f"[{table_name}] Row {idx}: invalid value '{val}' "
+                                f"for column '{colname}' ({col.type}). Row: {row}"
+                            )
+            except ValueError as ve:
+                print("Data validation error:", ve)
+                raise ve
+
+        # Run validations for each table 
+        validate_table_row("tournament", tournaments, schema["tournament"])
+        if verbose:
+            print("Tournament data successfully validated")
+        validate_table_row("course", courses, schema["course"])
+        if verbose:
+            print("Course data successfully validated")
+        validate_table_row("player", players, schema["player"])
+        if verbose:
+            print("Player data successfully validated")
+        validate_table_row("round", rounds, schema["round"])
+        if verbose:
+            print("Round data successfully validated")
+        validate_table_row("hole", holes, schema["hole"])
+        if verbose:
+            print("Hole data successfully validated")
+
     def run_upserts(
         tournaments,
         courses,
@@ -185,45 +313,51 @@ def upgrade() -> None:
         holes
     ):
         # Tournaments
-        tournaments_insert = postgresql.insert(schema["tournament"]).values(tournaments)
-        tournaments_upsert = tournaments_insert.on_conflict_do_nothing(
-            index_elements=['tournament_id']
-        )
+        if len(tournaments) > 0:
+            tournaments_insert = postgresql.insert(schema["tournament"]).values(tournaments)
+            tournaments_upsert = tournaments_insert.on_conflict_do_nothing(
+                index_elements=['tournament_id']
+            )
+            op.execute(tournaments_upsert)
 
         # Courses
-        courses_insert = postgresql.insert(schema["course"]).values(courses)
-        courses_upsert = courses_insert.on_conflict_do_nothing(
-            index_elements=['course_id']
-        )
+        if len(courses) > 0:
+            courses_insert = postgresql.insert(schema["course"]).values(courses)
+            courses_upsert = courses_insert.on_conflict_do_nothing(
+                index_elements=['course_id']
+            )
+            op.execute(courses_upsert)
 
         # Players
-        players_insert = postgresql.insert(schema["player"]).values(players)
-        players_upsert = players_insert.on_conflict_do_nothing(
-            index_elements=['player_id']
-        )
+        if len(players) > 0:
+            players_insert = postgresql.insert(schema["player"]).values(players)
+            players_upsert = players_insert.on_conflict_do_nothing(
+                index_elements=['player_id']
+            )
+            op.execute(players_upsert)
 
         # Rounds
-        rounds_insert = postgresql.insert(schema["round"]).values(rounds)
-        rounds_upsert = rounds_insert.on_conflict_do_nothing(
-            index_elements=['round_id']
-        )
+        if len(rounds) > 0:
+            rounds_insert = postgresql.insert(schema["round"]).values(rounds)
+            rounds_upsert = rounds_insert.on_conflict_do_nothing(
+                index_elements=['round_id']
+            )
+            op.execute(rounds_upsert)
 
         # Holes
-        holes_insert = postgresql.insert(schema["hole"]).values(holes)
-        holes_upsert = holes_insert.on_conflict_do_nothing(
-            index_elements=['hole_id']
-        )
-        
-        op.execute(tournaments_upsert)
-        op.execute(courses_upsert)
-        op.execute(players_upsert)
-        op.execute(rounds_upsert)
-        op.execute(holes_upsert)
+        if len(holes) > 0:
+            holes_insert = postgresql.insert(schema["hole"]).values(holes)
+            holes_upsert = holes_insert.on_conflict_do_nothing(
+                index_elements=['hole_id']
+            )
+            op.execute(holes_upsert)
 
     tournaments = get_tournaments(path_to_seeds + "tournament_data.csv")
     print("Found", len(tournaments) , "tournaments in the seed file")
 
     for file_name in os.listdir(path_to_pdga_data):
+        if verbose:
+            print("\nProcessing file:", file_name)
         # read 1 round of data
         round_data = read_round("/".join([path_to_pdga_data, file_name]))
         preprocessed_round_data = round_data["data"]
@@ -232,19 +366,28 @@ def upgrade() -> None:
 
         round_info = get_round_info_from_file_name(file_name, tournaments)
         if verbose:
-            print("Processing", round_info["tournament_name"], "round", round_info["round_num"])
+            print("Processing", round_info["tournament_year"], round_info["tournament_name"], "round", round_info["round_num"])
         
         # make list of dicts for each table
-        courses = get_courses(preprocessed_round_data)
+        courses = get_courses(preprocessed_round_data, year=round_info["tournament_year"])
         if verbose:
             print("Found", len(courses) , "course(s)")
         players = get_players(preprocessed_round_data)
         if verbose:
             print("Found", len(players) , "players")
-        holes, rounds = get_holes_and_rounds(preprocessed_round_data, round_info["round_date"], round_info["round_num"])
+        holes, rounds = get_holes_and_rounds(preprocessed_round_data, round_info["round_date"], round_info["round_num"], year=round_info["tournament_year"])
         if verbose:
             print("Found", len(rounds) , "rounds played")
             print("Found", len(holes) , "holes played")
+
+        # validate data
+        validate_data(
+            tournaments,
+            courses,
+            players,
+            rounds,
+            holes
+        )
 
         # alembic bulk upserts
         run_upserts(

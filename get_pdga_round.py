@@ -29,8 +29,27 @@ downloaded_tournaments = [
     "88296",
     "88299",
     "88301",
-    "88656"
+    "88302",
+    "88656",
+    "77775",
+    "77758",
+    "77759",
+    "77760",
+    "77761",
+    "77762",
+    "77099",
+    "77763",
+    "78193",
+    "77764",
+    "77765",
+    "77766",
+    "78194",
+    "78271",
+    "78195",
+    "77768"
 ]
+
+skip_for_now = []
 
 def to_bool(value: str) -> bool:
     return value.lower() in ("yes", "true", "t", "1")
@@ -92,7 +111,7 @@ if __name__ == "__main__":
 
     for tournament in tournaments:
         tournament_id = tournament["tournament_id"]
-        if tournament_id in downloaded_tournaments:
+        if tournament_id in downloaded_tournaments or tournament_id in skip_for_now:
             continue
         round_list = get_rounds_nums_list(tournament["total_rounds"], tournament["has_finals"])
         for i, api_round_num in enumerate(round_list):

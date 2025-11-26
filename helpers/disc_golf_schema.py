@@ -4,11 +4,11 @@ schema = {
     "course":
         sa.table(
             "course",
-            sa.Column("course_id", sa.Integer, primary_key=True),
-            sa.Column("course_name", sa.Text),
-            sa.Column("name", sa.Text),
-            sa.Column("holes", sa.Integer),
-            sa.Column("units", sa.Text),
+            sa.Column("course_id", sa.BigInteger, primary_key=True),
+            sa.Column("course_name", sa.Text, nullable=False),
+            sa.Column("name", sa.Text, nullable=False),
+            sa.Column("holes", sa.Integer, nullable=False),
+            sa.Column("units", sa.Text, nullable=False),
         ),
     "player":
         sa.table(
@@ -19,12 +19,13 @@ schema = {
             sa.Column("state", sa.Text),
             sa.Column("city", sa.Text),
             sa.Column("country", sa.Text),
-            sa.Column("division", sa.Text),
+            sa.Column("division", sa.Text, nullable=False),
         ),
     "tournament":
         sa.table(
             "tournament",
             sa.Column("tournament_id", sa.Integer, primary_key=True),
+            sa.Column("season", sa.Integer, nullable=False),
             sa.Column("name", sa.Text, nullable=False),
             sa.Column("long_name", sa.Text, nullable=False),
             sa.Column("start_date", sa.Date, nullable=False),
@@ -39,7 +40,7 @@ schema = {
             "round",
             sa.Column("round_id", sa.Integer, primary_key=True),
             sa.Column("layout_id", sa.Integer, nullable=False),
-            sa.Column("course_id", sa.Integer, sa.ForeignKey("course.course_id"), nullable=False),
+            sa.Column("course_id", sa.BigInteger, sa.ForeignKey("course.course_id"), nullable=False),
             sa.Column("player_id", sa.Integer, sa.ForeignKey("player.player_id"), nullable=False),
             sa.Column("tournament_id", sa.Integer, sa.ForeignKey("tournament.tournament_id"), nullable=False),
             sa.Column("tournament_round_id", sa.Integer, nullable=False),
@@ -61,8 +62,8 @@ schema = {
             sa.Column("round_id", sa.Integer, sa.ForeignKey("round.round_id"), nullable=False),
             sa.Column("player_id", sa.Integer, sa.ForeignKey("player.player_id"), nullable=False),
             sa.Column("hole_number", sa.Integer, nullable=False),
-            sa.Column("par", sa.Integer),
-            sa.Column("length", sa.Integer),
-            sa.Column("score", sa.Integer),
+            sa.Column("par", sa.Integer, nullable=False),
+            sa.Column("length", sa.Float, nullable=False),
+            sa.Column("score", sa.Integer, nullable=False),
     )
 }
