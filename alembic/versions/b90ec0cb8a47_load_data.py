@@ -26,7 +26,7 @@ depends_on: Union[str, Sequence[str], None] = None
 
 path_to_pdga_data = "data/pdga/"
 path_to_seeds = "data/seed/"
-verbose = True
+verbose = False
 
 def upgrade() -> None:
     """Loading Data."""
@@ -36,16 +36,16 @@ def upgrade() -> None:
             data = json.loads(data_str)
         return data
 
-    def get_courses(data, year):
+    def get_courses(data, year, round):
         courses = []
         for pool in data:
             for layout in pool["layouts"]:
                 if layout["CourseID"] == -1:
                     layout["CourseID"] = layout["LayoutID"]
-                if layout["Name"] != "Default Layout" and layout["Par"] not in [9, 11] and layout["Length"] != 5000:
+                if layout["Name"] != "Default Layout" and layout["Par"] > 19 and layout["Length"] != 5000:
                     courses.append(
                         {
-                            "course_id": int(str(layout["CourseID"]) + str(year)),
+                            "course_id": int(str(layout["CourseID"]) + str(year) + str(round)),
                             "course_name": layout["CourseName"],
                             "name": layout["Name"],
                             "holes": layout["Holes"],
@@ -118,7 +118,7 @@ def upgrade() -> None:
                 )
             return tournaments
     
-    def get_holes_and_rounds(data, round_date, tournament_round_num, year):
+    def get_holes_and_rounds(data, round_date, tournament_round_num, year, round):
         holes = []
         rounds = []
         for pool in data:
@@ -129,7 +129,7 @@ def upgrade() -> None:
             for layout in pool["layouts"]:
                 if layout["CourseID"] in [-1, None]:
                     layout["CourseID"] = layout["LayoutID"]
-                course_id = int(str(layout["CourseID"]) + str(year))
+                course_id = int(str(layout["CourseID"]) + str(year) + str(round))
                 layout_id = layout["LayoutID"]
                 tournament_id = layout["TournID"]
                 hole_detail = layout["Detail"]
@@ -358,6 +358,8 @@ def upgrade() -> None:
     for file_name in os.listdir(path_to_pdga_data):
         if verbose:
             print("\nProcessing file:", file_name)
+        else:
+            print("Processing file:", file_name)
         # read 1 round of data
         round_data = read_round("/".join([path_to_pdga_data, file_name]))
         preprocessed_round_data = round_data["data"]
@@ -369,13 +371,13 @@ def upgrade() -> None:
             print("Processing", round_info["tournament_year"], round_info["tournament_name"], "round", round_info["round_num"])
         
         # make list of dicts for each table
-        courses = get_courses(preprocessed_round_data, year=round_info["tournament_year"])
+        courses = get_courses(preprocessed_round_data, year=round_info["tournament_year"], round=round_info["round_num"])
         if verbose:
             print("Found", len(courses) , "course(s)")
         players = get_players(preprocessed_round_data)
         if verbose:
             print("Found", len(players) , "players")
-        holes, rounds = get_holes_and_rounds(preprocessed_round_data, round_info["round_date"], round_info["round_num"], year=round_info["tournament_year"])
+        holes, rounds = get_holes_and_rounds(preprocessed_round_data, round_info["round_date"], round_info["round_num"], year=round_info["tournament_year"], round=round_info["round_num"])
         if verbose:
             print("Found", len(rounds) , "rounds played")
             print("Found", len(holes) , "holes played")
