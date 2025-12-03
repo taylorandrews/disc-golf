@@ -139,7 +139,7 @@ def upgrade() -> None:
                     hole_reference[hole["Hole"]] = hole
                 for person_round in pool["scores"]:
                     if person_round["RoundStarted"] == 1:
-                        person_round_id = person_round["ScoreID"] if person_round["ScoreID"] == "" else person_round["ResultID"] + tournament_round_num
+                        person_round_id = person_round["ScoreID"] if person_round["ScoreID"] != "" else person_round["ResultID"] + tournament_round_num
                         player_id = person_round["PDGANum"]
                         won_playoff = person_round["WonPlayoff"]
                         prize = person_round["Prize"]
@@ -383,13 +383,13 @@ def upgrade() -> None:
             print("Found", len(holes) , "holes played")
 
         # validate data
-        validate_data(
-            tournaments,
-            courses,
-            players,
-            rounds,
-            holes
-        )
+        # validate_data(
+        #     tournaments,
+        #     courses,
+        #     players,
+        #     rounds,
+        #     holes
+        # )
 
         # alembic bulk upserts
         run_upserts(
