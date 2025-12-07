@@ -65,3 +65,12 @@ website says 21 total events, including 3 majors
 PLUS the tour championship, so 22 total
 beaver state fling got cancelled though, so maybe just 21
 european open was also cancelled, down to 20
+
+2020:
+hard to tell, Elite filter is showing 11
+did Elite events exist?
+no more shot by shot data. 2021 must have been the start of the udisc era
+what to do with these download?
+I can get old courses and ... what would rounds look like?
+how does this effect the queries?
+hole table would just be empty for 2020 and earlier
