@@ -26,7 +26,7 @@ depends_on: Union[str, Sequence[str], None] = None
 
 path_to_pdga_data = "data/pdga/"
 path_to_seeds = "data/seed/"
-verbose = False
+verbose = True
 
 def upgrade() -> None:
     """Loading Data."""
@@ -383,13 +383,13 @@ def upgrade() -> None:
             print("Found", len(holes) , "holes played")
 
         # validate data
-        # validate_data(
-        #     tournaments,
-        #     courses,
-        #     players,
-        #     rounds,
-        #     holes
-        # )
+        validate_data(
+            tournaments,
+            courses,
+            players,
+            rounds,
+            holes
+        )
 
         # alembic bulk upserts
         run_upserts(

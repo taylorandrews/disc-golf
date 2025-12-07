@@ -2,6 +2,8 @@ version: "3.9"
 services:
   postgres:
     image: postgres:15
+    cpus: 4
+    mem_limit: 8g
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: secret

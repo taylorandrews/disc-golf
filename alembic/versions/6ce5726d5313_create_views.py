@@ -272,13 +272,13 @@ def upgrade() -> None:
             ) AS detail
         FROM round r
         WHERE r.hole_count IS NOT NULL
-        AND r.hole_count NOT IN (9, 18, 27);
+        AND r.hole_count NOT IN (9, 18, 24);
         """
     op.execute(create_vw_anomaly)
 
 
 def downgrade() -> None:
     """Downgrade schema."""
-    views = ["vw_round", "vw_hole", "vw_tournament_result", "vw_player_season"]
+    views = ["vw_round", "vw_hole", "vw_tournament_result", "vw_player_season", "create_vw_anomaly"]
     for view in views:
         op.execute(f"DROP VIEW IF EXISTS {view};")
