@@ -1,0 +1,5941 @@
+Found 142 tournaments in the seed file
+
+Processing file: tournament_88302_MPO_round_1.json
+Processing 2025 Pro Tour Championship round 1
+Found 1 course(s)
+Found 33 players
+Found 33 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_45796_MPO_round_2.json
+Processing 2020 Dynamic Discs Open round 2
+Found 1 course(s)
+Found 98 players
+Found 98 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88277_MPO_round_3.json
+Processing 2025 Waco Annual Charity Open round 3
+Found 1 course(s)
+Found 108 players
+Found 108 rounds played
+Found 1890 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_78196_MPO_round_1.json
+Processing 2024 Krokhol Open round 1
+Found 1 course(s)
+Found 112 players
+Found 112 rounds played
+Found 2006 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55593_MPO_round_1.json
+Processing 2022 Green Mountain Championship round 1
+Found 1 course(s)
+Found 96 players
+Found 96 rounds played
+Found 1728 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_38709_MPO_round_2.json
+Processing 2019 World Championships round 2
+Found 2 course(s)
+Found 196 players
+Found 196 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55580_MPO_round_2.json
+Processing 2022 Las Vegas Challenge round 2
+Found 1 course(s)
+Found 118 players
+Found 118 rounds played
+Found 2088 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77773_MPO_round_3.json
+Processing 2024 MVP Open round 3
+Found 1 course(s)
+Found 81 players
+Found 81 rounds played
+Found 1404 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77764_MPO_round_1.json
+Processing 2024 OTB Open round 1
+Found 1 course(s)
+Found 120 players
+Found 120 rounds played
+Found 2160 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_67202_MPO_round_3.json
+Processing 2023 European Open round 3
+Found 1 course(s)
+Found 108 players
+Found 108 rounds played
+Found 1944 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_38851_MPO_round_2.json
+Processing 2019 Delaware Disc Golf Challenge round 2
+Found 1 course(s)
+Found 73 players
+Found 73 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55584_MPO_round_3.json
+Processing 2022 Jonesboro Open round 3
+Found 1 course(s)
+Found 119 players
+Found 119 rounds played
+Found 2052 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88286_MPO_round_1.json
+Processing 2025 Northwest Disc Golf Championship round 1
+Found 1 course(s)
+Found 103 players
+Found 103 rounds played
+Found 1854 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55595_MPO_round_4.json
+Processing 2022 Disc Golf Pro Tour Championship round 4
+Found 1 course(s)
+Found 32 players
+Found 4 rounds played
+Found 72 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_38977_MPO_round_2.json
+Processing 2019 Beaver State Fling round 2
+Found 1 course(s)
+Found 80 players
+Found 80 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88299_MPO_round_1.json
+Processing 2025 Green Mountain Championship round 1
+Found 1 course(s)
+Found 89 players
+Found 89 rounds played
+Found 1602 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77768_MPO_round_2.json
+Processing 2024 Des Moines Challenge round 2
+Found 1 course(s)
+Found 120 players
+Found 120 rounds played
+Found 2142 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_44114_MPO_round_3.json
+Processing 2020 Green Mountain Championship round 3
+Found 1 course(s)
+Found 92 players
+Found 92 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_65291_MPO_round_2.json
+Processing 2023 MVP Open round 2
+Found 1 course(s)
+Found 72 players
+Found 72 rounds played
+Found 1296 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_48687_MPO_round_1.json
+Processing 2021 The Preserve Championship round 1
+Found 1 course(s)
+Found 124 players
+Found 124 rounds played
+Found 2232 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_39018_MPO_round_1.json
+Processing 2019 United States Disc Golf Championship round 1
+Found 1 course(s)
+Found 116 players
+Found 116 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_64957_MPO_round_3.json
+Processing 2023 United States Disc Golf Championship round 3
+Found 1 course(s)
+Found 109 players
+Found 109 rounds played
+Found 1926 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_43778_MPO_round_1.json
+Processing 2020 Jonesboro Open round 1
+Found 1 course(s)
+Found 94 players
+Found 94 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77099_MPO_round_4.json
+Processing 2024 Champions Cup round 4
+Found 1 course(s)
+Found 96 players
+Found 44 rounds played
+Found 774 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_48690_MPO_round_3.json
+Processing 2021 Green Mountain Championship round 3
+Found 1 course(s)
+Found 134 players
+Found 134 rounds played
+Found 2322 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_66174_MPO_round_1.json
+Processing 2023 LWS Open at Idlewild round 1
+Found 1 course(s)
+Found 100 players
+Found 100 rounds played
+Found 1800 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88279_MPO_round_4.json
+Processing 2025 The Open at Austin round 4
+Found 1 course(s)
+Found 107 players
+Found 46 rounds played
+Found 810 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_65116_MPO_round_2.json
+Processing 2023 Discraft Great Lakes Open round 2
+Found 1 course(s)
+Found 73 players
+Found 73 rounds played
+Found 1314 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_66458_MPO_round_2.json
+Processing 2023 Jonesboro Open round 2
+Found 1 course(s)
+Found 112 players
+Found 112 rounds played
+Found 2016 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_38397_MPO_round_3.json
+Processing 2019 European Open round 3
+Found 1 course(s)
+Found 128 players
+Found 128 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_47877_MPO_round_3.json
+Processing 2021 Las Vegas Challenge round 3
+Found 1 course(s)
+Found 136 players
+Found 136 rounds played
+Found 2412 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_47516_MPO_round_2.json
+Processing 2021 Dynamic Discs Open round 2
+Found 1 course(s)
+Found 139 players
+Found 139 rounds played
+Found 2502 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_48338_MPO_round_3.json
+Processing 2021 Discraft's Great Lakes Open round 3
+Found 1 course(s)
+Found 125 players
+Found 125 rounds played
+Found 2142 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77098_MPO_round_2.json
+Processing 2024 United States Disc Golf Championship round 2
+Found 1 course(s)
+Found 122 players
+Found 122 rounds played
+Found 2142 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_39325_MPO_round_2.json
+Processing 2019 Great Lakes Open round 2
+Found 1 course(s)
+Found 132 players
+Found 132 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_47512_MPO_round_3.json
+Processing 2021 Texas State Disc Golf Championship round 3
+Found 1 course(s)
+Found 140 players
+Found 140 rounds played
+Found 2448 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_65206_MPO_round_2.json
+Processing 2023 Las Vegas Challenge round 2
+Found 1 course(s)
+Found 119 players
+Found 119 rounds played
+Found 2124 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_82419_MPO_round_2.json
+Processing 2024 Green Mountain Championship round 2
+Found 1 course(s)
+Found 88 players
+Found 88 rounds played
+Found 1577 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_38682_MPO_round_3.json
+Processing 2019 Jonesboro Open round 3
+Found 1 course(s)
+Found 120 players
+Found 120 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77769_MPO_round_4.json
+Processing 2024 Ledgestone Open round 4
+Found 1 course(s)
+Found 153 players
+Found 72 rounds played
+Found 1170 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_47981_MPO_round_1.json
+Processing 2021 Ledgestone Open round 1
+Found 1 course(s)
+Found 167 players
+Found 167 rounds played
+Found 2991 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_68353_MPO_round_1.json
+Processing 2023 The Preserve Championship round 1
+Found 1 course(s)
+Found 119 players
+Found 119 rounds played
+Found 2142 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55454_MPO_round_2.json
+Processing 2022 United States Disc Golf Championship round 2
+Found 1 course(s)
+Found 96 players
+Found 96 rounds played
+Found 1728 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77759_MPO_round_3.json
+Processing 2024 The Open at Austin round 3
+Found 1 course(s)
+Found 112 players
+Found 112 rounds played
+Found 1962 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55594_MPO_round_2.json
+Processing 2022 MVP Open round 2
+Found 1 course(s)
+Found 82 players
+Found 82 rounds played
+Found 1476 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_38723_MPO_round_2.json
+Processing 2019 Idlewild Open round 2
+Found 1 course(s)
+Found 126 players
+Found 126 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55587_MPO_round_1.json
+Processing 2022 Portland Open round 1
+Found 1 course(s)
+Found 114 players
+Found 114 rounds played
+Found 1998 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_68748_MPO_round_5.json
+Processing 2023 World Championships round 5
+Found 2 course(s)
+Found 216 players
+Found 95 rounds played
+Found 1674 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_90947_MPO_round_3.json
+Processing 2025 World Championship round 3
+Found 2 course(s)
+Found 200 players
+Found 200 rounds played
+Found 3564 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_47541_MPO_round_1.json
+Processing 2021 Music City Open round 1
+Found 1 course(s)
+Found 130 players
+Found 130 rounds played
+Found 2340 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_67392_MPO_round_3.json
+Processing 2023 Des Moines Challenge round 3
+Found 1 course(s)
+Found 120 players
+Found 3 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_71315_MPO_round_5.json
+Processing 2024 World Championships round 5
+Found 2 course(s)
+Found 208 players
+Found 93 rounds played
+Found 1548 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88285_MPO_round_3.json
+Processing 2025 Konopiste Open round 3
+Found 1 course(s)
+Found 110 players
+Found 110 rounds played
+Found 1944 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77763_MPO_round_2.json
+Processing 2024 Dynamic Discs Open round 2
+Found 1 course(s)
+Found 107 players
+Found 107 rounds played
+Found 1908 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88301_MPO_round_3.json
+Processing 2025 MVP Open round 3
+Found 1 course(s)
+Found 79 players
+Found 79 rounds played
+Found 1422 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55460_MPO_round_4.json
+Processing 2022 World Championships round 4
+Found 2 course(s)
+Found 211 players
+Found 211 rounds played
+Found 3726 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55590_MPO_round_3.json
+Processing 2022 Discraft's Great Lakes Open round 3
+Found 1 course(s)
+Found 116 players
+Found 116 rounds played
+Found 2034 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_78195_MPO_round_3.json
+Processing 2024 Swedish Open round 3
+Found 1 course(s)
+Found 108 players
+Found 108 rounds played
+Found 1908 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_52009_MPO_round_3.json
+Processing 2021 Des Moines Challenge round 3
+Found 1 course(s)
+Found 138 players
+Found 91 rounds played
+Found 1471 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_65289_MPO_round_1.json
+Processing 2023 Dynamic Discs Open round 1
+Found 1 course(s)
+Found 119 players
+Found 119 rounds played
+Found 2142 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_43838_MPO_round_2.json
+Processing 2020 United States Disc Golf Championship round 2
+Found 1 course(s)
+Found 74 players
+Found 74 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_66457_MPO_round_3.json
+Processing 2023 Waco Annual Charity Open round 3
+Found 1 course(s)
+Found 116 players
+Found 116 rounds played
+Found 2088 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_40686_MPO_round_1.json
+Processing 2019 Portland Open round 1
+Found 1 course(s)
+Found 110 players
+Found 110 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_43838_MPO_round_3.json
+Processing 2020 United States Disc Golf Championship round 3
+Found 1 course(s)
+Found 74 players
+Found 74 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_66457_MPO_round_2.json
+Processing 2023 Waco Annual Charity Open round 2
+Found 1 course(s)
+Found 116 players
+Found 116 rounds played
+Found 2088 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_52009_MPO_round_2.json
+Processing 2021 Des Moines Challenge round 2
+Found 1 course(s)
+Found 138 players
+Found 138 rounds played
+Found 2359 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55583_MPO_round_1.json
+Processing 2022 Texas State Disc Golf Championship round 1
+Found 1 course(s)
+Found 131 players
+Found 131 rounds played
+Found 2358 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_47518_MPO_round_4.json
+Processing 2021 United States Disc Golf Championship round 4
+Found 1 course(s)
+Found 99 players
+Found 99 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77772_MPO_round_4.json
+Processing 2024 Discraft Great Lakes Open round 4
+Found 1 course(s)
+Found 106 players
+Found 50 rounds played
+Found 792 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55460_MPO_round_5.json
+Processing 2022 World Championships round 5
+Found 2 course(s)
+Found 211 players
+Found 90 rounds played
+Found 1530 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55590_MPO_round_2.json
+Processing 2022 Discraft's Great Lakes Open round 2
+Found 1 course(s)
+Found 116 players
+Found 116 rounds played
+Found 2052 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_78195_MPO_round_2.json
+Processing 2024 Swedish Open round 2
+Found 1 course(s)
+Found 108 players
+Found 108 rounds played
+Found 1926 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_45795_MPO_round_1.json
+Processing 2020 The Preserve Championship round 1
+Found 1 course(s)
+Found 104 players
+Found 104 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77763_MPO_round_3.json
+Processing 2024 Dynamic Discs Open round 3
+Found 1 course(s)
+Found 107 players
+Found 107 rounds played
+Found 1890 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88301_MPO_round_2.json
+Processing 2025 MVP Open round 2
+Found 1 course(s)
+Found 79 players
+Found 79 rounds played
+Found 1422 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_71315_MPO_round_4.json
+Processing 2024 World Championships round 4
+Found 2 course(s)
+Found 208 players
+Found 208 rounds played
+Found 3636 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77774_MPO_round_1.json
+Processing 2024 DGPT Championship round 1
+Found 1 course(s)
+Found 33 players
+Found 33 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_44144_MPO_round_2.json
+Processing 2020 Waco Annual Charity Open round 2
+Found 1 course(s)
+Found 115 players
+Found 115 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88285_MPO_round_2.json
+Processing 2025 Konopiste Open round 2
+Found 1 course(s)
+Found 110 players
+Found 110 rounds played
+Found 1962 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_68748_MPO_round_4.json
+Processing 2023 World Championships round 4
+Found 2 course(s)
+Found 216 players
+Found 216 rounds played
+Found 3870 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_48688_MPO_round_1.json
+Processing 2021 Idlewild Open round 1
+Found 1 course(s)
+Found 120 players
+Found 120 rounds played
+Found 2160 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_90947_MPO_round_2.json
+Processing 2025 World Championship round 2
+Found 2 course(s)
+Found 200 players
+Found 200 rounds played
+Found 3564 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_67392_MPO_round_2.json
+Processing 2023 Des Moines Challenge round 2
+Found 1 course(s)
+Found 120 players
+Found 120 rounds played
+Found 2114 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_56013_MPO_round_4.json
+Processing 2022 European Open round 4
+Found 1 course(s)
+Found 117 players
+Found 61 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55594_MPO_round_3.json
+Processing 2022 MVP Open round 3
+Found 1 course(s)
+Found 82 players
+Found 82 rounds played
+Found 1458 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_38723_MPO_round_3.json
+Processing 2019 Idlewild Open round 3
+Found 1 course(s)
+Found 126 players
+Found 126 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55585_MPO_round_4.json
+Processing 2022 Dynamic Discs Open round 4
+Found 1 course(s)
+Found 117 players
+Found 61 rounds played
+Found 900 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77759_MPO_round_2.json
+Processing 2024 The Open at Austin round 2
+Found 1 course(s)
+Found 112 players
+Found 112 rounds played
+Found 1962 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88296_MPO_round_1.json
+Processing 2025 Discraft Great Lakes Open round 1
+Found 1 course(s)
+Found 102 players
+Found 102 rounds played
+Found 1836 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_47520_MPO_round_1.json
+Processing 2021 Delaware Disc Golf Challenge round 1
+Found 1 course(s)
+Found 85 players
+Found 85 rounds played
+Found 1530 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55454_MPO_round_3.json
+Processing 2022 United States Disc Golf Championship round 3
+Found 1 course(s)
+Found 96 players
+Found 96 rounds played
+Found 1728 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88289_MPO_round_1.json
+Processing 2025 PCS Open round 1
+Found 1 course(s)
+Found 110 players
+Found 110 rounds played
+Found 1980 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_82419_MPO_round_3.json
+Processing 2024 Green Mountain Championship round 3
+Found 1 course(s)
+Found 88 players
+Found 88 rounds played
+Found 1566 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_38873_MPO_round_1.json
+Processing 2019 MVP Open round 1
+Found 1 course(s)
+Found 142 players
+Found 142 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_38682_MPO_round_2.json
+Processing 2019 Jonesboro Open round 2
+Found 1 course(s)
+Found 120 players
+Found 120 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_47512_MPO_round_2.json
+Processing 2021 Texas State Disc Golf Championship round 2
+Found 1 course(s)
+Found 140 players
+Found 140 rounds played
+Found 2502 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_65206_MPO_round_3.json
+Processing 2023 Las Vegas Challenge round 3
+Found 1 course(s)
+Found 119 players
+Found 119 rounds played
+Found 2106 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_74356_MPO_round_6.json
+Processing 2023 Disc Golf Pro Tour Championship round 6
+Found 1 course(s)
+Found 32 players
+Found 13 rounds played
+Found 216 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77098_MPO_round_3.json
+Processing 2024 United States Disc Golf Championship round 3
+Found 1 course(s)
+Found 122 players
+Found 122 rounds played
+Found 2106 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_65115_MPO_round_1.json
+Processing 2023 Ledgestone Open round 1
+Found 1 course(s)
+Found 145 players
+Found 145 rounds played
+Found 2610 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_43452_MPO_round_1.json
+Processing 2020 Ledgestone Open round 1
+Found 1 course(s)
+Found 182 players
+Found 182 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_39325_MPO_round_3.json
+Processing 2019 Great Lakes Open round 3
+Found 1 course(s)
+Found 132 players
+Found 132 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_48338_MPO_round_2.json
+Processing 2021 Discraft's Great Lakes Open round 2
+Found 1 course(s)
+Found 125 players
+Found 125 rounds played
+Found 2214 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_47877_MPO_round_2.json
+Processing 2021 Las Vegas Challenge round 2
+Found 1 course(s)
+Found 136 players
+Found 136 rounds played
+Found 2448 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_47516_MPO_round_3.json
+Processing 2021 Dynamic Discs Open round 3
+Found 1 course(s)
+Found 139 players
+Found 139 rounds played
+Found 2448 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_66458_MPO_round_3.json
+Processing 2023 Jonesboro Open round 3
+Found 1 course(s)
+Found 112 players
+Found 112 rounds played
+Found 1998 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_38397_MPO_round_2.json
+Processing 2019 European Open round 2
+Found 1 course(s)
+Found 128 players
+Found 128 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_65116_MPO_round_3.json
+Processing 2023 Discraft Great Lakes Open round 3
+Found 1 course(s)
+Found 73 players
+Found 73 rounds played
+Found 1314 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_48690_MPO_round_2.json
+Processing 2021 Green Mountain Championship round 2
+Found 1 course(s)
+Found 134 players
+Found 134 rounds played
+Found 2358 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55451_MPO_round_4.json
+Processing 2022 Champions Cup round 4
+Found 1 course(s)
+Found 100 players
+Found 100 rounds played
+Found 1782 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_64957_MPO_round_2.json
+Processing 2023 United States Disc Golf Championship round 2
+Found 1 course(s)
+Found 109 players
+Found 109 rounds played
+Found 1933 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_40853_MPO_round_4.json
+Processing 2019 Green Mountain Championship round 4
+Found 1 course(s)
+Found 102 players
+Found 102 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55588_MPO_round_1.json
+Processing 2022 The Preserve Championship round 1
+Found 1 course(s)
+Found 118 players
+Found 118 rounds played
+Found 2106 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_44114_MPO_round_2.json
+Processing 2020 Green Mountain Championship round 2
+Found 1 course(s)
+Found 92 players
+Found 92 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_65291_MPO_round_3.json
+Processing 2023 MVP Open round 3
+Found 1 course(s)
+Found 72 players
+Found 72 rounds played
+Found 1278 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_38977_MPO_round_3.json
+Processing 2019 Beaver State Fling round 3
+Found 1 course(s)
+Found 80 players
+Found 80 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77768_MPO_round_3.json
+Processing 2024 Des Moines Challenge round 3
+Found 1 course(s)
+Found 120 players
+Found 120 rounds played
+Found 2128 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_67202_MPO_round_2.json
+Processing 2023 European Open round 2
+Found 1 course(s)
+Found 108 players
+Found 108 rounds played
+Found 1944 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_38851_MPO_round_3.json
+Processing 2019 Delaware Disc Golf Challenge round 3
+Found 1 course(s)
+Found 73 players
+Found 73 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55584_MPO_round_2.json
+Processing 2022 Jonesboro Open round 2
+Found 1 course(s)
+Found 119 players
+Found 119 rounds played
+Found 2088 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77758_MPO_round_4.json
+Processing 2024 Waco Annual Charity Open round 4
+Found 1 course(s)
+Found 112 players
+Found 51 rounds played
+Found 828 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_44118_MPO_round_1.json
+Processing 2020 The Memorial Championship round 1
+Found 1 course(s)
+Found 167 players
+Found 167 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_69022_MPO_round_1.json
+Processing 2023 Portland Open round 1
+Found 1 course(s)
+Found 109 players
+Found 109 rounds played
+Found 1962 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_38343_MPO_round_1.json
+Processing 2019 Las Vegas Challenge round 1
+Found 1 course(s)
+Found 156 players
+Found 156 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88282_MPO_round_1.json
+Processing 2025 Music City Open round 1
+Found 1 course(s)
+Found 108 players
+Found 108 rounds played
+Found 1933 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77773_MPO_round_2.json
+Processing 2024 MVP Open round 2
+Found 1 course(s)
+Found 81 players
+Found 81 rounds played
+Found 1440 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55591_MPO_round_4.json
+Processing 2022 Ledgestone Open round 4
+Found 1 course(s)
+Found 148 players
+Found 66 rounds played
+Found 1098 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_38709_MPO_round_3.json
+Processing 2019 World Championships round 3
+Found 2 course(s)
+Found 196 players
+Found 196 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55580_MPO_round_3.json
+Processing 2022 Las Vegas Challenge round 3
+Found 1 course(s)
+Found 118 players
+Found 118 rounds played
+Found 2034 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_45796_MPO_round_3.json
+Processing 2020 Dynamic Discs Open round 3
+Found 1 course(s)
+Found 98 players
+Found 98 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77760_MPO_round_1.json
+Processing 2024 Texas State Disc Golf Championships round 1
+Found 1 course(s)
+Found 123 players
+Found 123 rounds played
+Found 2214 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88277_MPO_round_2.json
+Processing 2025 Waco Annual Charity Open round 2
+Found 1 course(s)
+Found 108 players
+Found 108 rounds played
+Found 1926 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_47516_MPO_round_4.json
+Processing 2021 Dynamic Discs Open round 4
+Found 1 course(s)
+Found 139 players
+Found 60 rounds played
+Found 1026 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77098_MPO_round_4.json
+Processing 2024 United States Disc Golf Championship round 4
+Found 1 course(s)
+Found 122 players
+Found 59 rounds played
+Found 972 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_74356_MPO_round_1.json
+Processing 2023 Disc Golf Pro Tour Championship round 1
+Found 1 course(s)
+Found 32 players
+Found 32 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_48691_MPO_round_3.json
+Processing 2021 DGPT Championship round 3
+Found 1 course(s)
+Found 32 players
+Found 4 rounds played
+Found 72 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_38717_MPO_round_2.json
+Processing 2019 Ledgestone Open round 2
+Found 1 course(s)
+Found 180 players
+Found 180 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_65206_MPO_round_4.json
+Processing 2023 Las Vegas Challenge round 4
+Found 1 course(s)
+Found 119 players
+Found 51 rounds played
+Found 882 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_48686_MPO_round_1.json
+Processing 2021 Portland Open round 1
+Found 1 course(s)
+Found 112 players
+Found 112 rounds played
+Found 2008 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_82419_MPO_round_4.json
+Processing 2024 Green Mountain Championship round 4
+Found 1 course(s)
+Found 88 players
+Found 88 rounds played
+Found 1566 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77769_MPO_round_2.json
+Processing 2024 Ledgestone Open round 2
+Found 1 course(s)
+Found 153 players
+Found 153 rounds played
+Found 2726 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_42360_MPO_round_1.json
+Processing 2019 DGPT Championship round 1
+Found 1 course(s)
+Found 32 players
+Found 16 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_38761_MPO_round_1.json
+Processing 2019 The Memorial Championship round 1
+Found 1 course(s)
+Found 183 players
+Found 183 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55454_MPO_round_4.json
+Processing 2022 United States Disc Golf Championship round 4
+Found 1 course(s)
+Found 96 players
+Found 96 rounds played
+Found 1728 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55585_MPO_round_3.json
+Processing 2022 Dynamic Discs Open round 3
+Found 1 course(s)
+Found 117 players
+Found 117 rounds played
+Found 1908 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55594_MPO_round_4.json
+Processing 2022 MVP Open round 4
+Found 1 course(s)
+Found 82 players
+Found 1 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_56013_MPO_round_3.json
+Processing 2022 European Open round 3
+Found 1 course(s)
+Found 117 players
+Found 117 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_39807_MPO_round_1.json
+Processing 2019 San Francisco Open round 1
+Found 1 course(s)
+Found 133 players
+Found 133 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_44743_MPO_round_1.json
+Processing 2020 DGPT Championship round 1
+Found 1 course(s)
+Found 32 players
+Found 16 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88287_MPO_round_1.json
+Processing 2025 Ale Open round 1
+Found 1 course(s)
+Found 110 players
+Found 110 rounds played
+Found 1980 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_68748_MPO_round_3.json
+Processing 2023 World Championships round 3
+Found 2 course(s)
+Found 216 players
+Found 216 rounds played
+Found 3870 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77765_MPO_round_1.json
+Processing 2024 Portland Open round 1
+Found 1 course(s)
+Found 112 players
+Found 112 rounds played
+Found 2016 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_90947_MPO_round_5.json
+Processing 2025 World Championship round 5
+Found 2 course(s)
+Found 200 players
+Found 108 rounds played
+Found 1872 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88294_MPO_round_2.json
+Processing 2025 LWS Open at Idlewild round 2
+Found 1 course(s)
+Found 100 players
+Found 100 rounds played
+Found 1800 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_65208_MPO_round_3.json
+Processing 2023 Music City Open round 3
+Found 1 course(s)
+Found 116 players
+Found 116 rounds played
+Found 1980 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_71315_MPO_round_3.json
+Processing 2024 World Championships round 3
+Found 2 course(s)
+Found 208 players
+Found 208 rounds played
+Found 3726 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55460_MPO_round_2.json
+Processing 2022 World Championships round 2
+Found 2 course(s)
+Found 211 players
+Found 211 rounds played
+Found 3762 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77772_MPO_round_3.json
+Processing 2024 Discraft Great Lakes Open round 3
+Found 1 course(s)
+Found 106 players
+Found 106 rounds played
+Found 1800 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88276_MPO_round_3.json
+Processing 2025 Discraft Supreme Flight Open round 3
+Found 1 course(s)
+Found 108 players
+Found 108 rounds played
+Found 1926 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_49214_MPO_round_3.json
+Processing 2021 MVP Open round 3
+Found 1 course(s)
+Found 144 players
+Found 144 rounds played
+Found 2466 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_47518_MPO_round_3.json
+Processing 2021 United States Disc Golf Championship round 3
+Found 1 course(s)
+Found 99 players
+Found 99 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88290_MPO_round_3.json
+Processing 2025 Turku Open round 3
+Found 1 course(s)
+Found 109 players
+Found 109 rounds played
+Found 1926 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_43838_MPO_round_4.json
+Processing 2020 United States Disc Golf Championship round 4
+Found 1 course(s)
+Found 74 players
+Found 74 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55592_MPO_round_1.json
+Processing 2022 Des Moines Challenge round 1
+Found 1 course(s)
+Found 120 players
+Found 120 rounds played
+Found 2142 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_44653_MPO_round_3.json
+Processing 2020 MVP Open round 3
+Found 1 course(s)
+Found 107 players
+Found 107 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_78197_MPO_round_1.json
+Processing 2024 European Disc Golf Festival round 1
+Found 1 course(s)
+Found 108 players
+Found 108 rounds played
+Found 1944 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_43487_MPO_round_3.json
+Processing 2020 Music City Open round 3
+Found 1 course(s)
+Found 142 players
+Found 142 rounds played
+Found 2448 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_65288_MPO_round_1.json
+Processing 2023 The Open at Austin round 1
+Found 1 course(s)
+Found 116 players
+Found 116 rounds played
+Found 2070 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_90652_MPO_round_1.json
+Processing 2025 Krokhol Open round 1
+Found 1 course(s)
+Found 112 players
+Found 112 rounds played
+Found 2016 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77771_MPO_round_1.json
+Processing 2024 LWS Open at Idlewild round 1
+Found 1 course(s)
+Found 107 players
+Found 107 rounds played
+Found 1926 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_38709_MPO_round_4.json
+Processing 2019 World Championships round 4
+Found 2 course(s)
+Found 196 players
+Found 196 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88293_MPO_round_1.json
+Processing 2025 Discraft's Ledgestone Open round 1
+Found 1 course(s)
+Found 155 players
+Found 155 rounds played
+Found 2772 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77762_MPO_round_2.json
+Processing 2024 Music City Open round 2
+Found 1 course(s)
+Found 114 players
+Found 114 rounds played
+Found 2034 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_44224_MPO_round_3.json
+Processing 2020 Discraft's Great Lakes Open round 3
+Found 1 course(s)
+Found 143 players
+Found 143 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55580_MPO_round_4.json
+Processing 2022 Las Vegas Challenge round 4
+Found 1 course(s)
+Found 118 players
+Found 54 rounds played
+Found 882 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_78194_MPO_round_3.json
+Processing 2024 Turku Open round 3
+Found 1 course(s)
+Found 108 players
+Found 108 rounds played
+Found 1908 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55591_MPO_round_3.json
+Processing 2022 Ledgestone Open round 3
+Found 1 course(s)
+Found 148 players
+Found 148 rounds played
+Found 2592 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55586_MPO_round_1.json
+Processing 2022 OTB Open round 1
+Found 1 course(s)
+Found 113 players
+Found 113 rounds played
+Found 2034 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88284_MPO_round_3.json
+Processing 2025 Cascade Challenge round 3
+Found 1 course(s)
+Found 99 players
+Found 99 rounds played
+Found 1710 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77758_MPO_round_3.json
+Processing 2024 Waco Annual Charity Open round 3
+Found 1 course(s)
+Found 112 players
+Found 112 rounds played
+Found 1944 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_43983_MPO_round_2.json
+Processing 2020 Idlewild Open round 2
+Found 1 course(s)
+Found 132 players
+Found 132 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77766_MPO_round_3.json
+Processing 2024 Beaver State Fling round 3
+Found 1 course(s)
+Found 112 players
+Found 112 rounds played
+Found 1998 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55595_MPO_round_2.json
+Processing 2022 Disc Golf Pro Tour Championship round 2
+Found 1 course(s)
+Found 32 players
+Found 12 rounds played
+Found 216 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_48685_MPO_round_3.json
+Processing 2021 Waco Annual Charity Open round 3
+Found 1 course(s)
+Found 132 players
+Found 132 rounds played
+Found 2304 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_38977_MPO_round_4.json
+Processing 2019 Beaver State Fling round 4
+Found 1 course(s)
+Found 80 players
+Found 80 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_48567_MPO_round_3.json
+Processing 2021 Jonesboro Open round 3
+Found 1 course(s)
+Found 124 players
+Found 124 rounds played
+Found 2196 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_65291_MPO_round_4.json
+Processing 2023 MVP Open round 4
+Found 1 course(s)
+Found 72 players
+Found 72 rounds played
+Found 1278 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_64955_MPO_round_1.json
+Processing 2023 Champions Cup round 1
+Found 1 course(s)
+Found 108 players
+Found 108 rounds played
+Found 1943 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_65207_MPO_round_2.json
+Processing 2023 OTB Open round 2
+Found 1 course(s)
+Found 112 players
+Found 112 rounds played
+Found 1962 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_40853_MPO_round_3.json
+Processing 2019 Green Mountain Championship round 3
+Found 1 course(s)
+Found 102 players
+Found 102 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_47784_MPO_round_1.json
+Processing 2021 World Championships round 1
+Found 2 course(s)
+Found 209 players
+Found 209 rounds played
+Found 3762 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_38694_MPO_round_1.json
+Processing 2019 Ed Headrick Disc Golf Hall of Fame Classic round 1
+Found 1 course(s)
+Found 88 players
+Found 88 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_38471_MPO_round_1.json
+Processing 2019 Glass Blown Open round 1
+Found 1 course(s)
+Found 144 players
+Found 144 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77099_MPO_round_2.json
+Processing 2024 Champions Cup round 2
+Found 1 course(s)
+Found 96 players
+Found 96 rounds played
+Found 1710 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_64036_MPO_round_1.json
+Processing 2023 PCS Open round 1
+Found 1 course(s)
+Found 100 players
+Found 100 rounds played
+Found 1800 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55451_MPO_round_3.json
+Processing 2022 Champions Cup round 3
+Found 1 course(s)
+Found 100 players
+Found 100 rounds played
+Found 1782 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_65116_MPO_round_4.json
+Processing 2023 Discraft Great Lakes Open round 4
+Found 1 course(s)
+Found 73 players
+Found 73 rounds played
+Found 1314 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77750_MPO_round_1.json
+Processing 2024 European Open round 1
+Found 1 course(s)
+Found 95 players
+Found 95 rounds played
+Found 1710 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88279_MPO_round_2.json
+Processing 2025 The Open at Austin round 2
+Found 1 course(s)
+Found 107 players
+Found 107 rounds played
+Found 1908 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_38890_MPO_round_1.json
+Processing 2019 Waco Annual Charity Open round 1
+Found 1 course(s)
+Found 120 players
+Found 120 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_38397_MPO_round_4.json
+Processing 2019 European Open round 4
+Found 1 course(s)
+Found 128 players
+Found 70 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88279_MPO_round_3.json
+Processing 2025 The Open at Austin round 3
+Found 1 course(s)
+Found 107 players
+Found 107 rounds played
+Found 1908 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_48690_MPO_round_4.json
+Processing 2021 Green Mountain Championship round 4
+Found 1 course(s)
+Found 134 players
+Found 59 rounds played
+Found 972 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55451_MPO_round_2.json
+Processing 2022 Champions Cup round 2
+Found 1 course(s)
+Found 100 players
+Found 100 rounds played
+Found 1800 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77099_MPO_round_3.json
+Processing 2024 Champions Cup round 3
+Found 1 course(s)
+Found 96 players
+Found 96 rounds played
+Found 1710 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_64957_MPO_round_4.json
+Processing 2023 United States Disc Golf Championship round 4
+Found 1 course(s)
+Found 109 players
+Found 109 rounds played
+Found 1926 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_65207_MPO_round_3.json
+Processing 2023 OTB Open round 3
+Found 1 course(s)
+Found 112 players
+Found 112 rounds played
+Found 1944 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_48172_MPO_round_1.json
+Processing 2021 OTB Open round 1
+Found 1 course(s)
+Found 124 players
+Found 124 rounds played
+Found 2232 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_40853_MPO_round_2.json
+Processing 2019 Green Mountain Championship round 2
+Found 1 course(s)
+Found 102 players
+Found 102 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_48567_MPO_round_2.json
+Processing 2021 Jonesboro Open round 2
+Found 1 course(s)
+Found 124 players
+Found 124 rounds played
+Found 2232 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_44114_MPO_round_4.json
+Processing 2020 Green Mountain Championship round 4
+Found 1 course(s)
+Found 92 players
+Found 92 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88288_MPO_round_1.json
+Processing 2025 Discmania Challenge round 1
+Found 1 course(s)
+Found 115 players
+Found 115 rounds played
+Found 2059 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88656_MPO_round_1.json
+Processing 2025 United States Disc Golf Championship round 1
+Found 1 course(s)
+Found 107 players
+Found 107 rounds played
+Found 1926 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_48685_MPO_round_2.json
+Processing 2021 Waco Annual Charity Open round 2
+Found 1 course(s)
+Found 132 players
+Found 132 rounds played
+Found 2322 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88357_MPO_round_1.json
+Processing 2025 The Preserve Championships round 1
+Found 1 course(s)
+Found 111 players
+Found 111 rounds played
+Found 1979 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55595_MPO_round_3.json
+Processing 2022 Disc Golf Pro Tour Championship round 3
+Found 1 course(s)
+Found 32 players
+Found 12 rounds played
+Found 216 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_67202_MPO_round_4.json
+Processing 2023 European Open round 4
+Found 1 course(s)
+Found 108 players
+Found 75 rounds played
+Found 1350 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77758_MPO_round_2.json
+Processing 2024 Waco Annual Charity Open round 2
+Found 1 course(s)
+Found 112 players
+Found 112 rounds played
+Found 1980 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_43983_MPO_round_3.json
+Processing 2020 Idlewild Open round 3
+Found 1 course(s)
+Found 132 players
+Found 132 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77766_MPO_round_2.json
+Processing 2024 Beaver State Fling round 2
+Found 1 course(s)
+Found 112 players
+Found 112 rounds played
+Found 2016 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88284_MPO_round_2.json
+Processing 2025 Cascade Challenge round 2
+Found 1 course(s)
+Found 99 players
+Found 99 rounds played
+Found 1728 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77775_MPO_round_1.json
+Processing 2024 Chess.com Invitational round 1
+Found 1 course(s)
+Found 112 players
+Found 112 rounds played
+Found 2016 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_78194_MPO_round_2.json
+Processing 2024 Turku Open round 2
+Found 1 course(s)
+Found 108 players
+Found 108 rounds played
+Found 1926 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55591_MPO_round_2.json
+Processing 2022 Ledgestone Open round 2
+Found 1 course(s)
+Found 148 players
+Found 148 rounds played
+Found 2646 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77773_MPO_round_4.json
+Processing 2024 MVP Open round 4
+Found 1 course(s)
+Found 81 players
+Found 81 rounds played
+Found 1404 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_38709_MPO_round_5.json
+Processing 2019 World Championships round 5
+Found 2 course(s)
+Found 196 players
+Found 96 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77762_MPO_round_3.json
+Processing 2024 Music City Open round 3
+Found 1 course(s)
+Found 114 players
+Found 114 rounds played
+Found 1998 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_44224_MPO_round_2.json
+Processing 2020 Discraft's Great Lakes Open round 2
+Found 1 course(s)
+Found 143 players
+Found 143 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_43487_MPO_round_2.json
+Processing 2020 Music City Open round 2
+Found 1 course(s)
+Found 142 players
+Found 142 rounds played
+Found 2537 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55582_MPO_round_1.json
+Processing 2022 Waco Annual Charity Open round 1
+Found 1 course(s)
+Found 120 players
+Found 120 rounds played
+Found 2160 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_44653_MPO_round_2.json
+Processing 2020 MVP Open round 2
+Found 1 course(s)
+Found 107 players
+Found 107 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77761_MPO_round_1.json
+Processing 2024 Jonesboro Open round 1
+Found 1 course(s)
+Found 112 players
+Found 112 rounds played
+Found 2016 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88276_MPO_round_2.json
+Processing 2025 Discraft Supreme Flight Open round 2
+Found 1 course(s)
+Found 108 players
+Found 108 rounds played
+Found 1926 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_49214_MPO_round_2.json
+Processing 2021 MVP Open round 2
+Found 1 course(s)
+Found 144 players
+Found 144 rounds played
+Found 2514 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_47518_MPO_round_2.json
+Processing 2021 United States Disc Golf Championship round 2
+Found 1 course(s)
+Found 99 players
+Found 99 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88290_MPO_round_2.json
+Processing 2025 Turku Open round 2
+Found 1 course(s)
+Found 109 players
+Found 109 rounds played
+Found 1944 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77772_MPO_round_2.json
+Processing 2024 Discraft Great Lakes Open round 2
+Found 1 course(s)
+Found 106 players
+Found 106 rounds played
+Found 1890 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55460_MPO_round_3.json
+Processing 2022 World Championships round 3
+Found 2 course(s)
+Found 211 players
+Found 211 rounds played
+Found 3744 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88283_MPO_round_1.json
+Processing 2025 43rd Kansas City Wide Open round 1
+Found 1 course(s)
+Found 107 players
+Found 107 rounds played
+Found 1926 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88301_MPO_round_4.json
+Processing 2025 MVP Open round 4
+Found 1 course(s)
+Found 79 players
+Found 79 rounds played
+Found 1404 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88638_MPO_round_1.json
+Processing 2025 Champions Cup round 1
+Found 1 course(s)
+Found 100 players
+Found 100 rounds played
+Found 1783 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_71315_MPO_round_2.json
+Processing 2024 World Championships round 2
+Found 2 course(s)
+Found 208 players
+Found 208 rounds played
+Found 3744 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_78193_MPO_round_1.json
+Processing 2024 Copenhagen Open round 1
+Found 1 course(s)
+Found 108 players
+Found 108 rounds played
+Found 1944 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_68748_MPO_round_2.json
+Processing 2023 World Championships round 2
+Found 2 course(s)
+Found 216 players
+Found 216 rounds played
+Found 3870 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88294_MPO_round_3.json
+Processing 2025 LWS Open at Idlewild round 3
+Found 1 course(s)
+Found 100 players
+Found 100 rounds played
+Found 1782 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_90947_MPO_round_4.json
+Processing 2025 World Championship round 4
+Found 2 course(s)
+Found 200 players
+Found 200 rounds played
+Found 3534 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_65208_MPO_round_2.json
+Processing 2023 Music City Open round 2
+Found 1 course(s)
+Found 116 players
+Found 116 rounds played
+Found 2047 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_78271_MPO_round_1.json
+Processing 2024 The Preserve Championship round 1
+Found 1 course(s)
+Found 118 players
+Found 118 rounds played
+Found 2124 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_56013_MPO_round_2.json
+Processing 2022 European Open round 2
+Found 1 course(s)
+Found 117 players
+Found 117 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55585_MPO_round_2.json
+Processing 2022 Dynamic Discs Open round 2
+Found 1 course(s)
+Found 117 players
+Found 117 rounds played
+Found 2008 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_89546_MPO_round_1.json
+Processing 2025 European Disc Golf Festival round 1
+Found 1 course(s)
+Found 108 players
+Found 108 rounds played
+Found 1944 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77769_MPO_round_3.json
+Processing 2024 Ledgestone Open round 3
+Found 1 course(s)
+Found 153 players
+Found 153 rounds played
+Found 2628 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55589_MPO_round_1.json
+Processing 2022 LWS Open at Idlewild round 1
+Found 1 course(s)
+Found 100 players
+Found 100 rounds played
+Found 1800 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_38717_MPO_round_3.json
+Processing 2019 Ledgestone Open round 3
+Found 1 course(s)
+Found 180 players
+Found 180 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_48691_MPO_round_2.json
+Processing 2021 DGPT Championship round 2
+Found 1 course(s)
+Found 32 players
+Found 12 rounds played
+Found 216 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_47514_MPO_round_1.json
+Processing 2021 Santa Cruz Masters Cup round 1
+Found 1 course(s)
+Found 76 players
+Found 76 rounds played
+Found 1824 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_47877_MPO_round_4.json
+Processing 2021 Las Vegas Challenge round 4
+Found 1 course(s)
+Found 136 players
+Found 62 rounds played
+Found 1062 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_78197_MPO_round_3.json
+Processing 2024 European Disc Golf Festival round 3
+Found 1 course(s)
+Found 108 players
+Found 108 rounds played
+Found 1898 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_44653_MPO_round_1.json
+Processing 2020 MVP Open round 1
+Found 1 course(s)
+Found 107 players
+Found 107 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55592_MPO_round_3.json
+Processing 2022 Des Moines Challenge round 3
+Found 1 course(s)
+Found 120 players
+Found 120 rounds played
+Found 2106 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88290_MPO_round_1.json
+Processing 2025 Turku Open round 1
+Found 1 course(s)
+Found 109 players
+Found 109 rounds played
+Found 1962 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_47518_MPO_round_1.json
+Processing 2021 United States Disc Golf Championship round 1
+Found 1 course(s)
+Found 99 players
+Found 99 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77761_MPO_round_2.json
+Processing 2024 Jonesboro Open round 2
+Found 1 course(s)
+Found 112 players
+Found 112 rounds played
+Found 1998 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88276_MPO_round_1.json
+Processing 2025 Discraft Supreme Flight Open round 1
+Found 1 course(s)
+Found 108 players
+Found 108 rounds played
+Found 1944 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_49214_MPO_round_1.json
+Processing 2021 MVP Open round 1
+Found 1 course(s)
+Found 144 players
+Found 144 rounds played
+Found 2592 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88283_MPO_round_2.json
+Processing 2025 43rd Kansas City Wide Open round 2
+Found 1 course(s)
+Found 107 players
+Found 107 rounds played
+Found 1916 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77772_MPO_round_1.json
+Processing 2024 Discraft Great Lakes Open round 1
+Found 1 course(s)
+Found 106 players
+Found 106 rounds played
+Found 1908 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_78193_MPO_round_2.json
+Processing 2024 Copenhagen Open round 2
+Found 1 course(s)
+Found 108 players
+Found 108 rounds played
+Found 1926 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_71315_MPO_round_1.json
+Processing 2024 World Championships round 1
+Found 2 course(s)
+Found 208 players
+Found 208 rounds played
+Found 3744 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77774_MPO_round_4.json
+Processing 2024 DGPT Championship round 4
+Found 1 course(s)
+Found 33 players
+Found 33 rounds played
+Found 594 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88638_MPO_round_2.json
+Processing 2025 Champions Cup round 2
+Found 1 course(s)
+Found 100 players
+Found 100 rounds played
+Found 1767 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_65208_MPO_round_1.json
+Processing 2023 Music City Open round 1
+Found 1 course(s)
+Found 116 players
+Found 116 rounds played
+Found 2056 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_78271_MPO_round_2.json
+Processing 2024 The Preserve Championship round 2
+Found 1 course(s)
+Found 118 players
+Found 118 rounds played
+Found 2109 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_68748_MPO_round_1.json
+Processing 2023 World Championships round 1
+Found 2 course(s)
+Found 216 players
+Found 216 rounds played
+Found 3888 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77765_MPO_round_3.json
+Processing 2024 Portland Open round 3
+Found 1 course(s)
+Found 112 players
+Found 112 rounds played
+Found 1998 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_44743_MPO_round_3.json
+Processing 2020 DGPT Championship round 3
+Found 1 course(s)
+Found 32 players
+Found 4 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88287_MPO_round_3.json
+Processing 2025 Ale Open round 3
+Found 1 course(s)
+Found 110 players
+Found 110 rounds played
+Found 1971 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_39807_MPO_round_3.json
+Processing 2019 San Francisco Open round 3
+Found 1 course(s)
+Found 133 players
+Found 133 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_56013_MPO_round_1.json
+Processing 2022 European Open round 1
+Found 1 course(s)
+Found 117 players
+Found 117 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88296_MPO_round_4.json
+Processing 2025 Discraft Great Lakes Open round 4
+Found 1 course(s)
+Found 102 players
+Found 43 rounds played
+Found 738 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_89546_MPO_round_2.json
+Processing 2025 European Disc Golf Festival round 2
+Found 1 course(s)
+Found 108 players
+Found 108 rounds played
+Found 1944 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55585_MPO_round_1.json
+Processing 2022 Dynamic Discs Open round 1
+Found 1 course(s)
+Found 117 players
+Found 117 rounds played
+Found 2070 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_42360_MPO_round_3.json
+Processing 2019 DGPT Championship round 3
+Found 1 course(s)
+Found 32 players
+Found 4 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_38761_MPO_round_3.json
+Processing 2019 The Memorial Championship round 3
+Found 1 course(s)
+Found 183 players
+Found 183 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_48686_MPO_round_3.json
+Processing 2021 Portland Open round 3
+Found 1 course(s)
+Found 112 players
+Found 112 rounds played
+Found 1912 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55589_MPO_round_2.json
+Processing 2022 LWS Open at Idlewild round 2
+Found 1 course(s)
+Found 100 players
+Found 100 rounds played
+Found 1710 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_48691_MPO_round_1.json
+Processing 2021 DGPT Championship round 1
+Found 1 course(s)
+Found 32 players
+Found 16 rounds played
+Found 288 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_74356_MPO_round_3.json
+Processing 2023 Disc Golf Pro Tour Championship round 3
+Found 1 course(s)
+Found 32 players
+Found 32 rounds played
+Found 558 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_47514_MPO_round_2.json
+Processing 2021 Santa Cruz Masters Cup round 2
+Found 1 course(s)
+Found 76 players
+Found 76 rounds played
+Found 1824 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_43452_MPO_round_4.json
+Processing 2020 Ledgestone Open round 4
+Found 1 course(s)
+Found 182 players
+Found 182 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_65115_MPO_round_4.json
+Processing 2023 Ledgestone Open round 4
+Found 1 course(s)
+Found 145 players
+Found 68 rounds played
+Found 1044 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_38890_MPO_round_3.json
+Processing 2019 Waco Annual Charity Open round 3
+Found 1 course(s)
+Found 120 players
+Found 120 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77750_MPO_round_3.json
+Processing 2024 European Open round 3
+Found 1 course(s)
+Found 95 players
+Found 95 rounds played
+Found 1701 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55451_MPO_round_1.json
+Processing 2022 Champions Cup round 1
+Found 1 course(s)
+Found 100 players
+Found 100 rounds played
+Found 1800 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_64036_MPO_round_3.json
+Processing 2023 PCS Open round 3
+Found 1 course(s)
+Found 100 players
+Found 100 rounds played
+Found 1764 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_38471_MPO_round_3.json
+Processing 2019 Glass Blown Open round 3
+Found 1 course(s)
+Found 144 players
+Found 144 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_38694_MPO_round_3.json
+Processing 2019 Ed Headrick Disc Golf Hall of Fame Classic round 3
+Found 1 course(s)
+Found 88 players
+Found 88 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_47784_MPO_round_3.json
+Processing 2021 World Championships round 3
+Found 2 course(s)
+Found 209 players
+Found 209 rounds played
+Found 3744 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_40853_MPO_round_1.json
+Processing 2019 Green Mountain Championship round 1
+Found 1 course(s)
+Found 102 players
+Found 102 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_48172_MPO_round_2.json
+Processing 2021 OTB Open round 2
+Found 1 course(s)
+Found 124 players
+Found 124 rounds played
+Found 2232 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_64955_MPO_round_3.json
+Processing 2023 Champions Cup round 3
+Found 1 course(s)
+Found 108 players
+Found 108 rounds played
+Found 1908 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88656_MPO_round_2.json
+Processing 2025 United States Disc Golf Championship round 2
+Found 1 course(s)
+Found 107 players
+Found 107 rounds played
+Found 1926 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88288_MPO_round_2.json
+Processing 2025 Discmania Challenge round 2
+Found 1 course(s)
+Found 115 players
+Found 115 rounds played
+Found 2034 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_48567_MPO_round_1.json
+Processing 2021 Jonesboro Open round 1
+Found 1 course(s)
+Found 124 players
+Found 124 rounds played
+Found 2232 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88357_MPO_round_2.json
+Processing 2025 The Preserve Championships round 2
+Found 1 course(s)
+Found 111 players
+Found 111 rounds played
+Found 1944 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_48685_MPO_round_1.json
+Processing 2021 Waco Annual Charity Open round 1
+Found 1 course(s)
+Found 132 players
+Found 132 rounds played
+Found 2376 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77758_MPO_round_1.json
+Processing 2024 Waco Annual Charity Open round 1
+Found 1 course(s)
+Found 112 players
+Found 112 rounds played
+Found 2016 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77766_MPO_round_1.json
+Processing 2024 Beaver State Fling round 1
+Found 1 course(s)
+Found 112 players
+Found 112 rounds played
+Found 2016 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77775_MPO_round_2.json
+Processing 2024 Chess.com Invitational round 2
+Found 1 course(s)
+Found 112 players
+Found 112 rounds played
+Found 2016 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_44118_MPO_round_4.json
+Processing 2020 The Memorial Championship round 4
+Found 1 course(s)
+Found 167 players
+Found 75 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88284_MPO_round_1.json
+Processing 2025 Cascade Challenge round 1
+Found 1 course(s)
+Found 99 players
+Found 99 rounds played
+Found 1766 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55586_MPO_round_3.json
+Processing 2022 OTB Open round 3
+Found 1 course(s)
+Found 113 players
+Found 113 rounds played
+Found 1980 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_69022_MPO_round_4.json
+Processing 2023 Portland Open round 4
+Found 1 course(s)
+Found 109 players
+Found 48 rounds played
+Found 810 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55591_MPO_round_1.json
+Processing 2022 Ledgestone Open round 1
+Found 1 course(s)
+Found 148 players
+Found 148 rounds played
+Found 2664 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_38343_MPO_round_4.json
+Processing 2019 Las Vegas Challenge round 4
+Found 1 course(s)
+Found 156 players
+Found 68 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_78194_MPO_round_1.json
+Processing 2024 Turku Open round 1
+Found 1 course(s)
+Found 108 players
+Found 108 rounds played
+Found 1944 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_44224_MPO_round_1.json
+Processing 2020 Discraft's Great Lakes Open round 1
+Found 1 course(s)
+Found 143 players
+Found 143 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88293_MPO_round_3.json
+Processing 2025 Discraft's Ledgestone Open round 3
+Found 1 course(s)
+Found 155 players
+Found 155 rounds played
+Found 2764 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77771_MPO_round_3.json
+Processing 2024 LWS Open at Idlewild round 3
+Found 1 course(s)
+Found 107 players
+Found 107 rounds played
+Found 1908 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_90652_MPO_round_3.json
+Processing 2025 Krokhol Open round 3
+Found 1 course(s)
+Found 112 players
+Found 112 rounds played
+Found 1978 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55582_MPO_round_2.json
+Processing 2022 Waco Annual Charity Open round 2
+Found 1 course(s)
+Found 120 players
+Found 120 rounds played
+Found 2142 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_65288_MPO_round_3.json
+Processing 2023 The Open at Austin round 3
+Found 1 course(s)
+Found 116 players
+Found 116 rounds played
+Found 2031 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88302_MPO_round_5.json
+Processing 2025 Pro Tour Championship round 5
+Found 1 course(s)
+Found 33 players
+Found 33 rounds played
+Found 594 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_43487_MPO_round_1.json
+Processing 2020 Music City Open round 1
+Found 1 course(s)
+Found 142 players
+Found 142 rounds played
+Found 2556 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55582_MPO_round_3.json
+Processing 2022 Waco Annual Charity Open round 3
+Found 1 course(s)
+Found 120 players
+Found 120 rounds played
+Found 2124 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_65288_MPO_round_2.json
+Processing 2023 The Open at Austin round 2
+Found 1 course(s)
+Found 116 players
+Found 116 rounds played
+Found 2052 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88302_MPO_round_4.json
+Processing 2025 Pro Tour Championship round 4
+Found 1 course(s)
+Found 33 players
+Found 33 rounds played
+Found 594 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77771_MPO_round_2.json
+Processing 2024 LWS Open at Idlewild round 2
+Found 1 course(s)
+Found 107 players
+Found 107 rounds played
+Found 1908 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55593_MPO_round_4.json
+Processing 2022 Green Mountain Championship round 4
+Found 1 course(s)
+Found 96 players
+Found 40 rounds played
+Found 702 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_90652_MPO_round_2.json
+Processing 2025 Krokhol Open round 2
+Found 1 course(s)
+Found 112 players
+Found 112 rounds played
+Found 2016 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77762_MPO_round_1.json
+Processing 2024 Music City Open round 1
+Found 1 course(s)
+Found 114 players
+Found 114 rounds played
+Found 2052 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88293_MPO_round_2.json
+Processing 2025 Discraft's Ledgestone Open round 2
+Found 1 course(s)
+Found 155 players
+Found 155 rounds played
+Found 2772 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55586_MPO_round_2.json
+Processing 2022 OTB Open round 2
+Found 1 course(s)
+Found 113 players
+Found 113 rounds played
+Found 2016 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77775_MPO_round_3.json
+Processing 2024 Chess.com Invitational round 3
+Found 1 course(s)
+Found 112 players
+Found 112 rounds played
+Found 1998 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_43983_MPO_round_1.json
+Processing 2020 Idlewild Open round 1
+Found 1 course(s)
+Found 132 players
+Found 132 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55595_MPO_round_1.json
+Processing 2022 Disc Golf Pro Tour Championship round 1
+Found 1 course(s)
+Found 32 players
+Found 20 rounds played
+Found 360 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88286_MPO_round_4.json
+Processing 2025 Northwest Disc Golf Championship round 4
+Found 1 course(s)
+Found 103 players
+Found 47 rounds played
+Found 828 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88357_MPO_round_3.json
+Processing 2025 The Preserve Championships round 3
+Found 1 course(s)
+Found 111 players
+Found 111 rounds played
+Found 1926 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88299_MPO_round_4.json
+Processing 2025 Green Mountain Championship round 4
+Found 1 course(s)
+Found 89 players
+Found 89 rounds played
+Found 1584 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_64955_MPO_round_2.json
+Processing 2023 Champions Cup round 2
+Found 1 course(s)
+Found 108 players
+Found 108 rounds played
+Found 1908 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88656_MPO_round_3.json
+Processing 2025 United States Disc Golf Championship round 3
+Found 1 course(s)
+Found 107 players
+Found 107 rounds played
+Found 1908 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88288_MPO_round_3.json
+Processing 2025 Discmania Challenge round 3
+Found 1 course(s)
+Found 115 players
+Found 115 rounds played
+Found 1998 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_65207_MPO_round_1.json
+Processing 2023 OTB Open round 1
+Found 1 course(s)
+Found 112 players
+Found 112 rounds played
+Found 2016 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_48172_MPO_round_3.json
+Processing 2021 OTB Open round 3
+Found 1 course(s)
+Found 124 players
+Found 124 rounds played
+Found 2178 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_47784_MPO_round_2.json
+Processing 2021 World Championships round 2
+Found 2 course(s)
+Found 209 players
+Found 209 rounds played
+Found 3761 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_39018_MPO_round_4.json
+Processing 2019 United States Disc Golf Championship round 4
+Found 1 course(s)
+Found 116 players
+Found 116 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77099_MPO_round_1.json
+Processing 2024 Champions Cup round 1
+Found 1 course(s)
+Found 96 players
+Found 96 rounds played
+Found 1710 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_38471_MPO_round_2.json
+Processing 2019 Glass Blown Open round 2
+Found 1 course(s)
+Found 144 players
+Found 144 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_38694_MPO_round_2.json
+Processing 2019 Ed Headrick Disc Golf Hall of Fame Classic round 2
+Found 1 course(s)
+Found 88 players
+Found 88 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_64036_MPO_round_2.json
+Processing 2023 PCS Open round 2
+Found 1 course(s)
+Found 100 players
+Found 100 rounds played
+Found 1782 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77750_MPO_round_2.json
+Processing 2024 European Open round 2
+Found 1 course(s)
+Found 95 players
+Found 95 rounds played
+Found 1710 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88279_MPO_round_1.json
+Processing 2025 The Open at Austin round 1
+Found 1 course(s)
+Found 107 players
+Found 107 rounds played
+Found 1916 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_38890_MPO_round_2.json
+Processing 2019 Waco Annual Charity Open round 2
+Found 1 course(s)
+Found 120 players
+Found 120 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_47514_MPO_round_3.json
+Processing 2021 Santa Cruz Masters Cup round 3
+Found 1 course(s)
+Found 76 players
+Found 76 rounds played
+Found 1800 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_38717_MPO_round_1.json
+Processing 2019 Ledgestone Open round 1
+Found 1 course(s)
+Found 180 players
+Found 180 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_74356_MPO_round_2.json
+Processing 2023 Disc Golf Pro Tour Championship round 2
+Found 1 course(s)
+Found 32 players
+Found 32 rounds played
+Found 576 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_48686_MPO_round_2.json
+Processing 2021 Portland Open round 2
+Found 1 course(s)
+Found 112 players
+Found 112 rounds played
+Found 1993 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55589_MPO_round_3.json
+Processing 2022 LWS Open at Idlewild round 3
+Found 1 course(s)
+Found 100 players
+Found 100 rounds played
+Found 1764 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_42360_MPO_round_2.json
+Processing 2019 DGPT Championship round 2
+Found 1 course(s)
+Found 32 players
+Found 16 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_38761_MPO_round_2.json
+Processing 2019 The Memorial Championship round 2
+Found 1 course(s)
+Found 183 players
+Found 183 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77769_MPO_round_1.json
+Processing 2024 Ledgestone Open round 1
+Found 1 course(s)
+Found 153 players
+Found 153 rounds played
+Found 2754 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_89546_MPO_round_3.json
+Processing 2025 European Disc Golf Festival round 3
+Found 1 course(s)
+Found 108 players
+Found 108 rounds played
+Found 1944 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_44743_MPO_round_2.json
+Processing 2020 DGPT Championship round 2
+Found 1 course(s)
+Found 32 players
+Found 12 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88287_MPO_round_2.json
+Processing 2025 Ale Open round 2
+Found 1 course(s)
+Found 110 players
+Found 110 rounds played
+Found 1980 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_39807_MPO_round_2.json
+Processing 2019 San Francisco Open round 2
+Found 1 course(s)
+Found 133 players
+Found 133 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88294_MPO_round_1.json
+Processing 2025 LWS Open at Idlewild round 1
+Found 1 course(s)
+Found 100 players
+Found 100 rounds played
+Found 1800 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_78271_MPO_round_3.json
+Processing 2024 The Preserve Championship round 3
+Found 1 course(s)
+Found 118 players
+Found 118 rounds played
+Found 2088 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_47541_MPO_round_4.json
+Processing 2021 Music City Open round 4
+Found 1 course(s)
+Found 130 players
+Found 63 rounds played
+Found 1026 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55587_MPO_round_4.json
+Processing 2022 Portland Open round 4
+Found 1 course(s)
+Found 114 players
+Found 51 rounds played
+Found 828 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77765_MPO_round_2.json
+Processing 2024 Portland Open round 2
+Found 1 course(s)
+Found 112 players
+Found 112 rounds played
+Found 2016 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_78193_MPO_round_3.json
+Processing 2024 Copenhagen Open round 3
+Found 1 course(s)
+Found 108 players
+Found 108 rounds played
+Found 1926 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77774_MPO_round_5.json
+Processing 2024 DGPT Championship round 5
+Found 1 course(s)
+Found 33 players
+Found 33 rounds played
+Found 594 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88638_MPO_round_3.json
+Processing 2025 Champions Cup round 3
+Found 1 course(s)
+Found 100 players
+Found 100 rounds played
+Found 1746 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88283_MPO_round_3.json
+Processing 2025 43rd Kansas City Wide Open round 3
+Found 1 course(s)
+Found 107 players
+Found 107 rounds played
+Found 936 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55460_MPO_round_1.json
+Processing 2022 World Championships round 1
+Found 2 course(s)
+Found 211 players
+Found 211 rounds played
+Found 3798 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77761_MPO_round_3.json
+Processing 2024 Jonesboro Open round 3
+Found 1 course(s)
+Found 112 players
+Found 112 rounds played
+Found 1998 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_78197_MPO_round_2.json
+Processing 2024 European Disc Golf Festival round 2
+Found 1 course(s)
+Found 108 players
+Found 108 rounds played
+Found 1926 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55592_MPO_round_2.json
+Processing 2022 Des Moines Challenge round 2
+Found 1 course(s)
+Found 120 players
+Found 120 rounds played
+Found 2106 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_38397_MPO_round_1.json
+Processing 2019 European Open round 1
+Found 1 course(s)
+Found 128 players
+Found 128 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_66174_MPO_round_3.json
+Processing 2023 LWS Open at Idlewild round 3
+Found 1 course(s)
+Found 100 players
+Found 100 rounds played
+Found 1746 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_48690_MPO_round_1.json
+Processing 2021 Green Mountain Championship round 1
+Found 1 course(s)
+Found 134 players
+Found 134 rounds played
+Found 2394 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_43778_MPO_round_3.json
+Processing 2020 Jonesboro Open round 3
+Found 1 course(s)
+Found 94 players
+Found 94 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_39018_MPO_round_3.json
+Processing 2019 United States Disc Golf Championship round 3
+Found 1 course(s)
+Found 116 players
+Found 116 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_47784_MPO_round_5.json
+Processing 2021 World Championships round 5
+Found 2 course(s)
+Found 209 players
+Found 87 rounds played
+Found 1512 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_64957_MPO_round_1.json
+Processing 2023 United States Disc Golf Championship round 1
+Found 1 course(s)
+Found 109 players
+Found 109 rounds played
+Found 1962 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55588_MPO_round_2.json
+Processing 2022 The Preserve Championship round 2
+Found 1 course(s)
+Found 118 players
+Found 118 rounds played
+Found 2070 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_48687_MPO_round_3.json
+Processing 2021 The Preserve Championship round 3
+Found 1 course(s)
+Found 124 players
+Found 124 rounds played
+Found 2178 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88656_MPO_round_4.json
+Processing 2025 United States Disc Golf Championship round 4
+Found 1 course(s)
+Found 107 players
+Found 47 rounds played
+Found 828 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_44114_MPO_round_1.json
+Processing 2020 Green Mountain Championship round 1
+Found 1 course(s)
+Found 92 players
+Found 92 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88299_MPO_round_3.json
+Processing 2025 Green Mountain Championship round 3
+Found 1 course(s)
+Found 89 players
+Found 89 rounds played
+Found 1591 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88286_MPO_round_3.json
+Processing 2025 Northwest Disc Golf Championship round 3
+Found 1 course(s)
+Found 103 players
+Found 103 rounds played
+Found 1836 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55584_MPO_round_1.json
+Processing 2022 Jonesboro Open round 1
+Found 1 course(s)
+Found 119 players
+Found 119 rounds played
+Found 2142 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_67202_MPO_round_1.json
+Processing 2023 European Open round 1
+Found 1 course(s)
+Found 108 players
+Found 108 rounds played
+Found 1944 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_44118_MPO_round_2.json
+Processing 2020 The Memorial Championship round 2
+Found 1 course(s)
+Found 167 players
+Found 167 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77764_MPO_round_3.json
+Processing 2024 OTB Open round 3
+Found 1 course(s)
+Found 120 players
+Found 120 rounds played
+Found 2088 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_69022_MPO_round_2.json
+Processing 2023 Portland Open round 2
+Found 1 course(s)
+Found 109 players
+Found 109 rounds played
+Found 1944 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77773_MPO_round_1.json
+Processing 2024 MVP Open round 1
+Found 1 course(s)
+Found 81 players
+Found 81 rounds played
+Found 1458 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88282_MPO_round_2.json
+Processing 2025 Music City Open round 2
+Found 1 course(s)
+Found 108 players
+Found 108 rounds played
+Found 1908 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_38343_MPO_round_2.json
+Processing 2019 Las Vegas Challenge round 2
+Found 1 course(s)
+Found 156 players
+Found 156 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55593_MPO_round_3.json
+Processing 2022 Green Mountain Championship round 3
+Found 1 course(s)
+Found 96 players
+Found 96 rounds played
+Found 1656 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_78196_MPO_round_3.json
+Processing 2024 Krokhol Open round 3
+Found 1 course(s)
+Found 112 players
+Found 112 rounds played
+Found 1944 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77760_MPO_round_2.json
+Processing 2024 Texas State Disc Golf Championships round 2
+Found 1 course(s)
+Found 123 players
+Found 123 rounds played
+Found 2196 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88277_MPO_round_1.json
+Processing 2025 Waco Annual Charity Open round 1
+Found 1 course(s)
+Found 108 players
+Found 108 rounds played
+Found 1944 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88302_MPO_round_3.json
+Processing 2025 Pro Tour Championship round 3
+Found 1 course(s)
+Found 33 players
+Found 33 rounds played
+Found 594 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_66457_MPO_round_1.json
+Processing 2023 Waco Annual Charity Open round 1
+Found 1 course(s)
+Found 116 players
+Found 116 rounds played
+Found 2088 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_40686_MPO_round_3.json
+Processing 2019 Portland Open round 3
+Found 1 course(s)
+Found 110 players
+Found 110 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_65289_MPO_round_3.json
+Processing 2023 Dynamic Discs Open round 3
+Found 1 course(s)
+Found 119 players
+Found 119 rounds played
+Found 2142 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_52009_MPO_round_1.json
+Processing 2021 Des Moines Challenge round 1
+Found 1 course(s)
+Found 138 players
+Found 138 rounds played
+Found 2434 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55583_MPO_round_2.json
+Processing 2022 Texas State Disc Golf Championship round 2
+Found 1 course(s)
+Found 131 players
+Found 131 rounds played
+Found 2322 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_78195_MPO_round_1.json
+Processing 2024 Swedish Open round 1
+Found 1 course(s)
+Found 108 players
+Found 108 rounds played
+Found 1944 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55590_MPO_round_1.json
+Processing 2022 Discraft's Great Lakes Open round 1
+Found 1 course(s)
+Found 116 players
+Found 116 rounds played
+Found 2070 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88301_MPO_round_1.json
+Processing 2025 MVP Open round 1
+Found 1 course(s)
+Found 79 players
+Found 79 rounds played
+Found 1422 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_45795_MPO_round_2.json
+Processing 2020 The Preserve Championship round 2
+Found 1 course(s)
+Found 104 players
+Found 104 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88285_MPO_round_1.json
+Processing 2025 Konopiste Open round 1
+Found 1 course(s)
+Found 110 players
+Found 110 rounds played
+Found 1980 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_44144_MPO_round_1.json
+Processing 2020 Waco Annual Charity Open round 1
+Found 1 course(s)
+Found 115 players
+Found 115 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88638_MPO_round_4.json
+Processing 2025 Champions Cup round 4
+Found 1 course(s)
+Found 100 players
+Found 44 rounds played
+Found 738 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77774_MPO_round_2.json
+Processing 2024 DGPT Championship round 2
+Found 1 course(s)
+Found 33 players
+Found 33 rounds played
+Found 594 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_47541_MPO_round_3.json
+Processing 2021 Music City Open round 3
+Found 1 course(s)
+Found 130 players
+Found 130 rounds played
+Found 2232 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_67392_MPO_round_1.json
+Processing 2023 Des Moines Challenge round 1
+Found 1 course(s)
+Found 120 players
+Found 120 rounds played
+Found 2160 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_48688_MPO_round_2.json
+Processing 2021 Idlewild Open round 2
+Found 1 course(s)
+Found 120 players
+Found 120 rounds played
+Found 2124 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_90947_MPO_round_1.json
+Processing 2025 World Championship round 1
+Found 2 course(s)
+Found 200 players
+Found 200 rounds played
+Found 3590 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55587_MPO_round_3.json
+Processing 2022 Portland Open round 3
+Found 1 course(s)
+Found 114 players
+Found 114 rounds played
+Found 1962 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_47520_MPO_round_2.json
+Processing 2021 Delaware Disc Golf Challenge round 2
+Found 1 course(s)
+Found 85 players
+Found 85 rounds played
+Found 1466 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_89546_MPO_round_4.json
+Processing 2025 European Disc Golf Festival round 4
+Found 1 course(s)
+Found 108 players
+Found 67 rounds played
+Found 1206 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88296_MPO_round_2.json
+Processing 2025 Discraft Great Lakes Open round 2
+Found 1 course(s)
+Found 102 players
+Found 102 rounds played
+Found 1832 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77759_MPO_round_1.json
+Processing 2024 The Open at Austin round 1
+Found 1 course(s)
+Found 112 players
+Found 112 rounds played
+Found 2005 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88289_MPO_round_2.json
+Processing 2025 PCS Open round 2
+Found 1 course(s)
+Found 110 players
+Found 110 rounds played
+Found 1926 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_68353_MPO_round_3.json
+Processing 2023 The Preserve Championship round 3
+Found 1 course(s)
+Found 119 players
+Found 119 rounds played
+Found 2088 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_47981_MPO_round_3.json
+Processing 2021 Ledgestone Open round 3
+Found 1 course(s)
+Found 167 players
+Found 167 rounds played
+Found 2880 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_38682_MPO_round_1.json
+Processing 2019 Jonesboro Open round 1
+Found 1 course(s)
+Found 120 players
+Found 120 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_38873_MPO_round_2.json
+Processing 2019 MVP Open round 2
+Found 1 course(s)
+Found 142 players
+Found 142 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_47512_MPO_round_1.json
+Processing 2021 Texas State Disc Golf Championship round 1
+Found 1 course(s)
+Found 140 players
+Found 140 rounds played
+Found 2520 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_74356_MPO_round_5.json
+Processing 2023 Disc Golf Pro Tour Championship round 5
+Found 1 course(s)
+Found 32 players
+Found 13 rounds played
+Found 216 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_65115_MPO_round_2.json
+Processing 2023 Ledgestone Open round 2
+Found 1 course(s)
+Found 145 players
+Found 145 rounds played
+Found 2610 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_43452_MPO_round_2.json
+Processing 2020 Ledgestone Open round 2
+Found 1 course(s)
+Found 182 players
+Found 182 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_48338_MPO_round_1.json
+Processing 2021 Discraft's Great Lakes Open round 1
+Found 1 course(s)
+Found 125 players
+Found 125 rounds played
+Found 2250 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_47877_MPO_round_1.json
+Processing 2021 Las Vegas Challenge round 1
+Found 1 course(s)
+Found 136 players
+Found 136 rounds played
+Found 2448 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_47516_MPO_round_1.json
+Processing 2021 Dynamic Discs Open round 1
+Found 1 course(s)
+Found 139 players
+Found 139 rounds played
+Found 2502 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_39325_MPO_round_1.json
+Processing 2019 Great Lakes Open round 1
+Found 1 course(s)
+Found 132 players
+Found 132 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_65115_MPO_round_3.json
+Processing 2023 Ledgestone Open round 3
+Found 1 course(s)
+Found 145 players
+Found 145 rounds played
+Found 2461 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_43452_MPO_round_3.json
+Processing 2020 Ledgestone Open round 3
+Found 1 course(s)
+Found 182 players
+Found 182 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77098_MPO_round_1.json
+Processing 2024 United States Disc Golf Championship round 1
+Found 1 course(s)
+Found 122 players
+Found 122 rounds played
+Found 2178 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_74356_MPO_round_4.json
+Processing 2023 Disc Golf Pro Tour Championship round 4
+Found 1 course(s)
+Found 32 players
+Found 32 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_65206_MPO_round_1.json
+Processing 2023 Las Vegas Challenge round 1
+Found 1 course(s)
+Found 119 players
+Found 119 rounds played
+Found 2142 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_82419_MPO_round_1.json
+Processing 2024 Green Mountain Championship round 1
+Found 1 course(s)
+Found 88 players
+Found 88 rounds played
+Found 1584 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_38873_MPO_round_3.json
+Processing 2019 MVP Open round 3
+Found 1 course(s)
+Found 142 players
+Found 142 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_38761_MPO_round_4.json
+Processing 2019 The Memorial Championship round 4
+Found 1 course(s)
+Found 183 players
+Found 79 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_47981_MPO_round_2.json
+Processing 2021 Ledgestone Open round 2
+Found 1 course(s)
+Found 167 players
+Found 167 rounds played
+Found 2950 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88289_MPO_round_3.json
+Processing 2025 PCS Open round 3
+Found 1 course(s)
+Found 110 players
+Found 110 rounds played
+Found 1880 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55454_MPO_round_1.json
+Processing 2022 United States Disc Golf Championship round 1
+Found 1 course(s)
+Found 96 players
+Found 96 rounds played
+Found 1728 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_68353_MPO_round_2.json
+Processing 2023 The Preserve Championship round 2
+Found 1 course(s)
+Found 119 players
+Found 119 rounds played
+Found 2124 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_47520_MPO_round_3.json
+Processing 2021 Delaware Disc Golf Challenge round 3
+Found 1 course(s)
+Found 85 players
+Found 85 rounds played
+Found 1404 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88296_MPO_round_3.json
+Processing 2025 Discraft Great Lakes Open round 3
+Found 1 course(s)
+Found 102 players
+Found 102 rounds played
+Found 1800 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_38723_MPO_round_1.json
+Processing 2019 Idlewild Open round 1
+Found 1 course(s)
+Found 126 players
+Found 126 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55594_MPO_round_1.json
+Processing 2022 MVP Open round 1
+Found 1 course(s)
+Found 82 players
+Found 82 rounds played
+Found 1476 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_47541_MPO_round_2.json
+Processing 2021 Music City Open round 2
+Found 1 course(s)
+Found 130 players
+Found 130 rounds played
+Found 2268 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_48688_MPO_round_3.json
+Processing 2021 Idlewild Open round 3
+Found 1 course(s)
+Found 120 players
+Found 120 rounds played
+Found 2106 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77765_MPO_round_4.json
+Processing 2024 Portland Open round 4
+Found 1 course(s)
+Found 112 players
+Found 47 rounds played
+Found 828 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55587_MPO_round_2.json
+Processing 2022 Portland Open round 2
+Found 1 course(s)
+Found 114 players
+Found 114 rounds played
+Found 1962 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77774_MPO_round_3.json
+Processing 2024 DGPT Championship round 3
+Found 1 course(s)
+Found 33 players
+Found 33 rounds played
+Found 594 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77763_MPO_round_1.json
+Processing 2024 Dynamic Discs Open round 1
+Found 1 course(s)
+Found 107 players
+Found 107 rounds played
+Found 1913 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_45795_MPO_round_3.json
+Processing 2020 The Preserve Championship round 3
+Found 1 course(s)
+Found 104 players
+Found 104 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_65289_MPO_round_2.json
+Processing 2023 Dynamic Discs Open round 2
+Found 1 course(s)
+Found 119 players
+Found 119 rounds played
+Found 2142 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55583_MPO_round_3.json
+Processing 2022 Texas State Disc Golf Championship round 3
+Found 1 course(s)
+Found 131 players
+Found 131 rounds played
+Found 2304 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_40686_MPO_round_2.json
+Processing 2019 Portland Open round 2
+Found 1 course(s)
+Found 110 players
+Found 110 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_43838_MPO_round_1.json
+Processing 2020 United States Disc Golf Championship round 1
+Found 1 course(s)
+Found 74 players
+Found 74 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77760_MPO_round_3.json
+Processing 2024 Texas State Disc Golf Championships round 3
+Found 1 course(s)
+Found 123 players
+Found 123 rounds played
+Found 2196 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_45796_MPO_round_1.json
+Processing 2020 Dynamic Discs Open round 1
+Found 1 course(s)
+Found 98 players
+Found 98 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88302_MPO_round_2.json
+Processing 2025 Pro Tour Championship round 2
+Found 1 course(s)
+Found 33 players
+Found 33 rounds played
+Found 594 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55593_MPO_round_2.json
+Processing 2022 Green Mountain Championship round 2
+Found 1 course(s)
+Found 96 players
+Found 96 rounds played
+Found 1656 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_78196_MPO_round_2.json
+Processing 2024 Krokhol Open round 2
+Found 1 course(s)
+Found 112 players
+Found 112 rounds played
+Found 1998 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55580_MPO_round_1.json
+Processing 2022 Las Vegas Challenge round 1
+Found 1 course(s)
+Found 118 players
+Found 118 rounds played
+Found 2124 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_38709_MPO_round_1.json
+Processing 2019 World Championships round 1
+Found 2 course(s)
+Found 196 players
+Found 196 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88293_MPO_round_4.json
+Processing 2025 Discraft's Ledgestone Open round 4
+Found 1 course(s)
+Found 155 players
+Found 69 rounds played
+Found 1206 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_38343_MPO_round_3.json
+Processing 2019 Las Vegas Challenge round 3
+Found 1 course(s)
+Found 156 players
+Found 156 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77764_MPO_round_2.json
+Processing 2024 OTB Open round 2
+Found 1 course(s)
+Found 120 players
+Found 120 rounds played
+Found 2140 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_69022_MPO_round_3.json
+Processing 2023 Portland Open round 3
+Found 1 course(s)
+Found 109 players
+Found 109 rounds played
+Found 1916 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_44118_MPO_round_3.json
+Processing 2020 The Memorial Championship round 3
+Found 1 course(s)
+Found 167 players
+Found 167 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_38851_MPO_round_1.json
+Processing 2019 Delaware Disc Golf Challenge round 1
+Found 1 course(s)
+Found 73 players
+Found 73 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88286_MPO_round_2.json
+Processing 2025 Northwest Disc Golf Championship round 2
+Found 1 course(s)
+Found 103 players
+Found 103 rounds played
+Found 1836 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77768_MPO_round_1.json
+Processing 2024 Des Moines Challenge round 1
+Found 1 course(s)
+Found 120 players
+Found 120 rounds played
+Found 2147 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_38977_MPO_round_1.json
+Processing 2019 Beaver State Fling round 1
+Found 1 course(s)
+Found 80 players
+Found 80 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_88299_MPO_round_2.json
+Processing 2025 Green Mountain Championship round 2
+Found 1 course(s)
+Found 89 players
+Found 89 rounds played
+Found 1602 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_65291_MPO_round_1.json
+Processing 2023 MVP Open round 1
+Found 1 course(s)
+Found 72 players
+Found 72 rounds played
+Found 1296 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_64955_MPO_round_4.json
+Processing 2023 Champions Cup round 4
+Found 1 course(s)
+Found 108 players
+Found 108 rounds played
+Found 1885 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_55588_MPO_round_3.json
+Processing 2022 The Preserve Championship round 3
+Found 1 course(s)
+Found 118 players
+Found 118 rounds played
+Found 2034 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_48687_MPO_round_2.json
+Processing 2021 The Preserve Championship round 2
+Found 1 course(s)
+Found 124 players
+Found 124 rounds played
+Found 2214 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_39018_MPO_round_2.json
+Processing 2019 United States Disc Golf Championship round 2
+Found 1 course(s)
+Found 116 players
+Found 116 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_47784_MPO_round_4.json
+Processing 2021 World Championships round 4
+Found 2 course(s)
+Found 209 players
+Found 209 rounds played
+Found 3732 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_38471_MPO_round_4.json
+Processing 2019 Glass Blown Open round 4
+Found 1 course(s)
+Found 144 players
+Found 61 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_43778_MPO_round_2.json
+Processing 2020 Jonesboro Open round 2
+Found 1 course(s)
+Found 94 players
+Found 94 rounds played
+Found 0 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_66174_MPO_round_2.json
+Processing 2023 LWS Open at Idlewild round 2
+Found 1 course(s)
+Found 100 players
+Found 100 rounds played
+Found 1782 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_65116_MPO_round_1.json
+Processing 2023 Discraft Great Lakes Open round 1
+Found 1 course(s)
+Found 73 players
+Found 73 rounds played
+Found 1314 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_77750_MPO_round_4.json
+Processing 2024 European Open round 4
+Found 1 course(s)
+Found 95 players
+Found 79 rounds played
+Found 1404 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated
+
+Processing file: tournament_66458_MPO_round_1.json
+Processing 2023 Jonesboro Open round 1
+Found 1 course(s)
+Found 112 players
+Found 112 rounds played
+Found 2016 holes played
+Tournament data successfully validated
+Course data successfully validated
+Player data successfully validated
+Round data successfully validated
+Hole data successfully validated

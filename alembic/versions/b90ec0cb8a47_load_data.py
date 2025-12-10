@@ -26,7 +26,7 @@ depends_on: Union[str, Sequence[str], None] = None
 
 path_to_pdga_data = "data/pdga/"
 path_to_seeds = "data/seed/"
-verbose = True
+verbose = False
 
 def upgrade() -> None:
     """Loading Data."""
@@ -40,18 +40,15 @@ def upgrade() -> None:
         courses = []
         for pool in data:
             for layout in pool["layouts"]:
-                if layout["CourseID"] == -1:
-                    layout["CourseID"] = layout["LayoutID"]
-                if layout["Name"] != "Default Layout" and layout["Par"] > 19 and layout["Length"] != 5000:
-                    courses.append(
-                        {
-                            "course_id": int(str(layout["CourseID"]) + str(year) + str(round)),
-                            "course_name": layout["CourseName"],
-                            "name": layout["Name"],
-                            "holes": layout["Holes"],
-                            "units": layout["Units"],
-                        }
-                    )
+                courses.append(
+                    {
+                        "course_id": int(str(layout["LayoutID"]) + str(year) + str(round)),
+                        "course_name": layout["CourseName"],
+                        "name": layout["Name"],
+                        "holes": layout["Holes"],
+                        "units": layout["Units"],
+                    }
+                )
         return courses
     
     def get_players(data):
@@ -123,13 +120,8 @@ def upgrade() -> None:
         rounds = []
         for pool in data:
             round_id = pool["live_round_id"]
-            if len(pool["layouts"]) > 1:
-                print('There is an issue!!')
-                break
             for layout in pool["layouts"]:
-                if layout["CourseID"] in [-1, None]:
-                    layout["CourseID"] = layout["LayoutID"]
-                course_id = int(str(layout["CourseID"]) + str(year) + str(round))
+                course_id = int(str(layout["LayoutID"]) + str(year) + str(round))
                 layout_id = layout["LayoutID"]
                 tournament_id = layout["TournID"]
                 hole_detail = layout["Detail"]
@@ -138,8 +130,8 @@ def upgrade() -> None:
                 for hole in hole_detail:
                     hole_reference[hole["Hole"]] = hole
                 for person_round in pool["scores"]:
-                    if person_round["RoundStarted"] == 1:
-                        person_round_id = person_round["ScoreID"] if person_round["ScoreID"] != "" else person_round["ResultID"] + tournament_round_num
+                    if person_round["RoundStarted"] == 1 or person_round["Completed"] == 1:
+                        person_round_id = person_round["ScoreID"] if person_round["ScoreID"] else person_round["ResultID"] + tournament_round_num
                         player_id = person_round["PDGANum"]
                         won_playoff = person_round["WonPlayoff"]
                         prize = person_round["Prize"]
@@ -403,4 +395,5 @@ def upgrade() -> None:
 
 def downgrade() -> None:
     """Truncating Tables."""
-    op.execute("TRUNCATE TABLE course CASCADE;")
+    for table in schema.keys():
+        op.execute(f"TRUNCATE TABLE {table} CASCADE;")
