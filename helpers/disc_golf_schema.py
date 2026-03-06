@@ -46,7 +46,8 @@ schema = {
             sa.Column("tournament_round_id", sa.Integer, nullable=False),
             sa.Column("tournament_round_num", sa.Integer, nullable=False),
             sa.Column("won_playoff", sa.Text),
-            sa.Column("prize", sa.Text),
+            sa.Column("prize", sa.Integer),
+            sa.Column("prize_currency", sa.Text),
             sa.Column("round_status", sa.Text),
             sa.Column("hole_count", sa.Integer),
             sa.Column("card_number", sa.Integer),
@@ -63,7 +64,7 @@ schema = {
             sa.Column("player_id", sa.Integer, sa.ForeignKey("player.player_id"), nullable=False),
             sa.Column("hole_number", sa.Integer, nullable=False),
             sa.Column("par", sa.Integer, nullable=False),
-            sa.Column("length", sa.Float, nullable=False),
+            sa.Column("length", sa.Float),
             sa.Column("score", sa.Integer, nullable=False),
     )
 }

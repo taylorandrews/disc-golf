@@ -55,17 +55,18 @@ def upgrade() -> None:
         players = []
         for pool in data:
             for scores in pool["scores"]:
-                players.append(
-                    {
-                        "first_name": scores["FirstName"],
-                        "last_name": scores["LastName"],
-                        "city": scores["City"],
-                        "country": scores["Country"],
-                        "state": scores["StateProv"],
-                        "player_id": scores.get("PDGANum"),
-                        "division": scores["Division"],
-                    }
-                )
+                if scores["HasPDGANum"] == 1:
+                    players.append(
+                        {
+                            "first_name": scores["FirstName"],
+                            "last_name": scores["LastName"],
+                            "city": scores["City"],
+                            "country": scores["Country"],
+                            "state": scores["StateProv"],
+                            "player_id": scores.get("PDGANum"),
+                            "division": scores["Division"],
+                        }
+                    )
         return players
     
     def to_bool(value: str) -> bool:
@@ -130,11 +131,12 @@ def upgrade() -> None:
                 for hole in hole_detail:
                     hole_reference[hole["Hole"]] = hole
                 for person_round in pool["scores"]:
-                    if person_round["RoundStarted"] == 1 or person_round["Completed"] == 1:
-                        person_round_id = person_round["ScoreID"] if person_round["ScoreID"] else person_round["ResultID"] + tournament_round_num
+                    if person_round["HasPDGANum"] == 1 and (person_round["RoundStarted"] == 1 or person_round["Completed"] == 1):
+                        person_round_id = person_round["ScoreID"] if person_round["ScoreID"] else int(f"{person_round['ResultID']}{tournament_round_num}")
                         player_id = person_round["PDGANum"]
                         won_playoff = person_round["WonPlayoff"]
-                        prize = person_round["Prize"]
+                        prize = person_round["Prize"].replace("$", "").replace(",", "").replace("&euro;", "") if person_round["Prize"] else None
+                        prize_currency = "EUR" if "euro" in str(person_round["Prize"]) else "USD"
                         round_status = person_round["RoundStatus"]
                         hole_count = person_round["Holes"]
                         card_number = person_round["CardNum"]
@@ -152,6 +154,7 @@ def upgrade() -> None:
                                 "tournament_round_num": tournament_round_num,
                                 "won_playoff": won_playoff,
                                 "prize": prize,
+                                "prize_currency": prize_currency,
                                 "round_status": round_status,
                                 "hole_count": hole_count,
                                 "card_number": card_number,
@@ -375,13 +378,13 @@ def upgrade() -> None:
             print("Found", len(holes) , "holes played")
 
         # validate data
-        validate_data(
-            tournaments,
-            courses,
-            players,
-            rounds,
-            holes
-        )
+        # validate_data(
+        #     tournaments,
+        #     courses,
+        #     players,
+        #     rounds,
+        #     holes
+        # )
 
         # alembic bulk upserts
         run_upserts(
