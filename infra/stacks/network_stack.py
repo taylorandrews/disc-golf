@@ -83,5 +83,5 @@ class NetworkStack(cdk.Stack):
         self.db_security_group.add_ingress_rule(
             ec2.Peer.any_ipv4(),
             ec2.Port.tcp(5432),
-            "PostgreSQL — open for developer access (see module docstring to restrict)",
+            "PostgreSQL - open for developer access (see module docstring to restrict)",
         )

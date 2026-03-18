@@ -96,6 +96,12 @@ DATABASE_URL=postgresql+psycopg://postgres:<PASSWORD>@<RDS_ENDPOINT>:5432/pdga_d
     alembic upgrade head
 ```
 
+> **Gotcha:** You must prefix the command with `DATABASE_URL=...` as shown above.
+> Do not rely on sourcing `.env` first — `.env` points to `localhost` for local dev.
+> Without the prefix, Alembic silently migrates the local DB (already at head) and
+> leaves RDS untouched. The site will show "relation tournament does not exist" until
+> RDS is actually seeded.
+
 This loads all three migrations:
 1. Creates the 5 base tables
 2. Loads all data from `data/pdga/` JSON files

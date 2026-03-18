@@ -3,3 +3,14 @@ pgdata/
 .venv/
 data/
 notes/
+
+# Python
+__pycache__/
+*.pyc
+
+# CDK build artifacts and runtime context
+infra/cdk.out/
+infra/cdk.context.json
+
+# SQL scratch files
+*.session.sql
