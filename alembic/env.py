@@ -12,9 +12,9 @@ config = context.config
 
 # Allow DATABASE_URL environment variable to override the URL in alembic.ini.
 # Use this when running migrations against non-local databases (e.g. RDS):
-#   DATABASE_URL=postgresql://postgres:<pw>@<rds-endpoint>:5432/pdga_data \
+#   DATABASE_URL=postgresql+psycopg://postgres:<pw>@<rds-endpoint>:5432/pdga_data \
 #       alembic upgrade head
-# The postgresql:// scheme (no driver prefix) uses psycopg2 via SQLAlchemy.
+# The postgresql+psycopg:// scheme explicitly selects the psycopg v3 driver.
 _db_url = os.getenv("DATABASE_URL")
 if _db_url:
     config.set_main_option("sqlalchemy.url", _db_url)

@@ -92,7 +92,7 @@ aws secretsmanager get-secret-value \
 
 **Run migrations:**
 ```bash
-DATABASE_URL=postgresql://postgres:<PASSWORD>@<RDS_ENDPOINT>:5432/pdga_data \
+DATABASE_URL=postgresql+psycopg://postgres:<PASSWORD>@<RDS_ENDPOINT>:5432/pdga_data \
     alembic upgrade head
 ```
 
