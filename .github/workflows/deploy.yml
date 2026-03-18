@@ -1,0 +1,54 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+
+# Required for GitHub to request an OIDC token from AWS.
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy:
+    name: Build and deploy to ECS
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Assumes the disc-golf-github-actions IAM role via OIDC.
+      # No AWS credentials are stored in GitHub Secrets.
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::368365885895:role/disc-golf-github-actions
+          aws-region: us-east-1
+
+      - name: Login to ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      # Tags with both the git SHA (immutable, for rollback reference) and
+      # "latest" (what ECS pulls on each new deployment).
+      - name: Build and push Docker image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          docker build \
+            -t $ECR_REGISTRY/disc-golf-app:$IMAGE_TAG \
+            -t $ECR_REGISTRY/disc-golf-app:latest \
+            .
+          docker push $ECR_REGISTRY/disc-golf-app:$IMAGE_TAG
+          docker push $ECR_REGISTRY/disc-golf-app:latest
+
+      # Forces ECS to pull the new "latest" image and replace running tasks.
+      - name: Deploy to ECS
+        run: |
+          aws ecs update-service \
+            --cluster disc-golf-cluster \
+            --service disc-golf-service \
+            --force-new-deployment \
+            --no-cli-pager

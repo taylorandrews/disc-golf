@@ -11,7 +11,8 @@ A stats and content dashboard for the Disc Golf Pro Tour (DGPT), focused on the 
 Data comes from the PDGA website. The site surfaces season stats, event results, player performance,
 and eventually a "this week in disc golf" content hub.
 
-**Current domain**: `get-your-disc-golf-data.com` (stealth/placeholder — intentionally silly)
+**Target domain**: `disc-golf-data.com` (not yet connected — Phase 1 uses the ALB URL)
+See `docs/runbook.md` for domain connection steps.
 
 ---
 
@@ -204,14 +205,21 @@ Season tab is implemented. All others are placeholder shells (`render_shell()`).
 
 ---
 
-## AWS Infrastructure (Phase 1 — to be built)
+## AWS Infrastructure (Phase 1 — complete)
 
 - **IaC**: AWS CDK (Python) — always CDK, never Terraform
-- **Region**: `us-east-1`
-- **App hosting**: ECS Fargate (containerized Streamlit)
-- **Database**: RDS PostgreSQL (same engine as local Docker)
-- **Domain**: `get-your-disc-golf-data.com` (placeholder)
-- CDK app will live in `infra/` directory at repo root
+- **Region**: `us-east-1`, **Account**: `368365885895`
+- **App hosting**: ECS Fargate — cluster `disc-golf-cluster`, service `disc-golf-service`
+- **Database**: RDS PostgreSQL t3.micro — instance ID `disc-golf-db`
+- **Container registry**: ECR repo `disc-golf-app`
+- **Load balancer**: ALB `disc-golf-alb` (HTTP:80 → Streamlit:8501)
+- **Task size**: 0.5 vCPU / 1 GB RAM
+- **Domain**: `disc-golf-data.com` (not yet connected — site runs at ALB URL for now)
+- **GitHub Actions**: OIDC role `disc-golf-github-actions` — no AWS keys stored in GitHub
+- CDK stacks live in `infra/stacks/`: NetworkStack, DatabaseStack, AppStack
+- Deployment: `git push main` → GitHub Actions → ECR → ECS rolling deploy
+- Stop/start: `make stop` / `make start` — see `docs/runbook.md`
+- Estimated cost: ~$50/month running, ~$16/month stopped (ALB base charge only)
 
 ---
 

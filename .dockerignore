@@ -1,0 +1,39 @@
+# Local data and storage — never goes in the image
+pgdata/
+data/
+notes/
+
+# Python artifacts
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+
+# Secrets and local config
+.env
+
+# Version control
+.git/
+.gitignore
+
+# IDE
+.vscode/
+
+# Infrastructure and pipeline — not needed to run the app
+infra/
+.github/
+alembic/
+alembic.ini
+
+# Top-level helpers only used by Alembic migrations, not the dashboard
+helpers/
+
+# Scripts not needed at runtime
+get_pdga_round.py
+
+# Docs and tooling
+README.md
+CLAUDE.md
+docs/
+Makefile
+disc-golf.session.sql

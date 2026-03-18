@@ -1,3 +1,4 @@
+import os
 from logging.config import fileConfig
 
 from sqlalchemy import engine_from_config
@@ -8,6 +9,15 @@ from alembic import context
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
+
+# Allow DATABASE_URL environment variable to override the URL in alembic.ini.
+# Use this when running migrations against non-local databases (e.g. RDS):
+#   DATABASE_URL=postgresql://postgres:<pw>@<rds-endpoint>:5432/pdga_data \
+#       alembic upgrade head
+# The postgresql:// scheme (no driver prefix) uses psycopg2 via SQLAlchemy.
+_db_url = os.getenv("DATABASE_URL")
+if _db_url:
+    config.set_main_option("sqlalchemy.url", _db_url)
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
