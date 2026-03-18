@@ -113,7 +113,10 @@ class AppStack(cdk.Stack):
             service_name="disc-golf-service",
             security_groups=[app_security_group],
             assign_public_ip=True,
-            desired_count=1,
+            # Start at 0 so CDK doesn't wait for tasks to launch during initial
+            # deploy (the ECR repo is empty at that point). make build-push
+            # pushes the first image and scales the service up to 1.
+            desired_count=0,
         )
 
         # ── Application Load Balancer ─────────────────────────────────────────

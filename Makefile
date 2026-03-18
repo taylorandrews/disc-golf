@@ -88,6 +88,7 @@ build-push:
 	aws ecs update-service \
 	    --cluster $(CLUSTER) \
 	    --service $(SERVICE) \
+	    --desired-count 1 \
 	    --force-new-deployment \
 	    --region $(AWS_REGION) \
 	    --no-cli-pager
