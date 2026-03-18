@@ -38,6 +38,7 @@ jobs:
           IMAGE_TAG: ${{ github.sha }}
         run: |
           docker build \
+            --platform linux/amd64 \
             -t $ECR_REGISTRY/disc-golf-app:$IMAGE_TAG \
             -t $ECR_REGISTRY/disc-golf-app:latest \
             .

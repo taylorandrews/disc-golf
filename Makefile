@@ -83,7 +83,7 @@ status:
 build-push:
 	aws ecr get-login-password --region $(AWS_REGION) | \
 	    docker login --username AWS --password-stdin $(ECR_REGISTRY)
-	docker build -t $(ECR_REGISTRY)/$(ECR_REPO):latest .
+	docker build --platform linux/amd64 -t $(ECR_REGISTRY)/$(ECR_REPO):latest .
 	docker push $(ECR_REGISTRY)/$(ECR_REPO):latest
 	aws ecs update-service \
 	    --cluster $(CLUSTER) \
