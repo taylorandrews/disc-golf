@@ -1,5 +1,6 @@
 """
-AppStack — ECR repository, ECS Fargate service, ALB, and GitHub OIDC role.
+AppStack — ECR repository, ECS Fargate service, ALB, GitHub OIDC role,
+           S3 data lake bucket, and nightly ETL Lambda + EventBridge rule.
 
 Fargate task: 0.5 vCPU / 1 GB RAM
   Sized for comfortable Streamlit operation. Scale up by editing cpu/memory_limit_mib
@@ -23,15 +24,33 @@ GitHub OIDC:
         self, "GithubOidc",
         "arn:aws:iam::368365885895:oidc-provider/token.actions.githubusercontent.com"
     )
+
+S3 data lake:
+  Bucket name: disc-golf-data-lake-{account}
+  Legacy data (2020-2025): raw/pdga/legacy/{tourn_id}/tournament_{id}_MPO_round_{n}.json
+  ETL data (2026+):        raw/pdga/2026/{tourn_id}/tournament_{id}_MPO_round_{n}.json
+  Upload legacy JSONs once with: make upload-legacy
+
+Nightly ETL Lambda:
+  Function name: disc-golf-nightly-etl
+  Cron: 06:00 UTC daily (EventBridge)
+  Invoke manually: make invoke-etl
+  Logs: make logs-etl
+  Connects to RDS via public endpoint — no VPC required since RDS is publicly accessible.
+  Exits cleanly (503) if RDS is stopped.
 """
 import aws_cdk as cdk
 import aws_cdk.aws_ec2 as ec2
 import aws_cdk.aws_ecr as ecr
 import aws_cdk.aws_ecs as ecs
 import aws_cdk.aws_elasticloadbalancingv2 as elbv2
+import aws_cdk.aws_events as events
+import aws_cdk.aws_events_targets as targets
 import aws_cdk.aws_iam as iam
+import aws_cdk.aws_lambda as lambda_
 import aws_cdk.aws_logs as logs
 import aws_cdk.aws_rds as rds
+import aws_cdk.aws_s3 as s3
 import aws_cdk.aws_secretsmanager as secretsmanager
 from constructs import Construct
 
@@ -53,17 +72,16 @@ class AppStack(cdk.Stack):
     ) -> None:
         super().__init__(scope, id, **kwargs)
 
-        # ── ECR repository ────────────────────────────────────────────────────
+        # -- ECR repository ---------------------------------------------------
         self.ecr_repo = ecr.Repository(
             self,
             "AppRepo",
             repository_name="disc-golf-app",
-            # Allow cdk destroy to remove the repo and all images inside it.
             removal_policy=cdk.RemovalPolicy.DESTROY,
             empty_on_delete=True,
         )
 
-        # ── ECS cluster ───────────────────────────────────────────────────────
+        # -- ECS cluster ------------------------------------------------------
         cluster = ecs.Cluster(
             self,
             "Cluster",
@@ -71,7 +89,7 @@ class AppStack(cdk.Stack):
             cluster_name="disc-golf-cluster",
         )
 
-        # ── Task definition — 0.5 vCPU / 1 GB RAM ────────────────────────────
+        # -- Task definition -- 0.5 vCPU / 1 GB RAM --------------------------
         task_def = ecs.FargateTaskDefinition(
             self,
             "TaskDef",
@@ -79,18 +97,15 @@ class AppStack(cdk.Stack):
             memory_limit_mib=1024,
         )
 
-        # ── Container ─────────────────────────────────────────────────────────
+        # -- Container --------------------------------------------------------
         container = task_def.add_container(
             "App",
             image=ecs.ContainerImage.from_ecr_repository(self.ecr_repo, "latest"),
-            # Non-sensitive connection details as plain environment variables.
             environment={
                 "DB_HOST": db_instance.db_instance_endpoint_address,
                 "DB_PORT": "5432",
                 "DB_NAME": "pdga_data",
             },
-            # Sensitive credentials pulled from Secrets Manager at task start.
-            # ECS grants the task execution role GetSecretValue automatically.
             secrets={
                 "DB_USER": ecs.Secret.from_secrets_manager(db_secret, "username"),
                 "DB_PASSWORD": ecs.Secret.from_secrets_manager(db_secret, "password"),
@@ -102,9 +117,9 @@ class AppStack(cdk.Stack):
         )
         container.add_port_mappings(ecs.PortMapping(container_port=8501))
 
-        # ── Fargate service ───────────────────────────────────────────────────
+        # -- Fargate service --------------------------------------------------
         # assign_public_ip=True is required when running in a public subnet
-        # without a NAT gateway — tasks need outbound internet for ECR pulls.
+        # without a NAT gateway -- tasks need outbound internet for ECR pulls.
         service = ecs.FargateService(
             self,
             "Service",
@@ -113,13 +128,13 @@ class AppStack(cdk.Stack):
             service_name="disc-golf-service",
             security_groups=[app_security_group],
             assign_public_ip=True,
-            # Start at 0 so CDK doesn't wait for tasks to launch during initial
+            # Start at 0 so CDK does not wait for tasks to launch during initial
             # deploy (the ECR repo is empty at that point). make build-push
             # pushes the first image and scales the service up to 1.
             desired_count=0,
         )
 
-        # ── Application Load Balancer ─────────────────────────────────────────
+        # -- Application Load Balancer -----------------------------------------
         alb = elbv2.ApplicationLoadBalancer(
             self,
             "Alb",
@@ -145,7 +160,7 @@ class AppStack(cdk.Stack):
             ),
         )
 
-        # ── GitHub Actions OIDC ───────────────────────────────────────────────
+        # -- GitHub Actions OIDC ----------------------------------------------
         # See module docstring if you already have a GitHub OIDC provider
         # in this account and hit a "resource already exists" error.
         github_provider = iam.OpenIdConnectProvider(
@@ -155,7 +170,6 @@ class AppStack(cdk.Stack):
             client_ids=["sts.amazonaws.com"],
         )
 
-        # Scoped to main-branch pushes on this specific repo only.
         github_role = iam.Role(
             self,
             "GithubActionsRole",
@@ -173,11 +187,8 @@ class AppStack(cdk.Stack):
             ),
         )
 
-        # ECR: push images. grant_push covers BatchCheckLayerAvailability,
-        # InitiateLayerUpload, UploadLayerPart, CompleteLayerUpload, PutImage.
         self.ecr_repo.grant_push(github_role)
 
-        # GetAuthorizationToken is account-level — cannot scope to a single repo.
         github_role.add_to_policy(
             iam.PolicyStatement(
                 actions=["ecr:GetAuthorizationToken"],
@@ -185,7 +196,6 @@ class AppStack(cdk.Stack):
             )
         )
 
-        # ECS: trigger redeployment, scoped to this service only.
         github_role.add_to_policy(
             iam.PolicyStatement(
                 actions=["ecs:UpdateService", "ecs:DescribeServices"],
@@ -196,12 +206,68 @@ class AppStack(cdk.Stack):
             )
         )
 
-        # ── Outputs ───────────────────────────────────────────────────────────
+        # -- S3 data lake -----------------------------------------------------
+        # RETAIN on destroy -- data should survive infrastructure teardowns.
+        data_lake = s3.Bucket(
+            self,
+            "DataLake",
+            bucket_name=f"disc-golf-data-lake-{self.account}",
+            removal_policy=cdk.RemovalPolicy.RETAIN,
+            block_public_access=s3.BlockPublicAccess.BLOCK_ALL,
+        )
+
+        # -- Nightly ETL Lambda -----------------------------------------------
+        # Packaged from repo root: etl/ and helpers/ copied into the Lambda
+        # deployment package alongside their pip dependencies.
+        # Connects to RDS via its public endpoint -- no VPC needed.
+        etl_function = lambda_.Function(
+            self,
+            "NightlyEtl",
+            function_name="disc-golf-nightly-etl",
+            runtime=lambda_.Runtime.PYTHON_3_12,
+            handler="etl.lambda_handler.handler",
+            code=lambda_.Code.from_asset(
+                # Relative to infra/ where CDK runs. ".." = repo root.
+                "..",
+                bundling=cdk.BundlingOptions(
+                    image=lambda_.Runtime.PYTHON_3_12.bundling_image,
+                    command=[
+                        "bash", "-c",
+                        "pip install -r etl/requirements.txt -t /asset-output --quiet"
+                        " && cp -r etl helpers /asset-output",
+                    ],
+                ),
+            ),
+            timeout=cdk.Duration.minutes(5),
+            memory_size=512,
+            environment={
+                "DB_HOST": db_instance.db_instance_endpoint_address,
+                "DB_NAME": "pdga_data",
+                "DB_SECRET_ARN": db_secret.secret_arn,
+                "S3_BUCKET": data_lake.bucket_name,
+            },
+            log_retention=logs.RetentionDays.TWO_WEEKS,
+        )
+
+        db_secret.grant_read(etl_function)
+        data_lake.grant_write(etl_function)
+
+        # -- EventBridge cron -- 06:00 UTC daily ------------------------------
+        etl_rule = events.Rule(
+            self,
+            "NightlyEtlSchedule",
+            rule_name="disc-golf-nightly-etl",
+            schedule=events.Schedule.cron(minute="0", hour="6"),
+            description="Trigger nightly ETL to check for new PDGA round data",
+        )
+        etl_rule.add_target(targets.LambdaFunction(etl_function))
+
+        # -- Outputs ----------------------------------------------------------
         cdk.CfnOutput(
             self,
             "AlbUrl",
             value=f"http://{alb.load_balancer_dns_name}",
-            description="Public site URL — accessible after the first image push",
+            description="Public site URL -- accessible after the first image push",
         )
         cdk.CfnOutput(
             self,
@@ -214,4 +280,16 @@ class AppStack(cdk.Stack):
             "GithubActionsRoleArn",
             value=github_role.role_arn,
             description="IAM role ARN assumed by GitHub Actions via OIDC",
+        )
+        cdk.CfnOutput(
+            self,
+            "DataLakeBucket",
+            value=data_lake.bucket_name,
+            description="S3 data lake bucket -- raw PDGA JSON archive",
+        )
+        cdk.CfnOutput(
+            self,
+            "EtlFunctionArn",
+            value=etl_function.function_arn,
+            description="Nightly ETL Lambda ARN -- invoke manually with: make invoke-etl",
         )

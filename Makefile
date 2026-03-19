@@ -1,29 +1,34 @@
-# ─────────────────────────────────────────────────────────────────────────────
-# disc-golf — AWS infrastructure management
+# -----------------------------------------------------------------------------
+# disc-golf -- AWS infrastructure management
 #
 # Commands:
-#   make start      → Start RDS + scale ECS to 1  (use after make stop)
-#   make stop       → Scale ECS to 0 + stop RDS   (eliminates hourly charges)
-#   make status     → Show current ECS and RDS state
-#   make build-push → Build Docker image and push to ECR (initial deploy / manual push)
-#   make destroy    → Tear down ALL infrastructure via CDK  ⚠ deletes data
-# ─────────────────────────────────────────────────────────────────────────────
+#   make start         -> Start RDS + scale ECS to 1  (use after make stop)
+#   make stop          -> Scale ECS to 0 + stop RDS   (eliminates hourly charges)
+#   make status        -> Show current ECS and RDS state
+#   make build-push    -> Build Docker image and push to ECR (initial deploy / manual push)
+#   make invoke-etl    -> Manually run the nightly ETL Lambda
+#   make logs-etl      -> Tail the ETL Lambda's CloudWatch log group
+#   make upload-legacy -> One-time upload of data/pdga/ JSONs to S3 legacy prefix
+#   make destroy       -> Tear down ALL infrastructure via CDK  [warning: deletes data]
+# -----------------------------------------------------------------------------
 
 AWS_REGION   := us-east-1
 ACCOUNT_ID   := 368365885895
 ECR_REGISTRY := $(ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com
 ECR_REPO     := disc-golf-app
+S3_BUCKET    := disc-golf-data-lake-$(ACCOUNT_ID)
 
-# These names are set explicitly in the CDK stacks — keep in sync if changed.
-CLUSTER := disc-golf-cluster
-SERVICE := disc-golf-service
-DB_ID   := disc-golf-db
+# These names are set explicitly in the CDK stacks -- keep in sync if changed.
+CLUSTER      := disc-golf-cluster
+SERVICE      := disc-golf-service
+DB_ID        := disc-golf-db
+ETL_FUNCTION := disc-golf-nightly-etl
 
-.PHONY: start stop status build-push destroy
+.PHONY: start stop status build-push invoke-etl logs-etl upload-legacy destroy
 
-## start: Start RDS and scale ECS service to 1  (takes 2–5 min for RDS to be ready)
+## start: Start RDS and scale ECS service to 1  (takes 2-5 min for RDS to be ready)
 start:
-	@echo "Starting RDS instance (may take 2–5 minutes)..."
+	@echo "Starting RDS instance (may take 2-5 minutes)..."
 	aws rds start-db-instance \
 	    --db-instance-identifier $(DB_ID) \
 	    --region $(AWS_REGION) \
@@ -41,7 +46,7 @@ start:
 	    --no-cli-pager
 	@echo "Done. Site should be live at the ALB URL within ~1 minute."
 
-## stop: Scale ECS to 0 and stop RDS — eliminates hourly compute charges
+## stop: Scale ECS to 0 and stop RDS -- eliminates hourly compute charges
 stop:
 	@echo "Scaling ECS service to 0..."
 	aws ecs update-service \
@@ -60,7 +65,7 @@ stop:
 ## status: Show current ECS service and RDS instance state
 status:
 	@echo ""
-	@echo "── ECS Service ──────────────────────────────────────"
+	@echo "-- ECS Service ------------------------------------------------------"
 	@aws ecs describe-services \
 	    --cluster $(CLUSTER) \
 	    --services $(SERVICE) \
@@ -69,7 +74,7 @@ status:
 	    --output table \
 	    --no-cli-pager
 	@echo ""
-	@echo "── RDS Instance ─────────────────────────────────────"
+	@echo "-- RDS Instance -----------------------------------------------------"
 	@aws rds describe-db-instances \
 	    --db-instance-identifier $(DB_ID) \
 	    --region $(AWS_REGION) \
@@ -92,11 +97,46 @@ build-push:
 	    --force-new-deployment \
 	    --region $(AWS_REGION) \
 	    --no-cli-pager
-	@echo "Done. New deployment initiated — live in ~1 minute."
+	@echo "Done. New deployment initiated -- live in ~1 minute."
+
+## invoke-etl: Manually trigger the nightly ETL Lambda and stream its output.
+##             RDS must be running (make start) before invoking.
+invoke-etl:
+	@echo "Invoking $(ETL_FUNCTION)..."
+	aws lambda invoke \
+	    --function-name $(ETL_FUNCTION) \
+	    --region $(AWS_REGION) \
+	    --log-type Tail \
+	    --query 'LogResult' \
+	    --output text \
+	    /tmp/etl-response.json | base64 --decode
+	@echo ""
+	@echo "Response:"
+	@cat /tmp/etl-response.json
+
+## logs-etl: Tail the ETL Lambda CloudWatch log group (last 30 minutes).
+logs-etl:
+	aws logs tail /aws/lambda/$(ETL_FUNCTION) \
+	    --region $(AWS_REGION) \
+	    --since 30m \
+	    --follow
+
+## upload-legacy: One-time upload of local data/pdga/ JSONs to S3 legacy prefix.
+##                Run once after the S3 bucket is created (cdk deploy).
+##                Safe to re-run -- S3 sync skips files that are already present.
+upload-legacy:
+	@echo "Syncing data/pdga/ to s3://$(S3_BUCKET)/raw/pdga/legacy/ ..."
+	aws s3 sync data/pdga/ s3://$(S3_BUCKET)/raw/pdga/legacy/ \
+	    --region $(AWS_REGION) \
+	    --no-cli-pager
+	@echo "Done."
 
 ## destroy: Tear down ALL AWS infrastructure. Data will be permanently deleted.
+##          Note: the S3 data lake bucket has RemovalPolicy.RETAIN and will NOT
+##          be deleted by this command -- remove it manually if desired.
 destroy:
 	@echo "WARNING: This permanently deletes all infrastructure and database data."
+	@echo "         The S3 data lake bucket is retained and must be deleted manually."
 	@echo "         Data can be restored by re-running Alembic migrations locally."
 	@read -p "Type 'yes' to confirm: " confirm && [ "$$confirm" = "yes" ] || exit 1
 	cd infra && cdk destroy --all --force
