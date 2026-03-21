@@ -57,7 +57,7 @@ disc-golf/
 |   +-- run.py                       # Local runner: python -m etl.run
 |   +-- requirements.txt             # Lambda-only deps (no streamlit/black/etc)
 +-- scripts/
-|   +-- enrich_2026_tournaments.py   # Seed tournament table from 6-col CSV
+|   +-- enrich_tournaments.py   # Seed tournament table from 6-col CSV
 +-- dashboard/
 |   +-- app.py                       # Streamlit entrypoint -- all UI lives here
 |   +-- queries.py                   # SQL query functions, all @st.cache_data cached
@@ -169,7 +169,7 @@ CSV columns (6): `tournament_id, name, start_date, classification, is_worlds, to
 
 ```bash
 DATABASE_URL=postgresql+psycopg://postgres:<pw>@<host>:5432/pdga_data \
-    python scripts/enrich_2026_tournaments.py
+    python scripts/enrich_tournaments.py [--year YEAR]
 ```
 
 Fetches round 1 from PDGA to auto-fill `long_name`. Upserts into the `tournament` table.
@@ -330,13 +330,13 @@ Dockerize app -> CDK stack (VPC + RDS + ECS + ALB) -> GitHub Actions CI/CD -> li
 
 **2C -- Tournament seed management (complete)**
 - `data/seed/2026_tournaments.csv`: 6-column file you maintain (tournament_id, name, start_date, classification, is_worlds, total_rounds, has_finals)
-- `scripts/enrich_2026_tournaments.py`: reads CSV, fetches long_name from PDGA round 1 API, upserts into tournament table
+- `scripts/enrich_tournaments.py`: reads CSV, fetches long_name from PDGA round 1 API, upserts into tournament table
 
 **2D -- Deploy and seed 2026 data (pending)**
 - `cdk deploy` to create S3 bucket + Lambda + EventBridge
 - Run `make upload-legacy` to archive legacy JSONs
 - Add 2026 tournament IDs to `data/seed/2026_tournaments.csv`
-- Run `scripts/enrich_2026_tournaments.py` to seed tournament table
+- Run `scripts/enrich_tournaments.py` to seed tournament table
 - Run `make invoke-etl` to load any rounds already available
 
 **2E -- Dashboard 2026 tab (pending)**

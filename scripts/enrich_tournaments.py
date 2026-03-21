@@ -1,7 +1,7 @@
 """
-Enrich 2026 tournament seed data and upsert into the tournament table.
+Enrich tournament seed data and upsert into the tournament table.
 
-Reads data/seed/2026_tournaments.csv (6 columns you maintain):
+Reads data/seed/{year}_tournaments.csv (6 columns you maintain):
     tournament_id, name, start_date, classification, is_worlds, total_rounds, has_finals
 
 For each row:
@@ -11,10 +11,11 @@ For each row:
 
 Usage:
     DATABASE_URL=postgresql+psycopg://postgres:<pw>@<host>:5432/pdga_data \\
-        python scripts/enrich_2026_tournaments.py
+        python scripts/enrich_tournaments.py [--year YEAR]
 
-Run this locally whenever you add new rows to 2026_tournaments.csv.
+Run this locally whenever you add new rows to {year}_tournaments.csv.
 """
+import argparse
 import csv
 import datetime
 import logging
@@ -30,7 +31,7 @@ from helpers.disc_golf_schema import schema
 logging.basicConfig(level=logging.INFO, format="%(levelname)s  %(message)s")
 logger = logging.getLogger(__name__)
 
-SEED_CSV = "data/seed/2026_tournaments.csv"
+seed_csv_TEMPLATE = "data/seed/{year}_tournaments.csv"
 PDGA_ROUND1_API = (
     "https://www.pdga.com/apps/tournament/live-api/live_results_fetch_round"
     "?TournID={tourn_id}&Division=MPO&Round=1"
@@ -65,20 +66,26 @@ def to_bool(value: str) -> bool:
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--year", type=int, default=datetime.date.today().year)
+    args = parser.parse_args()
+
+    seed_csv = seed_csv_TEMPLATE.format(year=args.year)
+
     db_url = os.environ.get("DATABASE_URL")
     if not db_url:
         raise SystemExit("DATABASE_URL environment variable is required")
 
     engine = create_engine(db_url)
 
-    with open(SEED_CSV, newline="") as f:
+    with open(seed_csv, newline="") as f:
         rows = list(csv.DictReader(f))
 
     if not rows:
-        logger.info("No rows in %s — nothing to do", SEED_CSV)
+        logger.info("No rows in %s — nothing to do", seed_csv)
         return
 
-    logger.info("Processing %d tournament(s) from %s", len(rows), SEED_CSV)
+    logger.info("Processing %d tournament(s) from %s", len(rows), seed_csv)
     tournaments = []
 
     for row in rows:
