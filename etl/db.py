@@ -25,7 +25,7 @@ def get_engine():
             client.get_secret_value(SecretId=secret_arn)["SecretString"]
         )
         db_url = (
-            f"postgresql+psycopg2://{secret['username']}:{secret['password']}"
+            f"postgresql+pg8000://{secret['username']}:{secret['password']}"
             f"@{os.environ['DB_HOST']}:5432/{os.environ.get('DB_NAME', 'pdga_data')}"
         )
     return create_engine(db_url, pool_pre_ping=True)

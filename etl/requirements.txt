@@ -1,4 +1,4 @@
 # Lambda-only dependencies (boto3 is provided by the Lambda runtime)
 requests
-psycopg2-binary
+pg8000
 SQLAlchemy
