@@ -48,19 +48,31 @@ Project history, current state, and future direction for disc-golf-data.com.
 
 ### Phase 3 — Landing Page
 
+Full design specification: `docs/landing-page-design.md`
+
 A "this week in disc golf" hub replacing the current placeholder tab.
+The vision: a single page that answers *who just won, what's next, who's leading the season,
+and where to watch* — without any interaction from the user.
 
-**Planned content:**
-- Upcoming DGPT events (from `tournament` table, `start_date >= today`)
-- Recent results summary (last completed event champion + score)
-- Embedded or linked video content: JomezPro, GK Pro, Ultiworld Disc Golf coverage
-- Tour Life Podcast links (Ezra Aderhold + Aaron Goosage)
-- Disc golf blog / article roundup
+**Content sections:**
+1. **Triptych hero** — Last Result / Next Event / Season Standings (top 5 points)
+2. **Schedule strip** — horizontal scrollable 2026 calendar, color-coded by classification
+3. **Video coverage** — JomezPro + Gatekeeper YouTube thumbnail cards (no autoplay)
+4. **Podcast strip** — latest episode from The Upshot, Griplocked, Tour Life
+5. **Stat callout** — one large compelling number derived from current season data
+6. **Recent results table** — last 4 completed events
 
-**Design notes:**
-- Should feel like a sports media homepage, not a data dashboard
-- Cards with event name, location, dates, classification badge
-- Video links open externally — no embed needed for v1
+**New ETL jobs (additive, no existing schema changes):**
+- `etl/youtube.py` — YouTube RSS feed scraper → `media_youtube` table
+- `etl/podcast.py` — Podcast RSS scraper → `podcast_episodes` table
+- `etl/standings.py` — DGPT points computation → `season_standings` table
+
+**Build sequence:**
+1. Static shell using existing RDS data (ships independently, no new ETL)
+2. DGPT Points Standings
+3. YouTube coverage cards
+4. Podcast episode cards
+5. Polish + mobile layout pass
 
 ### Phase 4 — Text-to-SQL Search (deprioritized)
 
