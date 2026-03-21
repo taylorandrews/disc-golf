@@ -20,7 +20,15 @@ import csv
 import datetime
 import logging
 import os
+import sys
 import time
+
+# Allow running from the repo root without PYTHONPATH=.
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
+
+from dotenv import load_dotenv
+
+load_dotenv()
 
 import requests
 from sqlalchemy import create_engine
