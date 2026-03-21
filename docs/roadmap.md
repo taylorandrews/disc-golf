@@ -23,22 +23,24 @@ Project history, current state, and future direction for disc-golf-data.com.
 - `etl/` module: parse logic extracted from Alembic into a standalone, Lambda-compatible package
 - Lambda `disc-golf-nightly-etl`: checks loaded rounds nightly at 06:00 UTC, fetches new rounds from PDGA, saves to S3, upserts into RDS
 - EventBridge cron + `make invoke-etl` for manual triggering
-- 6-column tournament seed CSV + `scripts/enrich_2026_tournaments.py` for auto-filling metadata
+- 6-column tournament seed CSV + `scripts/enrich_tournaments.py` for auto-filling metadata
+
+### Phase 2D–E — 2026 season live
+*Finished March 2026*
+
+- `cdk deploy`: S3 bucket, Lambda, and EventBridge live in prod
+- `make upload-legacy` archived 2020–2025 JSONs to S3
+- 2026 tournament IDs seeded via `data/seed/2026_tournaments.csv`
+- `make seed-and-etl`: one command to enrich tournament table + kick ETL (uses Secrets Manager, no password in config)
+- ETL successfully loaded 2026 round data into RDS
+- Driver split: `psycopg2-binary` for ECS app, `pg8000` (pure Python) for Lambda — avoids CDK bundling platform issues on macOS
+- 2026 data flows into the existing Season tab automatically — no separate tab needed for now
 
 ---
 
 ## In Progress
 
-### Phase 2D — Deploy 2026 infrastructure
-- `cdk deploy` to create S3 + Lambda + EventBridge in prod
-- `make upload-legacy` to archive 2020-2025 JSONs to S3
-- Add 2026 tournament IDs to `data/seed/2026_tournaments.csv`
-- Seed tournament table, kick initial ETL run
-
-### Phase 2E — 2026 season dashboard tab
-- New "2026" nav tab using existing query patterns with `WHERE season = 2026`
-- Season standings card, top winners chart, events table — same design as legacy Season tab
-- The tab should light up automatically once rounds are in RDS
+*Nothing currently in progress.*
 
 ---
 
@@ -99,8 +101,8 @@ These require a full season of 2026 data to be meaningful:
 
 | Tab / Page | Status | Notes |
 |---|---|---|
-| Season (2020-2025) | Live | Year selector, stat cards, bar chart, events table |
-| 2026 | Pending (Phase 2E) | Same design, filtered to `season = 2026` |
+| Season (2020–2026) | Live | Year selector, stat cards, bar chart, events table |
+| 2026 | Live | Flows into Season tab automatically via nightly ETL |
 | Landing Page | Pending (Phase 3) | "This week in disc golf" content hub |
 | Search | Placeholder | Will drive player profiles in Phase 5 |
 | State of Disc Golf | Placeholder | Cross-season analytics — Phase 6 territory |

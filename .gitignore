@@ -1,6 +1,7 @@
 pgdata/
 .vscode/
 .venv/
+.env
 data/
 !data/seed/
 !data/seed/**
