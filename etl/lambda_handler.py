@@ -35,7 +35,7 @@ def handler(event, context):
         logger.error("Could not connect to RDS (may be stopped): %s", exc)
         return {"statusCode": 503, "body": "RDS unavailable — is the instance running?"}
 
-    logger.info("Found %d 2026 tournaments to check", len(tournaments))
+    logger.info("Found %d tournaments to check for %d", len(tournaments), year)
     total_new = 0
 
     for t in tournaments:

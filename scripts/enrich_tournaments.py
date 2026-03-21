@@ -10,10 +10,12 @@ For each row:
   - Upserts into the tournament table (ON CONFLICT DO NOTHING — safe to re-run)
 
 Usage:
-    DATABASE_URL=postgresql+psycopg://postgres:<pw>@<host>:5432/pdga_data \\
-        python scripts/enrich_tournaments.py [--year YEAR]
+    python scripts/enrich_tournaments.py             # local Docker DB
+    python scripts/enrich_tournaments.py --prod      # RDS via Secrets Manager
+    python scripts/enrich_tournaments.py --year 2025 # override year
 
 Run this locally whenever you add new rows to {year}_tournaments.csv.
+For RDS, run `make print-rds-config` first to populate DB_SECRET_ARN and DB_HOST in .env.
 """
 import argparse
 import csv
@@ -36,10 +38,31 @@ from sqlalchemy.dialects.postgresql import insert as pg_insert
 
 from helpers.disc_golf_schema import schema
 
+
+def get_engine(prod: bool):
+    """Return a SQLAlchemy engine.
+
+    local (default): reads DATABASE_URL from .env
+    --prod: pulls credentials from Secrets Manager (same path as the Lambda),
+            requires DB_SECRET_ARN and DB_HOST in .env
+    """
+    if prod:
+        # Unset DATABASE_URL so etl.db.get_engine() falls through to Secrets Manager.
+        os.environ.pop("DATABASE_URL", None)
+        from etl.db import get_engine as _get_engine
+        return _get_engine()
+
+    db_url = os.environ.get("DATABASE_URL")
+    if not db_url:
+        raise SystemExit(
+            "DATABASE_URL not set. Add it to .env for local, or use --prod for RDS."
+        )
+    return create_engine(db_url, pool_pre_ping=True)
+
 logging.basicConfig(level=logging.INFO, format="%(levelname)s  %(message)s")
 logger = logging.getLogger(__name__)
 
-seed_csv_TEMPLATE = "data/seed/{year}_tournaments.csv"
+SEED_CSV_TEMPLATE = "data/seed/{year}_tournaments.csv"
 PDGA_ROUND1_API = (
     "https://www.pdga.com/apps/tournament/live-api/live_results_fetch_round"
     "?TournID={tourn_id}&Division=MPO&Round=1"
@@ -76,15 +99,14 @@ def to_bool(value: str) -> bool:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--year", type=int, default=datetime.date.today().year)
+    parser.add_argument(
+        "--prod", action="store_true",
+        help="Connect to RDS via Secrets Manager (requires DB_SECRET_ARN + DB_HOST in .env)"
+    )
     args = parser.parse_args()
 
-    seed_csv = seed_csv_TEMPLATE.format(year=args.year)
-
-    db_url = os.environ.get("DATABASE_URL")
-    if not db_url:
-        raise SystemExit("DATABASE_URL environment variable is required")
-
-    engine = create_engine(db_url)
+    seed_csv = SEED_CSV_TEMPLATE.format(year=args.year)
+    engine = get_engine(args.prod)
 
     with open(seed_csv, newline="") as f:
         rows = list(csv.DictReader(f))

@@ -6,3 +6,4 @@ streamlit
 python-dotenv
 psycopg[binary]
 plotly
+boto3

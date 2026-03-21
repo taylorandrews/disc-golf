@@ -24,7 +24,7 @@ SERVICE      := disc-golf-service
 DB_ID        := disc-golf-db
 ETL_FUNCTION := disc-golf-nightly-etl
 
-.PHONY: start stop status build-push invoke-etl logs-etl upload-legacy destroy
+.PHONY: start stop status build-push invoke-etl logs-etl upload-legacy destroy seed-and-etl print-rds-config
 
 ## start: Start RDS and scale ECS service to 1  (takes 2-5 min for RDS to be ready)
 start:
@@ -130,6 +130,36 @@ upload-legacy:
 	    --region $(AWS_REGION) \
 	    --no-cli-pager
 	@echo "Done."
+
+## seed-and-etl: Seed tournament table in RDS then run the ETL Lambda.
+##               Run this after adding rows to data/seed/{year}_tournaments.csv.
+##               RDS must be running (make start) before invoking.
+seed-and-etl:
+	@echo "Seeding tournament table in RDS..."
+	python scripts/enrich_tournaments.py --prod
+	@echo ""
+	@echo "Running ETL Lambda..."
+	$(MAKE) invoke-etl
+
+## print-rds-config: Print DB_SECRET_ARN and DB_HOST from CloudFormation.
+##                   Copy these into your .env file to enable --prod mode.
+print-rds-config:
+	@echo ""
+	@echo "Paste these into your .env file:"
+	@echo ""
+	@printf "DB_SECRET_ARN=" && aws cloudformation describe-stacks \
+	    --stack-name DiscGolfDatabase \
+	    --region $(AWS_REGION) \
+	    --query "Stacks[0].Outputs[?OutputKey=='DbSecretArn'].OutputValue" \
+	    --output text \
+	    --no-cli-pager
+	@printf "DB_HOST=" && aws cloudformation describe-stacks \
+	    --stack-name DiscGolfDatabase \
+	    --region $(AWS_REGION) \
+	    --query "Stacks[0].Outputs[?OutputKey=='DbEndpoint'].OutputValue" \
+	    --output text \
+	    --no-cli-pager
+	@echo ""
 
 ## destroy: Tear down ALL AWS infrastructure. Data will be permanently deleted.
 ##          Note: the S3 data lake bucket has RemovalPolicy.RETAIN and will NOT
