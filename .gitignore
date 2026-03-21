@@ -2,6 +2,8 @@ pgdata/
 .vscode/
 .venv/
 data/
+!data/seed/
+!data/seed/**
 notes/
 
 # Python
