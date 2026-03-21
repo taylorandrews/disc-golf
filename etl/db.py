@@ -42,13 +42,14 @@ def get_loaded_round_nums(engine, tournament_id: int) -> set[int]:
         return {row[0] for row in result}
 
 
-def get_2026_tournaments(engine) -> list:
+def get_active_tournaments(engine, year: int) -> list:
     with engine.connect() as conn:
         result = conn.execute(
             text(
                 "SELECT tournament_id, season, name, start_date, total_rounds, has_finals"
-                " FROM tournament WHERE season = 2026 ORDER BY start_date"
-            )
+                " FROM tournament WHERE season = :year ORDER BY start_date"
+            ),
+            {"year": year},
         )
         return result.mappings().all()
 

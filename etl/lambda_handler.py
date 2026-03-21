@@ -16,7 +16,7 @@ import datetime
 import logging
 import os
 
-from etl.db import get_engine, get_loaded_round_nums, get_2026_tournaments, upsert_all
+from etl.db import get_engine, get_loaded_round_nums, get_active_tournaments, upsert_all
 from etl.parse import get_courses, get_players, get_holes_and_rounds
 from etl.pdga import api_round_num, fetch_round, save_to_s3
 
@@ -28,8 +28,9 @@ S3_BUCKET = os.environ.get("S3_BUCKET", "")
 
 def handler(event, context):
     try:
+        year = datetime.date.today().year
         engine = get_engine()
-        tournaments = get_2026_tournaments(engine)
+        tournaments = get_active_tournaments(engine, year)
     except Exception as exc:
         logger.error("Could not connect to RDS (may be stopped): %s", exc)
         return {"statusCode": 503, "body": "RDS unavailable — is the instance running?"}
@@ -88,7 +89,7 @@ def handler(event, context):
 
             if S3_BUCKET:
                 try:
-                    save_to_s3(raw, S3_BUCKET, tournament_id, seq)
+                    save_to_s3(raw, S3_BUCKET, tournament_id, seq, year)
                     logger.info("Saved to S3: tournament %s round %s", tournament_id, seq)
                 except Exception as exc:
                     logger.warning(

@@ -35,12 +35,11 @@ def fetch_round(tourn_id: int, pdga_round: int) -> dict:
     return resp.json()
 
 
-def s3_key(tourn_id: int, sequential: int) -> str:
-    return f"raw/pdga/2026/{tourn_id}/tournament_{tourn_id}_MPO_round_{sequential}.json"
+def s3_key(tourn_id: int, sequential: int, year: int) -> str:
+    return f"raw/pdga/{year}/{tourn_id}/tournament_{tourn_id}_MPO_round_{sequential}.json"
 
-
-def save_to_s3(data: dict, bucket: str, tourn_id: int, sequential: int) -> None:
-    key = s3_key(tourn_id, sequential)
+def save_to_s3(data: dict, bucket: str, tourn_id: int, sequential: int, year: int) -> None:
+    key = s3_key(tourn_id, sequential, year)
     boto3.client("s3").put_object(
         Bucket=bucket,
         Key=key,
