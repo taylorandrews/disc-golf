@@ -8,7 +8,7 @@ set -e
 # Locally, DATABASE_URL is already present (set by python-dotenv from .env),
 # so this block is skipped and nothing changes.
 if [ -z "${DATABASE_URL}" ]; then
-    export DATABASE_URL="postgresql+psycopg://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT:-5432}/${DB_NAME:-pdga_data}"
+    export DATABASE_URL="postgresql+psycopg2://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT:-5432}/${DB_NAME:-pdga_data}"
 fi
 
 exec streamlit run dashboard/app.py \
