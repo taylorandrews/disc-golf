@@ -431,7 +431,7 @@ def inject_css():
     }}
 
     /* ── Shell placeholder ── */
-    .shell-block {{{
+    .shell-block {{
         background: {WHITE};
         border-radius: 3px;
         padding: 100px 32px;
