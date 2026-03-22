@@ -176,6 +176,18 @@ def get_recent_results(limit: int = 4) -> pd.DataFrame:
 
 
 @st.cache_data(ttl=300)
+def get_season_standings_top5(season: int) -> pd.DataFrame:
+    query = f"""
+        SELECT rank, player_name, total_points
+        FROM season_standings
+        WHERE season = {season}
+        ORDER BY rank
+        LIMIT 5;
+    """
+    return run_query(query)
+
+
+@st.cache_data(ttl=300)
 def get_stat_callout(season: int) -> dict:
     """Returns the most interesting derived stat for the season.
     Priority: lowest winning score, then highest round rating.

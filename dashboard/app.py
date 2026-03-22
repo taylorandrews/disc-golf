@@ -11,6 +11,7 @@ from queries import (
     get_next_event,
     get_recent_results,
     get_schedule_strip,
+    get_season_standings_top5,
     get_season_summary_metrics,
     get_stat_callout,
     get_top_winners,
@@ -368,6 +369,55 @@ def inject_css():
         margin-top: 12px;
     }}
 
+    /* ── Landing page — standings rows ── */
+    .trip-standing-row {{
+        display: flex;
+        align-items: baseline;
+        gap: 8px;
+        padding: 5px 0;
+        border-bottom: 1px solid {BORDER};
+        font-size: 13px;
+    }}
+    .trip-standing-row:last-of-type {{
+        border-bottom: none;
+    }}
+    .trip-standing-rank {{
+        font-size: 11px;
+        font-weight: 700;
+        color: {MUTED};
+        width: 16px;
+        flex-shrink: 0;
+    }}
+    .trip-standing-rank-1 {{
+        font-size: 11px;
+        font-weight: 700;
+        color: {AMBER};
+        width: 16px;
+        flex-shrink: 0;
+    }}
+    .trip-standing-name {{
+        flex: 1;
+        font-weight: 600;
+        color: {TEXT};
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }}
+    .trip-standing-name-amber {{
+        flex: 1;
+        font-weight: 700;
+        color: {AMBER};
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }}
+    .trip-standing-pts {{
+        font-size: 12px;
+        font-weight: 600;
+        color: {MUTED};
+        flex-shrink: 0;
+    }}
+
     /* ── Landing page — schedule strip ── */
     .sched-strip {{
         overflow-x: auto;
@@ -653,7 +703,7 @@ def _date_range_str(start, end) -> str:
         return str(start) if start else "—"
 
 
-def _render_triptych(last: dict, nxt: dict) -> None:
+def _render_triptych(last: dict, nxt: dict, standings: pd.DataFrame) -> None:
     # Compute all values as Python variables first, then emit one flat f-string.
     # Never embed pre-built HTML strings — blank lines in nested f-strings end
     # the CommonMark HTML block and cause Streamlit to render content as code.
@@ -709,11 +759,34 @@ def _render_triptych(last: dict, nxt: dict) -> None:
                      '<div class="trip-placeholder">Season complete.</div>'
                      '</div>')
 
-    # ── Standings placeholder (until Step 2) ──────────────────────────────────
-    standings_html = ('<div class="trip-card">'
-                      '<div class="trip-label">Season Standings</div>'
-                      '<div class="trip-placeholder">DGPT points standings coming soon.</div>'
-                      '</div>')
+    # ── Standings card ─────────────────────────────────────────────────────────
+    if not standings.empty:
+        st_sublabel = (f"Before {nxt.get('event_name', '')}" if nxt
+                       else f"Final {datetime.date.today().year} Standings")
+        rows_html = ""
+        for _, row in standings.iterrows():
+            s_rank = int(row["rank"])
+            s_name = row["player_name"]
+            s_pts = row["total_points"]
+            pts_str = str(int(s_pts)) if s_pts == int(s_pts) else str(s_pts)
+            rank_cls = "trip-standing-rank-1" if s_rank == 1 else "trip-standing-rank"
+            name_cls = "trip-standing-name-amber" if s_rank == 1 else "trip-standing-name"
+            rows_html += (f'<div class="trip-standing-row">'
+                          f'<span class="{rank_cls}">{s_rank}</span>'
+                          f'<span class="{name_cls}">{s_name}</span>'
+                          f'<span class="trip-standing-pts">{pts_str}</span>'
+                          f'</div>')
+        standings_html = (f'<div class="trip-card">'
+                          f'<div class="trip-label">Season Standings</div>'
+                          f'<div class="trip-meta">{st_sublabel}</div>'
+                          f'{rows_html}'
+                          f'<div class="trip-link"><a href="https://www.dgpt.com/full-standings/" target="_blank">Full Standings ↗</a></div>'
+                          f'</div>')
+    else:
+        standings_html = ('<div class="trip-card">'
+                          '<div class="trip-label">Season Standings</div>'
+                          '<div class="trip-placeholder">Standings not yet available.</div>'
+                          '</div>')
 
     st.markdown(
         f'<div class="trip-row">{last_html}{next_html}{standings_html}</div>',
@@ -817,7 +890,8 @@ def render_landing_page() -> None:
     season = datetime.date.today().year
     last = get_last_result()
     nxt = get_next_event()
-    _render_triptych(last, nxt)
+    standings = get_season_standings_top5(season)
+    _render_triptych(last, nxt, standings)
     _render_schedule_strip(season)
     _render_stat_callout(season)
     _render_recent_results()
