@@ -47,7 +47,7 @@ def get_active_tournaments(engine, year: int) -> list:
         result = conn.execute(
             text(
                 "SELECT tournament_id, season, name, start_date, total_rounds, has_finals"
-                " FROM tournament WHERE season = :year ORDER BY start_date"
+                " FROM tournament WHERE season = :year AND start_date <= CURRENT_DATE ORDER BY start_date"
             ),
             {"year": year},
         )
