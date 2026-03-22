@@ -13,6 +13,7 @@ coverage strip so rounds appear chronologically: R1 F9 → R1 B9 → R2 …
 import json
 import logging
 import xml.etree.ElementTree as ET
+from urllib.parse import urlparse, parse_qs
 
 import requests
 from sqlalchemy import text
@@ -94,6 +95,21 @@ def fetch_all_channels() -> list[dict]:
 
 # ── JomezPro playlist scraper ───────────────────────────────────────────────
 
+def _to_playlist_url(url: str) -> str:
+    """Normalize any YouTube playlist URL to youtube.com/playlist?list=ID format.
+
+    Handles both watch URLs (watch?v=...&list=...) and playlist URLs.
+    The playlist page serves playlistVideoRenderer entries; the watch URL
+    serves only a sidebar panel (playlistPanelVideoRenderer) which is harder
+    to parse and may be truncated.
+    """
+    parsed = urlparse(url)
+    list_id = parse_qs(parsed.query).get("list", [None])[0]
+    if list_id:
+        return f"https://www.youtube.com/playlist?list={list_id}"
+    return url
+
+
 def fetch_jomez_playlist(playlist_url: str) -> list[dict]:
     """Fetch all videos from a JomezPro YouTube playlist page.
 
@@ -101,7 +117,8 @@ def fetch_jomez_playlist(playlist_url: str) -> list[dict]:
     Returns videos with sort_order set to their playlist index so that
     R1 F9 (index 0) always sorts before R4 B9 regardless of publish date.
     """
-    resp = requests.get(playlist_url, headers=_PAGE_HEADERS, timeout=20)
+    url = _to_playlist_url(playlist_url)
+    resp = requests.get(url, headers=_PAGE_HEADERS, timeout=20)
     resp.raise_for_status()
     return _parse_playlist_page(resp.text)
 
