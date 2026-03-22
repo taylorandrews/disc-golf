@@ -20,7 +20,10 @@ _PAGE_ID = "29445"
 _HEADERS = {"User-Agent": "disc-golf-stats/0.1", "Accept": "text/html,*/*"}
 
 _ROW_RE = re.compile(r'<tr[^>]+data-pdgaid="(\d+)"[^>]*>(.*?)</tr>', re.DOTALL)
-_RANK_RE = re.compile(r'data-tied="(\d+)"')
+# Rank is the text content of the <span> inside the rank <td>, not data-tied
+_RANK_RE = re.compile(
+    r'class="DGPTStandings--table_rank"[^>]*>\s*<span>(\d+)</span>', re.DOTALL
+)
 _NAME_RE = re.compile(
     r'class="DGPTStandings--table_name"[^>]*>.*?<span>(.*?)</span>', re.DOTALL
 )
@@ -79,9 +82,9 @@ def save_standings(engine, season: int, rows: list[dict]) -> None:
             text(
                 """
                 INSERT INTO season_standings
-                    (season, rank, player_name, player_id, total_points)
+                    (season, pdga_id, rank, player_name, player_id, total_points)
                 VALUES (
-                    :season, :rank, :player_name,
+                    :season, :pdga_id, :rank, :player_name,
                     (SELECT player_id FROM player
                      WHERE LOWER(first_name || ' ' || last_name) = LOWER(:player_name)
                      LIMIT 1),
@@ -92,6 +95,7 @@ def save_standings(engine, season: int, rows: list[dict]) -> None:
             [
                 {
                     "season": season,
+                    "pdga_id": r["pdga_id"],
                     "rank": r["rank"],
                     "player_name": r["player_name"],
                     "total_points": r["total_points"],
