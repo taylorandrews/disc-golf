@@ -225,7 +225,7 @@ def get_coverage_videos(event_name: str) -> pd.DataFrame:
         WHERE channel_id = '{_JOMEZ_CHANNEL}'
           AND LOWER(title) LIKE '%%mpo%%'
           AND {conditions}
-        ORDER BY published_at ASC;
+        ORDER BY COALESCE(sort_order, 9999) ASC, published_at ASC;
     """
     return run_query(query)
 

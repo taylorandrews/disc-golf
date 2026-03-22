@@ -54,6 +54,21 @@ def get_active_tournaments(engine, year: int) -> list:
         return result.mappings().all()
 
 
+def get_current_jomez_playlist_url(engine, year: int) -> str | None:
+    with engine.connect() as conn:
+        result = conn.execute(
+            text(
+                "SELECT jomez_playlist_url FROM tournament"
+                " WHERE season = :year AND start_date <= CURRENT_DATE"
+                "   AND jomez_playlist_url IS NOT NULL"
+                " ORDER BY start_date DESC LIMIT 1"
+            ),
+            {"year": year},
+        )
+        row = result.first()
+        return row[0] if row else None
+
+
 def upsert_all(
     engine,
     courses: list[dict],

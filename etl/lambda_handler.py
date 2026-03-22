@@ -16,11 +16,11 @@ import datetime
 import logging
 import os
 
-from etl.db import get_engine, get_loaded_round_nums, get_active_tournaments, upsert_all
+from etl.db import get_engine, get_loaded_round_nums, get_active_tournaments, upsert_all, get_current_jomez_playlist_url
 from etl.parse import get_courses, get_players, get_holes_and_rounds
 from etl.pdga import api_round_num, fetch_round, save_to_s3
 from etl.standings import fetch_standings, save_standings
-from etl.youtube import fetch_all_channels, save_youtube_videos
+from etl.youtube import fetch_all_channels, fetch_jomez_playlist, save_youtube_videos
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -125,6 +125,18 @@ def handler(event, context):
         save_youtube_videos(engine, videos)
     except Exception as exc:
         logger.warning("YouTube fetch failed (non-fatal): %s", exc)
+
+    # ── JomezPro playlist scrape (full event coverage with sort order) ───────────
+    try:
+        playlist_url = get_current_jomez_playlist_url(engine, current_year)
+        if playlist_url:
+            playlist_videos = fetch_jomez_playlist(playlist_url)
+            if playlist_videos:
+                save_youtube_videos(engine, playlist_videos)
+        else:
+            logger.info("No JomezPro playlist URL found for %d — skipping", current_year)
+    except Exception as exc:
+        logger.warning("JomezPro playlist fetch failed (non-fatal): %s", exc)
 
     msg = f"ETL complete. Loaded {total_new} new round(s)."
     logger.info(msg)
