@@ -519,17 +519,10 @@ inside a `<style>` block, not globally, to avoid affecting other tabs.
 
 Build in this order. Each step is independently deployable.
 
-### Step 1 — Static shell with existing data (no new ETL)
+### ~~Step 1 — Static shell with existing data (no new ETL)~~ ✅ COMPLETE
 
-Implement the triptych (last result, next event, standings using existing Season tab queries),
-schedule strip, stat callout, and recent results table. No YouTube, no podcasts.
-This gives the tab a real experience using only what's already in RDS.
-
-**Queries needed:** `get_last_result`, `get_next_event`, `get_recent_results`,
-`get_schedule_strip`, `get_stat_callout`.
-All derivable from `vw_tournament_summary` and `tournament`.
-
-**No schema changes. No new Lambda jobs. Ships independently.**
+Implemented triptych (last result, next event, standings placeholder), schedule strip,
+stat callout, and recent results table using existing queries. Ships on the "This Week" tab.
 
 ### Step 2 — DGPT Points Standings
 
@@ -558,11 +551,13 @@ Rename tab to "This Week." Update `roadmap.md` and `CLAUDE.md`.
 
 ## Open Questions
 
-1. **DGPT standings scraping approach** — `https://www.dgpt.com/full-standings/` is
-   JavaScript-rendered. Before implementing `etl/standings.py`, inspect the page's Network
-   requests to find a backing JSON API endpoint. If no API exists, evaluate Playwright
-   (adds a headful dependency to the Lambda) vs. a lightweight HTML scrape after JS execution.
-   Resolve this at Step 2 implementation time.
+1. ✅ **DGPT standings scraping approach** — Page is JS-rendered but uses a WordPress AJAX
+   endpoint that returns a pre-rendered HTML fragment. POST to:
+   `https://www.dgpt.com/wp-admin/admin-ajax.php`
+   with form data `action=get_standings&page_id=29445&division=MPO&season=2026`.
+   Response is HTML with `<tr data-pdgaid="{pdga_id}" data-playerid="{pdga_id}">` rows.
+   Each row contains rank (`data-tied`), name, and total points (`data-sort-value`).
+   Parse with `html.parser` — no headless browser, no extra deps.
 
 All other questions resolved:
 - ✅ **Tab name:** "This Week" confirmed
