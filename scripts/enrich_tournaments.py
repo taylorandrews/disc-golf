@@ -144,16 +144,22 @@ def main() -> None:
             "is_worlds": to_bool(row["is_worlds"]),
             "total_rounds": int(row["total_rounds"].strip()),
             "has_finals": to_bool(row["has_finals"]),
+            "location": row.get("location", "").strip() or None,
+            "jomez_playlist_url": row.get("jomez_playlist_url", "").strip() or None,
         })
 
     with engine.begin() as conn:
         stmt = pg_insert(schema["tournament"]).values(tournaments)
-        # Only update jomez_playlist_url on conflict — all other fields are manually
-        # maintained in the CSV and should not be overwritten on re-runs.
+        # On conflict, only update the two enrichment columns that may be filled in
+        # after the initial seed. Core fields (name, classification, dates, etc.)
+        # are authoritative from the CSV at first insert and are not overwritten.
         conn.execute(
             stmt.on_conflict_do_update(
                 index_elements=["tournament_id"],
-                set_={"jomez_playlist_url": stmt.excluded.jomez_playlist_url},
+                set_={
+                    "location": stmt.excluded.location,
+                    "jomez_playlist_url": stmt.excluded.jomez_playlist_url,
+                },
             )
         )
 

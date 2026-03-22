@@ -34,6 +34,8 @@ schema = {
             sa.Column("is_worlds", sa.Boolean, nullable=False),
             sa.Column("total_rounds", sa.Integer, nullable=False),
             sa.Column("has_finals", sa.Boolean, nullable=False),
+            sa.Column("location", sa.Text),
+            sa.Column("jomez_playlist_url", sa.Text),
         ),
     "round":
         sa.table(

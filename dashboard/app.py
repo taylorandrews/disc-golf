@@ -2,11 +2,18 @@ import streamlit as st
 import plotly.graph_objects as go
 import pandas as pd
 
+import datetime
+
 from queries import (
     get_available_seasons,
-    get_season_summary_metrics,
-    get_top_winners,
     get_events_for_season,
+    get_last_result,
+    get_next_event,
+    get_recent_results,
+    get_schedule_strip,
+    get_season_summary_metrics,
+    get_stat_callout,
+    get_top_winners,
 )
 
 # ── Palette ────────────────────────────────────────────────────────────────────
@@ -277,8 +284,154 @@ def inject_css():
     .champ-cell {{ font-weight: 600; white-space: nowrap; }}
     .prize-cell {{ font-weight: 700; color: {GREEN}; white-space: nowrap; font-variant-numeric: tabular-nums; }}
 
+    /* ── Landing page — triptych ── */
+    .trip-row {{
+        display: flex;
+        gap: 16px;
+        margin-bottom: 24px;
+        align-items: stretch;
+    }}
+    .trip-card {{
+        background: {WHITE};
+        border: 1px solid {BORDER};
+        border-radius: 8px;
+        padding: 20px 24px 24px 24px;
+        flex: 1;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        display: flex;
+        flex-direction: column;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    }}
+    .trip-label {{
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 1.8px;
+        text-transform: uppercase;
+        color: {MUTED};
+        margin-bottom: 14px;
+    }}
+    .trip-title {{
+        font-size: 18px;
+        font-weight: 800;
+        color: {TEXT};
+        line-height: 1.2;
+        margin-bottom: 6px;
+        letter-spacing: -0.3px;
+    }}
+    .trip-title-amber {{
+        font-size: 18px;
+        font-weight: 800;
+        color: {AMBER};
+        line-height: 1.2;
+        margin-bottom: 6px;
+        letter-spacing: -0.3px;
+    }}
+    .trip-meta {{
+        font-size: 13px;
+        color: {MUTED};
+        margin-bottom: 4px;
+    }}
+    .trip-score {{
+        font-size: 32px;
+        font-weight: 800;
+        color: {TEXT};
+        letter-spacing: -1px;
+        margin: 8px 0 4px 0;
+    }}
+    .trip-badge {{
+        display: inline-block;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        padding: 3px 8px;
+        border-radius: 3px;
+        margin-bottom: 10px;
+    }}
+    .trip-link {{
+        margin-top: auto;
+        padding-top: 16px;
+        font-size: 12px;
+        font-weight: 700;
+        color: {GREEN};
+        text-decoration: none;
+        letter-spacing: 0.3px;
+    }}
+    .trip-link a {{
+        color: {GREEN};
+        text-decoration: none;
+    }}
+    .trip-placeholder {{
+        font-size: 14px;
+        color: {MUTED};
+        font-style: italic;
+        margin-top: 12px;
+    }}
+
+    /* ── Landing page — schedule strip ── */
+    .sched-strip {{
+        overflow-x: auto;
+        white-space: nowrap;
+        padding: 4px 0 12px 0;
+        scrollbar-width: thin;
+    }}
+    .sched-pill {{
+        display: inline-block;
+        padding: 8px 14px;
+        margin-right: 8px;
+        border-radius: 6px;
+        border: 1px solid {BORDER};
+        background: {WHITE};
+        cursor: pointer;
+        vertical-align: top;
+        border-left-width: 4px;
+        border-left-style: solid;
+    }}
+    .sched-pill-name {{
+        font-size: 12px;
+        font-weight: 700;
+        display: block;
+        margin-bottom: 2px;
+    }}
+    .sched-pill-date {{
+        font-size: 11px;
+        color: {MUTED};
+        display: block;
+    }}
+    .sched-completed .sched-pill-name {{ color: {MUTED}; }}
+    .sched-current {{ background: {LIGHT_GREEN}; }}
+    .sched-current .sched-pill-name {{ color: {GREEN}; }}
+
+    /* ── Landing page — stat callout ── */
+    .stat-callout {{
+        background: {LIGHT_GREEN};
+        border-radius: 8px;
+        padding: 40px 32px;
+        text-align: center;
+        margin-bottom: 24px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    }}
+    .stat-callout-number {{
+        font-size: 72px;
+        font-weight: 800;
+        color: {GREEN};
+        line-height: 1;
+        margin-bottom: 12px;
+        letter-spacing: -3px;
+    }}
+    .stat-callout-subject {{
+        font-size: 15px;
+        font-weight: 700;
+        color: {TEXT};
+        margin-bottom: 4px;
+    }}
+    .stat-callout-detail {{
+        font-size: 13px;
+        color: {MUTED};
+    }}
+
     /* ── Shell placeholder ── */
-    .shell-block {{
+    .shell-block {{{
         background: {WHITE};
         border-radius: 3px;
         padding: 100px 32px;
@@ -446,6 +599,236 @@ def render_season(season):
         """, unsafe_allow_html=True)
 
 
+# ── Landing page helpers ────────────────────────────────────────────────────────
+
+def _classification_color(classification: str, is_worlds: bool) -> str:
+    if is_worlds:
+        return "#8B1A1A"
+    return {
+        "Elite Series": GREEN,
+        "Elite Series Plus": "#2E8B57",
+        "Major": AMBER,
+        "Tour Championship": TEXT,
+    }.get(classification, MUTED)
+
+
+def _score_str(score) -> str:
+    try:
+        s = int(score)
+        return f"{s:+d}" if s != 0 else "E"
+    except (TypeError, ValueError):
+        return "—"
+
+
+def _prize_str(prize) -> str:
+    try:
+        return f"${int(prize):,}" if prize and pd.notna(prize) else "—"
+    except (TypeError, ValueError):
+        return "—"
+
+
+def _days_away(start_date) -> str:
+    try:
+        dt = pd.to_datetime(start_date).date()
+        delta = (dt - datetime.date.today()).days
+        if delta == 0:
+            return "Today"
+        if delta == 1:
+            return "Tomorrow"
+        if delta < 0:
+            return "In progress"
+        return f"{delta} days away"
+    except Exception:
+        return ""
+
+
+def _date_range_str(start, end) -> str:
+    try:
+        s = pd.to_datetime(start)
+        e = pd.to_datetime(end)
+        if s.month == e.month:
+            return f"{s.strftime('%b %-d')}–{e.strftime('%-d')}"
+        return f"{s.strftime('%b %-d')}–{e.strftime('%b %-d')}"
+    except Exception:
+        return str(start) if start else "—"
+
+
+def _render_triptych(last: dict, nxt: dict) -> None:
+    # ── Last Result card ──────────────────────────────────────────────────────
+    if last:
+        champ = last.get("champion") or "—"
+        is_worlds = bool(last.get("is_worlds"))
+        name_cls = "trip-title-amber" if is_worlds else "trip-title"
+        score = _score_str(last.get("total_score"))
+        rounds = last.get("total_rounds") or ""
+        prize = _prize_str(last.get("prize_usd"))
+        event = last.get("event_name") or "—"
+        date_str = _date_range_str(last.get("start_date"), last.get("end_date"))
+        playlist = last.get("jomez_playlist_url") or ""
+        watch_html = (
+            f'<div class="trip-link"><a href="{playlist}" target="_blank">Watch Coverage ↗</a></div>'
+            if playlist else ""
+        )
+        last_card = f"""
+        <div class="trip-card">
+            <div class="trip-label">Last Result</div>
+            <div class="trip-meta">{event}</div>
+            <div class="{name_cls}">{champ}</div>
+            <div class="trip-score">{score}</div>
+            <div class="trip-meta">{rounds} rounds &middot; {prize} &middot; {date_str}</div>
+            {watch_html}
+        </div>"""
+    else:
+        last_card = f"""
+        <div class="trip-card">
+            <div class="trip-label">Last Result</div>
+            <div class="trip-placeholder">No results yet this season.</div>
+        </div>"""
+
+    # ── Next Event card ───────────────────────────────────────────────────────
+    if nxt:
+        classification = nxt.get("classification") or ""
+        is_worlds_nxt = bool(nxt.get("is_worlds"))
+        badge_color = _classification_color(classification, is_worlds_nxt)
+        label = "Worlds" if is_worlds_nxt else classification
+        location = nxt.get("location") or ""
+        days = _days_away(nxt.get("start_date"))
+        start = pd.to_datetime(nxt.get("start_date"))
+        pdga_url = f"https://www.pdga.com/tour/event/{nxt.get('tournament_id', '')}"
+        next_card = f"""
+        <div class="trip-card">
+            <div class="trip-label">Next Event</div>
+            <span class="trip-badge" style="background:{badge_color}20;color:{badge_color};">{label}</span>
+            <div class="trip-title">{nxt.get("event_name") or "—"}</div>
+            <div class="trip-meta">{location}</div>
+            <div class="trip-meta">{start.strftime("%b %-d")} &middot; {days}</div>
+            <div class="trip-link"><a href="{pdga_url}" target="_blank">View Field ↗</a></div>
+        </div>"""
+    else:
+        next_card = f"""
+        <div class="trip-card">
+            <div class="trip-label">Next Event</div>
+            <div class="trip-placeholder">Season complete.</div>
+        </div>"""
+
+    # ── Standings card (placeholder until Step 2) ─────────────────────────────
+    standings_card = f"""
+        <div class="trip-card">
+            <div class="trip-label">Season Standings</div>
+            <div class="trip-placeholder">DGPT points standings coming soon.</div>
+        </div>"""
+
+    st.markdown(f"""
+    <div class="trip-row">
+        {last_card}
+        {next_card}
+        {standings_card}
+    </div>
+    """, unsafe_allow_html=True)
+
+
+def _render_schedule_strip(season: int) -> None:
+    df = get_schedule_strip(season)
+    if df.empty:
+        return
+
+    today = datetime.date.today()
+    pills = ""
+    for _, row in df.iterrows():
+        end = pd.to_datetime(row["end_date"]).date()
+        start = pd.to_datetime(row["start_date"]).date()
+        color = _classification_color(row["classification"], bool(row["is_worlds"]))
+        date_str = pd.to_datetime(row["start_date"]).strftime("%b %-d")
+
+        if end < today:
+            state_cls = "sched-completed"
+            name_color = MUTED
+        elif start <= today <= end:
+            state_cls = "sched-current"
+            name_color = GREEN
+        else:
+            state_cls = ""
+            name_color = TEXT
+
+        pills += f"""
+        <span class="sched-pill {state_cls}" style="border-left-color:{color};">
+            <span class="sched-pill-name" style="color:{name_color};">{row["event_name"]}</span>
+            <span class="sched-pill-date">{date_str}</span>
+        </span>"""
+
+    st.markdown(f"""
+    <div class="table-card">
+        <div class="dg-section-header">{season} Schedule</div>
+        <div class="sched-strip">{pills}</div>
+    </div>
+    """, unsafe_allow_html=True)
+
+
+def _render_stat_callout(season: int) -> None:
+    stat = get_stat_callout(season)
+    if not stat:
+        return
+
+    st.markdown(f"""
+    <div class="stat-callout">
+        <div class="stat-callout-number">{stat["number"]}</div>
+        <div class="stat-callout-subject">{stat["subject"]}'s {stat["context"]}</div>
+        <div class="stat-callout-detail">{stat["detail"]}</div>
+    </div>
+    """, unsafe_allow_html=True)
+
+
+def _render_recent_results() -> None:
+    df = get_recent_results(limit=4)
+    if df.empty:
+        return
+
+    rows = ""
+    for _, row in df.iterrows():
+        date_str = _date_range_str(row.get("start_date"), row.get("end_date"))
+        score = _score_str(row.get("total_score"))
+        rounds = row.get("total_rounds") or ""
+        prize = _prize_str(row.get("prize_usd"))
+        rows += f"""
+        <tr>
+            <td class="date-cell">{date_str}</td>
+            <td><div class="event-name">{row.get("event_name") or "—"}</div></td>
+            <td class="champ-cell">{row.get("champion") or "—"}</td>
+            <td class="right" style="font-variant-numeric:tabular-nums;color:{MUTED};font-size:13px;">
+                {score} ({rounds}R)
+            </td>
+            <td class="prize-cell right">{prize}</td>
+        </tr>"""
+
+    st.markdown(f"""
+    <div class="table-card">
+        <div class="dg-section-header">Recent Results</div>
+        <table class="dg-table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Event</th>
+                    <th>Champion</th>
+                    <th class="right">Score</th>
+                    <th class="right">Prize</th>
+                </tr>
+            </thead>
+            <tbody>{rows}</tbody>
+        </table>
+    </div>
+    """, unsafe_allow_html=True)
+
+
+def render_landing_page() -> None:
+    season = datetime.date.today().year
+    last = get_last_result()
+    nxt = get_next_event()
+    _render_triptych(last, nxt)
+    _render_schedule_strip(season)
+    _render_stat_callout(season)
+    _render_recent_results()
+
+
 # ── Shell pages ────────────────────────────────────────────────────────────────
 def render_shell(title, description):
     st.markdown(f"""
@@ -477,7 +860,7 @@ def main():
 
     # ── Top-level nav tabs ────────────────────────────────────────────────────
     tab_season, tab_landing, tab_search, tab_state, tab_about = st.tabs(
-        ["Season", "Landing Page", "Search", "State of Disc Golf", "About"]
+        ["Season", "This Week", "Search", "State of Disc Golf", "About"]
     )
 
     # ── Season tab ────────────────────────────────────────────────────────────
@@ -495,7 +878,7 @@ def main():
 
     # ── Shell tabs ────────────────────────────────────────────────────────────
     with tab_landing:
-        render_shell("Landing Page", "Coming soon.")
+        render_landing_page()
 
     with tab_search:
         render_shell("Search", "Player and event search — coming soon.")
