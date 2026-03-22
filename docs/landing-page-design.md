@@ -386,10 +386,18 @@ Do not attempt to recreate the DGPT points formula — scrape the authoritative 
 
 **Source:** `https://www.dgpt.com/full-standings/` (MPO tab)
 
-The page is JavaScript-rendered, so a plain `requests.get()` won't work. Use the approach
-that works at implementation time — either a headless browser (Playwright/Selenium) or
-inspect the page's network requests to find a JSON API endpoint that backs the table
-(common with JS-rendered sports standings pages; check Network tab in DevTools first).
+Use a lightweight `requests.get()` + stdlib HTML parse — the same pattern as `get_pdga_round.py`.
+If the page is statically rendered, `html.parser` via `xml.etree.ElementTree` or a simple
+string search for the table rows will work with no extra dependencies.
+
+If the standings table is JavaScript-rendered (empty `<tbody>` in the raw HTML response):
+check the browser Network tab for a backing JSON API endpoint (common with React sports
+pages). Bind to that endpoint directly with `requests.get()` — still no headless browser needed.
+Resolve this at Step 2 implementation time with a quick `curl` test:
+```bash
+curl -s https://www.dgpt.com/full-standings/ | grep -i "wysocki\|mcbeth"
+```
+If names appear in the output, static parse works. If not, check Network tab for the API.
 
 **Display labeling:** The standings widget should be labeled:
 - `"Before [Next Tournament Name]"` when a next event exists in the `tournament` table
