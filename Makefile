@@ -24,7 +24,7 @@ SERVICE      := disc-golf-service
 DB_ID        := disc-golf-db
 ETL_FUNCTION := disc-golf-nightly-etl
 
-.PHONY: start stop status build-push invoke-etl logs-etl upload-legacy destroy seed-and-etl print-rds-config migrate-prod
+.PHONY: start stop status build-push invoke-etl logs-etl upload-legacy destroy seed-and-etl print-rds-config migrate-prod deploy-etl
 
 ## start: Start RDS and scale ECS service to 1  (takes 2-5 min for RDS to be ready)
 start:
@@ -160,6 +160,24 @@ print-rds-config:
 	    --output text \
 	    --no-cli-pager
 	@echo ""
+
+## deploy-etl: Package and deploy the ETL Lambda from local source.
+##             Faster than cdk deploy — no Docker required (all deps are pure Python).
+##             Run this whenever etl/ or helpers/ changes.
+deploy-etl:
+	@echo "Building Lambda package..."
+	@rm -rf /tmp/lambda-pkg && mkdir /tmp/lambda-pkg
+	pip install -r etl/requirements.txt --target /tmp/lambda-pkg --quiet
+	cp -r etl /tmp/lambda-pkg/
+	cp -r helpers /tmp/lambda-pkg/
+	cd /tmp/lambda-pkg && zip -r /tmp/lambda.zip . -x "*.pyc" -x "*/__pycache__/*" > /dev/null
+	@echo "Uploading to Lambda..."
+	aws lambda update-function-code \
+	    --function-name $(ETL_FUNCTION) \
+	    --zip-file fileb:///tmp/lambda.zip \
+	    --region $(AWS_REGION) \
+	    --no-cli-pager
+	@echo "Done. Run 'make invoke-etl' to test."
 
 ## migrate-prod: Run alembic upgrade head against RDS using Secrets Manager credentials.
 ##               Requires DB_SECRET_ARN and DB_HOST in .env (run make print-rds-config first).
