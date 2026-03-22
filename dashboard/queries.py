@@ -223,6 +223,7 @@ def get_coverage_videos(event_name: str) -> pd.DataFrame:
         SELECT video_id, channel_name, title, published_at, thumbnail_url, video_url
         FROM media_youtube
         WHERE channel_id = '{_JOMEZ_CHANNEL}'
+          AND LOWER(title) LIKE '%%mpo%%'
           AND {conditions}
         ORDER BY published_at ASC;
     """
@@ -242,7 +243,7 @@ def get_preview_videos(start_date) -> pd.DataFrame:
             channel_id, channel_name, title, published_at, thumbnail_url, video_url
         FROM media_youtube
         WHERE channel_id IN ({ch_list})
-          AND published_at >= '{start_date}'::date - INTERVAL '7 days'
+          AND published_at >= '{start_date}'::date - INTERVAL '6 days'
           AND published_at <  '{start_date}'::date + INTERVAL '1 day'
         ORDER BY channel_id, published_at DESC;
     """
