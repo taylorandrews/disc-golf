@@ -24,7 +24,7 @@ SERVICE      := disc-golf-service
 DB_ID        := disc-golf-db
 ETL_FUNCTION := disc-golf-nightly-etl
 
-.PHONY: start stop status build-push invoke-etl logs-etl upload-legacy destroy seed-and-etl print-rds-config
+.PHONY: start stop status build-push invoke-etl logs-etl upload-legacy destroy seed-and-etl print-rds-config migrate-prod
 
 ## start: Start RDS and scale ECS service to 1  (takes 2-5 min for RDS to be ready)
 start:
@@ -160,6 +160,22 @@ print-rds-config:
 	    --output text \
 	    --no-cli-pager
 	@echo ""
+
+## migrate-prod: Run alembic upgrade head against RDS using Secrets Manager credentials.
+##               Requires DB_SECRET_ARN and DB_HOST in .env (run make print-rds-config first).
+##               RDS must be running (make start) before invoking.
+migrate-prod:
+	@echo "Fetching RDS credentials and running alembic upgrade head..."
+	@SECRET=$$(aws secretsmanager get-secret-value \
+	    --secret-id $$(grep DB_SECRET_ARN .env | cut -d= -f2) \
+	    --region $(AWS_REGION) \
+	    --query SecretString --output text --no-cli-pager) && \
+	DB_USER=$$(echo "$$SECRET" | python3 -c "import sys,json; print(json.load(sys.stdin)['username'])") && \
+	DB_PASS=$$(echo "$$SECRET" | python3 -c "import sys,json; print(json.load(sys.stdin)['password'])") && \
+	DB_HOST=$$(grep DB_HOST .env | cut -d= -f2) && \
+	DATABASE_URL="postgresql+psycopg2://$$DB_USER:$$DB_PASS@$$DB_HOST:5432/pdga_data" \
+	    alembic upgrade head
+	@echo "Done."
 
 ## destroy: Tear down ALL AWS infrastructure. Data will be permanently deleted.
 ##          Note: the S3 data lake bucket has RemovalPolicy.RETAIN and will NOT
