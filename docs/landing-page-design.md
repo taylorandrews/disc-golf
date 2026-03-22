@@ -89,53 +89,100 @@ Classification is color-coded via a small left border stripe:
 | Elite Series | `#1D6B44` (GREEN) |
 | Elite Series Plus | `#2E8B57` (slightly lighter green) |
 | Major | `#E8A838` (AMBER) |
+| Worlds | `#8B1A1A` (deep red — distinct from Major despite same DB classification) |
 | Tour Championship | `#1C1C1E` (TEXT / near-black) |
+
+Worlds is identified via `is_worlds = true` on the `tournament` row, not by classification string.
+The classification column will still say "Major" — `is_worlds` is the distinguishing flag.
 
 ---
 
-### Section 3 — This week's video coverage
+### Section 3 — Video coverage
 
-JomezPro YouTube cards for the most recent event. One card per round.
-Gatekeeper coverage cards appear below (usually releases ~1 week later).
+Two subsections, always both present.
+
+#### 3A — Recent tournament coverage
+
+Post-produced coverage from the most recently completed event.
+JomezPro and GO Throw do 2 videos per 9 holes (Front 9 / Back 9), so a 5-round event
+produces up to 10 videos from JomezPro alone. **No hard cap on card count.**
+The row is horizontally scrollable, ordered chronologically starting with Round 1 Front 9 Jomez.
 
 ```
-┌──────────────────────────────────┐  ┌──────────────────────────────────┐
-│  [thumbnail]                     │  │  [thumbnail]                     │
-│  Big Easy Open · Round 4         │  │  Big Easy Open · Round 3         │
-│  JomezPro                        │  │  JomezPro                        │
-│  Published Mar 17                │  │  Published Mar 16                │
-│  [Watch on YouTube ↗]            │  │  [Watch on YouTube ↗]            │
-└──────────────────────────────────┘  └──────────────────────────────────┘
+RECENT COVERAGE — Big Easy Open
+← [R1 F9 · Jomez] [R1 B9 · Jomez] [R2 F9 · Jomez] [R2 B9 · Jomez] [R3 F9 · Jomez] ... →
 ```
+
+Channels for recent coverage (in priority order):
+1. JomezPro — lead card, reliable titling, primary source
+2. GO Throw Disc Golf — lead card alternate angle
+3. Gatekeeper Media — deprioritized; include if videos exist but don't rely on it
+
+Video-to-event matching uses the `jomez_playlist_url` column on the `tournament` table
+(see schema section). If no playlist link exists for the most recent event, omit the subsection
+rather than showing unmatched videos.
+
+#### 3B — Preview / upcoming content
+
+Course preview and hype videos for the next upcoming event.
+Source channels (all manually maintained course preview creators):
+
+| Channel | Creator |
+|---|---|
+| Ezra Aderhold | `UCJ5qQfW0IPRGunN3hIrrKKA` |
+| Aaron Goosage | `UCnTnv0pSDJjZRQlppkp0qUg` |
+| Anthony Barela | `UC4WJMNjQdQMwuIanr1Dfy3w` |
+| Ricky Wysocki | `UCsKzQ6cQfiFrq3JRUQQKxfQ` |
+
+Match by scanning video titles for the next event's tournament name or course name.
+Show up to 4 cards, ordered by published date descending.
+
+```
+PREVIEW — Waco Annual Charity Open
+[Waco Course Preview · Ezra] [Waco Prep · Goosage] [Waco Walk · Barela] ...
+```
+
+If no preview videos are found for the next event, omit the subsection rather than showing
+generic recent content.
+
+---
+
+**Card design (both subsections):**
 
 Thumbnails link to YouTube — no embed, no autoplay. Thumbnail is a static `<img>` tag
 using the YouTube thumbnail URL (`https://img.youtube.com/vi/{video_id}/mqdefault.jpg`).
-A GREEN play-button overlay icon is drawn with CSS on hover.
-
-Max 4 cards displayed (rounds 1-4 of most recent event). If Gatekeeper has released
-its chase card cut, show those cards below with a "Chase Card" label.
+A GREEN play-button overlay icon drawn with CSS on hover.
+Card shows: thumbnail, title (truncated to 2 lines), channel name, published date.
 
 ---
 
 ### Section 4 — Latest podcast episodes
 
-Horizontal card strip for the top 3 podcasts. Each card shows the most recent episode.
+Horizontal card strip. Each card shows the most recent episode from one show.
 
 ```
-┌───────────────────────┐  ┌───────────────────────┐  ┌───────────────────────┐
-│ THE UPSHOT            │  │ GRIPLOCKED            │  │ TOUR LIFE             │
-│ Ultiworld             │  │ Foundation DG         │  │ Brodie Smith + Ulibarri│
-│                       │  │                       │  │                       │
-│ Big Easy Mailbag      │  │ Waco Preview + Hot    │  │ Live Wed 8PM EST      │
-│ + UDisc Growth Report │  │ Takes                 │  │                       │
-│ Mar 20 · 64 min       │  │ Mar 19 · 48 min       │  │ Latest: Mar 18 · 55m  │
-│ [Listen ↗]            │  │ [Listen ↗]            │  │ [Listen ↗]            │
-└───────────────────────┘  └───────────────────────┘  └───────────────────────┘
+┌───────────────────────┐  ┌───────────────────────┐  ┌───────────────────────┐  ┌───────────────────────┐
+│ THE UPSHOT            │  │ TOUR LIFE             │  │ GRIP LOCKED           │  │ COURSE MAINTENANCE    │
+│ Ultiworld             │  │ Brodie + Uli          │  │                       │  │                       │
+│                       │  │                       │  │                       │  │                       │
+│ Big Easy Mailbag      │  │ Waco Preview          │  │ Hot Takes + Waco      │  │ Drainage Basics Ep 12 │
+│ + UDisc Growth Report │  │                       │  │ Breakdown             │  │                       │
+│ Mar 20 · 64 min       │  │ Mar 19 · 72 min       │  │ Mar 18 · 48 min       │  │ Mar 15 · 38 min       │
+│ [Listen ↗]            │  │ [Listen ↗]            │  │ [Listen ↗]            │  │ [Listen ↗]            │
+└───────────────────────┘  └───────────────────────┘  └───────────────────────┘  └───────────────────────┘
 ```
 
 Podcast show name in MUTED uppercase. Episode title in TEXT bold. Date + runtime in MUTED.
-Listen link opens the podcast's episode URL (Spotify or Apple Podcasts from the RSS feed).
-Show logo displayed as a small square icon if we can cache a static asset.
+Listen link opens the episode URL from the RSS feed. Horizontally scrollable on mobile.
+
+**Confirmed RSS feeds:**
+
+| Show | RSS Feed URL |
+|---|---|
+| The Upshot (Ultiworld) | `https://www.spreaker.com/show/1765686/episodes/feed` |
+| Tour Life (Brodie + Uli) | `https://feeds.simplecast.com/kkFf91zi` |
+| Grip Locked | `https://feeds.simplecast.com/WCZ5a8oV` |
+| Course Maintenance | `https://media.rss.com/coursemaintenance/feed.xml` |
 
 ---
 
@@ -261,11 +308,15 @@ No API key required. Returns the 15 most recent videos per channel.
 
 **Channels to track:**
 
-| Channel | Channel ID | Content type |
-|---|---|---|
-| JomezPro | `UCGLfzfKoKa_MpnFUxFo2y-A` | Lead card, next-day post-produced |
-| Gatekeeper Media | `UCQ1bU_EyEpbVrJ3HfABGJ6Q` | Chase card, ~1 week later |
-| GK Pro | `UCmME4Cd3hBLMwt9UuM7P37w` | Tour Series Skins |
+| Channel | Channel ID | Content type | Priority |
+|---|---|---|---|
+| JomezPro | `UCmGyCEbHfY91NFwHgioNLMQ` | Lead card coverage | High |
+| GO Throw Disc Golf | `UC96v9uB8ZKe1TFdYzBOGnpw` | Lead card alternate angle | High |
+| Ezra Aderhold | `UCJ5qQfW0IPRGunN3hIrrKKA` | Course previews / vlogs | High |
+| Aaron Goosage | `UCnTnv0pSDJjZRQlppkp0qUg` | Course previews | High |
+| Anthony Barela | `UC4WJMNjQdQMwuIanr1Dfy3w` | Course previews | High |
+| Ricky Wysocki | `UCsKzQ6cQfiFrq3JRUQQKxfQ` | Course previews | High |
+| Gatekeeper Media | `UC9a1V9evArQaHOlkqeY63Iw` | Chase card coverage | Low (deprioritized — sparse recent uploads) |
 
 **New table: `media_youtube`**
 
@@ -328,56 +379,68 @@ Upserts latest 5 episodes per show. `ON CONFLICT (episode_guid) DO NOTHING`.
 
 ---
 
-#### ETL Job 3: DGPT Points Standings (derived, no external fetch)
+#### ETL Job 3: DGPT Points Standings (scraped from DGPT.com)
 
-**Purpose:** Compute DGPT season points from existing `round` and `tournament` tables
-and materialize into a `season_standings` table for fast landing page queries.
+**Purpose:** Scrape the official DGPT standings page and store the results verbatim.
+Do not attempt to recreate the DGPT points formula — scrape the authoritative source.
 
-**Why a materialized table instead of a view:** The points calculation is complex
-(classification multipliers, top-N scores, DNF handling) and should only run once per ETL cycle,
-not on every page render.
+**Source:** `https://www.dgpt.com/full-standings/` (MPO tab)
 
-**DGPT points system (2026):**
+The page is JavaScript-rendered, so a plain `requests.get()` won't work. Use the approach
+that works at implementation time — either a headless browser (Playwright/Selenium) or
+inspect the page's network requests to find a JSON API endpoint that backs the table
+(common with JS-rendered sports standings pages; check Network tab in DevTools first).
 
-Points awarded by finish position within each event. Classification multiplier:
+**Display labeling:** The standings widget should be labeled:
+- `"Before [Next Tournament Name]"` when a next event exists in the `tournament` table
+- `"Final [Season] Standings"` as fallback when no upcoming events remain
 
-| Classification | Multiplier |
-|---|---|
-| Elite Series | 1.0× |
-| Elite Series Plus | 1.25× |
-| Major | 1.5× |
-| Tour Championship | 2.0× |
-
-Finish position → base points mapping is published by the DGPT each season.
-The 2025 scale: 1st = 500, 2nd = 450, 3rd = 425, 4th = 400, 5th = 380, ... (diminishing).
-**Verify the 2026 scale against official DGPT communications before implementing.**
+This framing is accurate (DGPT updates standings after each event concludes) and is more
+precise than a scraped timestamp.
 
 **New table: `season_standings`**
 
 ```sql
 CREATE TABLE season_standings (
-    player_id    INTEGER NOT NULL REFERENCES player(player_id),
-    season       INTEGER NOT NULL,
-    rank         INTEGER NOT NULL,
-    total_points NUMERIC(8, 2) NOT NULL,
-    wins         INTEGER NOT NULL DEFAULT 0,
-    top5s        INTEGER NOT NULL DEFAULT 0,
-    events_played INTEGER NOT NULL DEFAULT 0,
-    updated_at   TIMESTAMPTZ DEFAULT NOW(),
-    PRIMARY KEY (player_id, season)
+    season        INTEGER NOT NULL,
+    rank          INTEGER NOT NULL,
+    player_name   TEXT NOT NULL,            -- as displayed on DGPT site
+    player_id     INTEGER REFERENCES player(player_id),  -- nullable; matched by name where possible
+    total_points  NUMERIC(8, 2) NOT NULL,
+    events_played INTEGER,
+    fetched_at    TIMESTAMPTZ DEFAULT NOW(),
+    PRIMARY KEY (season, rank)
 );
 ```
 
-**Lambda trigger:** Fourth job. Truncates and rebuilds the current season's rows from scratch.
-Relatively fast (a few hundred players × a few dozen events).
+**Lambda trigger:** Third job. Truncates current season rows and rebuilds from the scraped page.
+Player name → `player_id` matching is best-effort (fuzzy name match against `player` table);
+`player_id` can be NULL when no match is found.
 
 ---
+
+### Tournament table — new column
+
+Add `jomez_playlist_url TEXT` (nullable) to the `tournament` table.
+This is the JomezPro YouTube playlist URL for all coverage from that event —
+a good grain since one playlist covers all rounds of a tournament.
+
+```sql
+ALTER TABLE tournament ADD COLUMN jomez_playlist_url TEXT;
+```
+
+`data/seed/2026_tournaments.csv` gets a 7th column: `jomez_playlist_url`.
+Populate it manually as playlists become available after each event.
+The `enrich_tournaments.py` script and `ON CONFLICT DO NOTHING` behavior means
+existing rows won't be overwritten — use `ON CONFLICT DO UPDATE` for this column
+so new playlist links propagate to already-seeded rows.
 
 ### New Alembic migration
 
 Create a new migration: `alembic revision -m "add_landing_page_tables"`
 
 Tables to create: `media_youtube`, `podcast_episodes`, `season_standings`.
+Column to add: `tournament.jomez_playlist_url`.
 
 Do **not** modify existing tables or views. Additive only.
 
@@ -487,23 +550,16 @@ Rename tab to "This Week." Update `roadmap.md` and `CLAUDE.md`.
 
 ## Open Questions
 
-1. **DGPT points scale for 2026** — verify the finish-position → base-points mapping
-   from official DGPT communications before implementing `season_standings` computation.
+1. **DGPT standings scraping approach** — `https://www.dgpt.com/full-standings/` is
+   JavaScript-rendered. Before implementing `etl/standings.py`, inspect the page's Network
+   requests to find a backing JSON API endpoint. If no API exists, evaluate Playwright
+   (adds a headful dependency to the Lambda) vs. a lightweight HTML scrape after JS execution.
+   Resolve this at Step 2 implementation time.
 
-2. **Podcast RSS feed URLs** — confirm The Upshot, Griplocked, and Tour Life feed URLs
-   from Apple Podcasts source or the show hosts before coding the parser.
-
-3. **JomezPro channel ID** — confirm `UCGLfzfKoKa_MpnFUxFo2y-A` is still the active
-   JomezPro channel ID (channels sometimes create new accounts after acquisitions).
-
-4. **"This Week" vs "Landing Page"** — tab rename only matters visually. Confirm with
-   Taylor before renaming, since it changes the nav bar appearance for all users.
-
-5. **Standings data for 2026** — the standings widget in the triptych requires at least
-   one completed 2026 event. Until then, show 2025 final standings with a label noting
-   "2025 final standings — 2026 season underway."
-
-6. **Last result "Watch Coverage" link** — requires a manual mapping of `tournament_id`
-   to JomezPro YouTube playlist. This could be a new column in the `tournament` table
-   (`jomez_playlist_url TEXT`) or a separate lookup table. Simpler: a hardcoded dict in
-   `queries.py` for known 2026 events, replaced later with a DB column.
+All other questions resolved:
+- ✅ **Tab name:** "This Week" confirmed
+- ✅ **Podcast RSS URLs:** confirmed and documented above
+- ✅ **YouTube channel IDs:** confirmed and corrected above
+- ✅ **Standings formula:** scrape DGPT.com instead of recomputing; label as "Before [Next Event]"
+- ✅ **Standings fallback:** "2025 final standings — 2026 season underway" if no 2026 data
+- ✅ **JomezPro playlist link:** `jomez_playlist_url` column on `tournament` table + CSV column
