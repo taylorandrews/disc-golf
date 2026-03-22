@@ -215,8 +215,9 @@ def get_coverage_videos(event_name: str) -> pd.DataFrame:
     if not keywords:
         return pd.DataFrame()
     # Strip trailing 's' in the DB title too via LIKE on the stem
+    # %% escapes the percent sign for psycopg2's parameter processing
     conditions = " AND ".join(
-        f"LOWER(title) LIKE '%{kw}%'" for kw in keywords
+        f"LOWER(title) LIKE '%%{kw}%%'" for kw in keywords
     )
     query = f"""
         SELECT video_id, channel_name, title, published_at, thumbnail_url, video_url
