@@ -654,77 +654,71 @@ def _date_range_str(start, end) -> str:
 
 
 def _render_triptych(last: dict, nxt: dict) -> None:
-    # ── Last Result card ──────────────────────────────────────────────────────
+    # Compute all values as Python variables first, then emit one flat f-string.
+    # Never embed pre-built HTML strings — blank lines in nested f-strings end
+    # the CommonMark HTML block and cause Streamlit to render content as code.
+
+    # ── Last Result values ────────────────────────────────────────────────────
     if last:
-        champ = last.get("champion") or "—"
-        is_worlds = bool(last.get("is_worlds"))
-        name_cls = "trip-title-amber" if is_worlds else "trip-title"
-        score = _score_str(last.get("total_score"))
-        rounds = last.get("total_rounds") or ""
-        prize = _prize_str(last.get("prize_usd"))
-        event = last.get("event_name") or "—"
-        date_str = _date_range_str(last.get("start_date"), last.get("end_date"))
-        playlist = last.get("jomez_playlist_url") or ""
-        watch_html = (
-            f'<div class="trip-link"><a href="{playlist}" target="_blank">Watch Coverage ↗</a></div>'
-            if playlist else ""
-        )
-        last_card = f"""
-        <div class="trip-card">
-            <div class="trip-label">Last Result</div>
-            <div class="trip-meta">{event}</div>
-            <div class="{name_cls}">{champ}</div>
-            <div class="trip-score">{score}</div>
-            <div class="trip-meta">{rounds} rounds &middot; {prize} &middot; {date_str}</div>
-            {watch_html}
-        </div>"""
+        l_event = last.get("event_name") or "—"
+        l_champ = last.get("champion") or "—"
+        l_name_cls = "trip-title-amber" if bool(last.get("is_worlds")) else "trip-title"
+        l_score = _score_str(last.get("total_score"))
+        l_rounds = last.get("total_rounds") or ""
+        l_prize = _prize_str(last.get("prize_usd"))
+        l_dates = _date_range_str(last.get("start_date"), last.get("end_date"))
+        l_playlist = last.get("jomez_playlist_url") or ""
+        l_watch = (f'<div class="trip-link"><a href="{l_playlist}" target="_blank">Watch Coverage ↗</a></div>'
+                   if l_playlist else "")
+        last_html = (f'<div class="trip-card">'
+                     f'<div class="trip-label">Last Result</div>'
+                     f'<div class="trip-meta">{l_event}</div>'
+                     f'<div class="{l_name_cls}">{l_champ}</div>'
+                     f'<div class="trip-score">{l_score}</div>'
+                     f'<div class="trip-meta">{l_rounds} rounds &middot; {l_prize} &middot; {l_dates}</div>'
+                     f'{l_watch}'
+                     f'</div>')
     else:
-        last_card = f"""
-        <div class="trip-card">
-            <div class="trip-label">Last Result</div>
-            <div class="trip-placeholder">No results yet this season.</div>
-        </div>"""
+        last_html = ('<div class="trip-card">'
+                     '<div class="trip-label">Last Result</div>'
+                     '<div class="trip-placeholder">No results yet this season.</div>'
+                     '</div>')
 
-    # ── Next Event card ───────────────────────────────────────────────────────
+    # ── Next Event values ─────────────────────────────────────────────────────
     if nxt:
-        classification = nxt.get("classification") or ""
-        is_worlds_nxt = bool(nxt.get("is_worlds"))
-        badge_color = _classification_color(classification, is_worlds_nxt)
-        label = "Worlds" if is_worlds_nxt else classification
-        location = nxt.get("location") or ""
-        days = _days_away(nxt.get("start_date"))
-        start = pd.to_datetime(nxt.get("start_date"))
-        pdga_url = f"https://www.pdga.com/tour/event/{nxt.get('tournament_id', '')}"
-        next_card = f"""
-        <div class="trip-card">
-            <div class="trip-label">Next Event</div>
-            <span class="trip-badge" style="background:{badge_color}20;color:{badge_color};">{label}</span>
-            <div class="trip-title">{nxt.get("event_name") or "—"}</div>
-            <div class="trip-meta">{location}</div>
-            <div class="trip-meta">{start.strftime("%b %-d")} &middot; {days}</div>
-            <div class="trip-link"><a href="{pdga_url}" target="_blank">View Field ↗</a></div>
-        </div>"""
+        n_cls = nxt.get("classification") or ""
+        n_worlds = bool(nxt.get("is_worlds"))
+        n_color = _classification_color(n_cls, n_worlds)
+        n_label = "Worlds" if n_worlds else n_cls
+        n_location = nxt.get("location") or ""
+        n_days = _days_away(nxt.get("start_date"))
+        n_start = pd.to_datetime(nxt.get("start_date")).strftime("%b %-d")
+        n_pdga = f"https://www.pdga.com/tour/event/{nxt.get('tournament_id', '')}"
+        n_name = nxt.get("event_name") or "—"
+        next_html = (f'<div class="trip-card">'
+                     f'<div class="trip-label">Next Event</div>'
+                     f'<span class="trip-badge" style="background:{n_color}20;color:{n_color};">{n_label}</span>'
+                     f'<div class="trip-title">{n_name}</div>'
+                     f'<div class="trip-meta">{n_location}</div>'
+                     f'<div class="trip-meta">{n_start} &middot; {n_days}</div>'
+                     f'<div class="trip-link"><a href="{n_pdga}" target="_blank">View Field ↗</a></div>'
+                     f'</div>')
     else:
-        next_card = f"""
-        <div class="trip-card">
-            <div class="trip-label">Next Event</div>
-            <div class="trip-placeholder">Season complete.</div>
-        </div>"""
+        next_html = ('<div class="trip-card">'
+                     '<div class="trip-label">Next Event</div>'
+                     '<div class="trip-placeholder">Season complete.</div>'
+                     '</div>')
 
-    # ── Standings card (placeholder until Step 2) ─────────────────────────────
-    standings_card = f"""
-        <div class="trip-card">
-            <div class="trip-label">Season Standings</div>
-            <div class="trip-placeholder">DGPT points standings coming soon.</div>
-        </div>"""
+    # ── Standings placeholder (until Step 2) ──────────────────────────────────
+    standings_html = ('<div class="trip-card">'
+                      '<div class="trip-label">Season Standings</div>'
+                      '<div class="trip-placeholder">DGPT points standings coming soon.</div>'
+                      '</div>')
 
-    st.markdown(f"""
-    <div class="trip-row">
-        {last_card}
-        {next_card}
-        {standings_card}
-    </div>
-    """, unsafe_allow_html=True)
+    st.markdown(
+        f'<div class="trip-row">{last_html}{next_html}{standings_html}</div>',
+        unsafe_allow_html=True,
+    )
 
 
 def _render_schedule_strip(season: int) -> None:
