@@ -1,6 +1,7 @@
 # dashboard/queries.py
 
 import datetime
+import re
 
 import pandas as pd
 import streamlit as st
@@ -173,6 +174,82 @@ def get_recent_results(limit: int = 4) -> pd.DataFrame:
         LIMIT {limit};
     """
     return run_query(query)
+
+
+_JOMEZ_CHANNEL = "UCmGyCEbHfY91NFwHgioNLMQ"
+_PREVIEW_CHANNELS = (
+    "UCJ5qQfW0IPRGunN3hIrrKKA",  # Ezra Aderhold
+    "UCnTnv0pSDJjZRQlppkp0qUg",  # Aaron Goosage
+    "UC4WJMNjQdQMwuIanr1Dfy3w",  # Anthony Barela
+    "UCsKzQ6cQfiFrq3JRUQQKxfQ",  # Ricky Wysocki
+)
+_PREVIEW_CHANNEL_ORDER = {ch: i for i, ch in enumerate(_PREVIEW_CHANNELS)}
+
+# Words too common in tournament names to be useful for matching
+_STOP = frozenset(
+    {"the", "a", "an", "of", "at", "in", "for", "and", "by", "to", "pro", "open",
+     "presented", "disc", "golf", "dgpt", "tour"}
+)
+
+
+def _event_keywords(name: str) -> list[str]:
+    """Return significant stems for fuzzy title matching.
+
+    Strips stop words, removes punctuation, and drops the trailing 's' from
+    each word so 'Championship' matches 'Championships' and vice versa.
+    Words shorter than 3 chars after stemming are also dropped.
+    """
+    words = re.sub(r"[^a-z0-9 ]", "", name.lower()).split()
+    stems = [w.rstrip("s") for w in words if w not in _STOP]
+    return [s for s in stems if len(s) >= 3]
+
+
+@st.cache_data(ttl=3600)
+def get_coverage_videos(event_name: str) -> pd.DataFrame:
+    """JomezPro videos whose title fuzzy-matches the given event name.
+
+    Uses AND logic across all keyword stems so results are specific to
+    the event. Returns empty DataFrame if no keywords or no matches.
+    """
+    keywords = _event_keywords(event_name)
+    if not keywords:
+        return pd.DataFrame()
+    # Strip trailing 's' in the DB title too via LIKE on the stem
+    conditions = " AND ".join(
+        f"LOWER(title) LIKE '%{kw}%'" for kw in keywords
+    )
+    query = f"""
+        SELECT video_id, channel_name, title, published_at, thumbnail_url, video_url
+        FROM media_youtube
+        WHERE channel_id = '{_JOMEZ_CHANNEL}'
+          AND {conditions}
+        ORDER BY published_at ASC;
+    """
+    return run_query(query)
+
+
+@st.cache_data(ttl=3600)
+def get_preview_videos(start_date) -> pd.DataFrame:
+    """Most recent video per preview channel posted in the 7 days before start_date.
+
+    Returns up to 4 rows (one per channel) sorted by channel priority:
+    Aderhold → Goosage → Barela → Wysocki.
+    """
+    ch_list = ", ".join(f"'{c}'" for c in _PREVIEW_CHANNELS)
+    query = f"""
+        SELECT DISTINCT ON (channel_id)
+            channel_id, channel_name, title, published_at, thumbnail_url, video_url
+        FROM media_youtube
+        WHERE channel_id IN ({ch_list})
+          AND published_at >= '{start_date}'::date - INTERVAL '7 days'
+          AND published_at <  '{start_date}'::date + INTERVAL '1 day'
+        ORDER BY channel_id, published_at DESC;
+    """
+    df = run_query(query)
+    if not df.empty:
+        df["_order"] = df["channel_id"].map(_PREVIEW_CHANNEL_ORDER)
+        df = df.sort_values("_order").drop(columns="_order").reset_index(drop=True)
+    return df
 
 
 @st.cache_data(ttl=300)

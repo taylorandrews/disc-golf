@@ -6,9 +6,11 @@ import datetime
 
 from queries import (
     get_available_seasons,
+    get_coverage_videos,
     get_events_for_season,
     get_last_result,
     get_next_event,
+    get_preview_videos,
     get_recent_results,
     get_schedule_strip,
     get_season_standings_top5,
@@ -452,6 +454,86 @@ def inject_css():
     .sched-current {{ background: {LIGHT_GREEN}; }}
     .sched-current .sched-pill-name {{ color: {GREEN}; }}
 
+    /* ── Landing page — video section ── */
+    .vid-section-label {{
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 1.8px;
+        text-transform: uppercase;
+        color: {MUTED};
+        margin: 28px 0 12px 0;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    }}
+    .vid-strip {{
+        display: flex;
+        gap: 12px;
+        overflow-x: auto;
+        padding-bottom: 8px;
+        scrollbar-width: thin;
+        margin-bottom: 8px;
+    }}
+    .vid-card {{
+        flex: 0 0 200px;
+        text-decoration: none;
+        color: {TEXT};
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    }}
+    .vid-card:hover {{
+        text-decoration: none;
+        color: {TEXT};
+    }}
+    .vid-thumb-wrap {{
+        position: relative;
+        width: 200px;
+        height: 112px;
+        border-radius: 6px;
+        overflow: hidden;
+        background: {BORDER};
+        margin-bottom: 8px;
+    }}
+    .vid-thumb {{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }}
+    .vid-play {{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 36px;
+        height: 36px;
+        background: rgba(29,107,68,0.88);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.18s ease;
+        color: {WHITE};
+        font-size: 14px;
+        padding-left: 2px;
+    }}
+    .vid-card:hover .vid-play {{
+        opacity: 1;
+    }}
+    .vid-title {{
+        font-size: 12px;
+        font-weight: 600;
+        color: {TEXT};
+        line-height: 1.4;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        margin-bottom: 4px;
+    }}
+    .vid-meta {{
+        font-size: 11px;
+        color: {MUTED};
+    }}
+
     /* ── Landing page — stat callout ── */
     .stat-callout {{
         background: {LIGHT_GREEN};
@@ -831,6 +913,54 @@ def _render_schedule_strip(season: int) -> None:
     """, unsafe_allow_html=True)
 
 
+def _render_video_section(last: dict, nxt: dict) -> None:
+    # ── 3A: Recent coverage (JomezPro, gated on jomez_playlist_url) ───────────
+    if last and last.get("jomez_playlist_url"):
+        event_name = last.get("event_name") or ""
+        coverage = get_coverage_videos(event_name)
+        if not coverage.empty:
+            cards = ""
+            for _, row in coverage.iterrows():
+                pub = pd.to_datetime(row["published_at"]).strftime("%b %-d")
+                title = str(row["title"]).replace("'", "&#39;").replace('"', "&quot;")
+                cards += (f'<a class="vid-card" href="{row["video_url"]}" target="_blank">'
+                          f'<div class="vid-thumb-wrap">'
+                          f'<img class="vid-thumb" src="{row["thumbnail_url"]}" />'
+                          f'<div class="vid-play">&#9654;</div>'
+                          f'</div>'
+                          f'<div class="vid-title">{title}</div>'
+                          f'<div class="vid-meta">{row["channel_name"]} &middot; {pub}</div>'
+                          f'</a>')
+            st.markdown(
+                f'<div class="vid-section-label">Recent Coverage &mdash; {event_name}</div>'
+                f'<div class="vid-strip">{cards}</div>',
+                unsafe_allow_html=True,
+            )
+
+    # ── 3B: Preview content (4 creator channels, within 7 days of next event) ─
+    if nxt and nxt.get("start_date"):
+        preview = get_preview_videos(nxt["start_date"])
+        if not preview.empty:
+            nxt_name = nxt.get("event_name") or ""
+            cards = ""
+            for _, row in preview.iterrows():
+                pub = pd.to_datetime(row["published_at"]).strftime("%b %-d")
+                title = str(row["title"]).replace("'", "&#39;").replace('"', "&quot;")
+                cards += (f'<a class="vid-card" href="{row["video_url"]}" target="_blank">'
+                          f'<div class="vid-thumb-wrap">'
+                          f'<img class="vid-thumb" src="{row["thumbnail_url"]}" />'
+                          f'<div class="vid-play">&#9654;</div>'
+                          f'</div>'
+                          f'<div class="vid-title">{title}</div>'
+                          f'<div class="vid-meta">{row["channel_name"]} &middot; {pub}</div>'
+                          f'</a>')
+            st.markdown(
+                f'<div class="vid-section-label">Preview &mdash; {nxt_name}</div>'
+                f'<div class="vid-strip">{cards}</div>',
+                unsafe_allow_html=True,
+            )
+
+
 def _render_stat_callout(season: int) -> None:
     stat = get_stat_callout(season)
     if not stat:
@@ -893,6 +1023,7 @@ def render_landing_page() -> None:
     standings = get_season_standings_top5(season)
     _render_triptych(last, nxt, standings)
     _render_schedule_strip(season)
+    _render_video_section(last, nxt)
     _render_stat_callout(season)
     _render_recent_results()
 

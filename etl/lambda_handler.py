@@ -20,6 +20,7 @@ from etl.db import get_engine, get_loaded_round_nums, get_active_tournaments, up
 from etl.parse import get_courses, get_players, get_holes_and_rounds
 from etl.pdga import api_round_num, fetch_round, save_to_s3
 from etl.standings import fetch_standings, save_standings
+from etl.youtube import fetch_all_channels, save_youtube_videos
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -117,6 +118,13 @@ def handler(event, context):
         save_standings(engine, current_year, standings)
     except Exception as exc:
         logger.warning("Standings scrape failed (non-fatal): %s", exc)
+
+    # ── YouTube RSS fetch ───────────────────────────────────────────────────────
+    try:
+        videos = fetch_all_channels()
+        save_youtube_videos(engine, videos)
+    except Exception as exc:
+        logger.warning("YouTube fetch failed (non-fatal): %s", exc)
 
     msg = f"ETL complete. Loaded {total_new} new round(s)."
     logger.info(msg)
