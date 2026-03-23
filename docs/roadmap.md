@@ -36,6 +36,28 @@ Project history, current state, and future direction for disc-golf-data.com.
 - Driver split: `psycopg2-binary` for ECS app, `pg8000` (pure Python) for Lambda — avoids CDK bundling platform issues on macOS
 - 2026 data flows into the existing Season tab automatically — no separate tab needed for now
 
+### Phase 3 — Landing Page (Steps 1–3 complete)
+*In progress — March 2026*
+
+Full design specification: `docs/landing-page-design.md`
+
+**Step 1 — Static shell** ✅ *complete*
+- "This Week" tab with triptych (Last Result / Next Event / standings placeholder), schedule strip, stat callout, recent results table
+- All data from existing RDS queries — no new ETL
+
+**Step 2 — DGPT Points Standings** ✅ *complete*
+- `etl/standings.py`: POSTs to DGPT.com WordPress AJAX endpoint, parses HTML standings table, upserts `season_standings`
+- `season_standings` table: PK is `(season, pdga_id)` to handle tied players
+- Triptych standings card live: top 5 with AMBER highlight for rank 1, "Before [Next Event]" label
+- `make deploy-etl` target for fast Lambda redeployment without Docker/CDK
+
+**Step 3 — YouTube coverage cards** ✅ *complete*
+- `etl/youtube.py`: RSS feed fetch (JomezPro + 4 creator channels) + JomezPro playlist scraper
+- Playlist scraper uses `ytInitialData` embedded in `youtube.com/playlist?list=` page HTML — no API key required; watch URLs normalized to playlist URL format automatically
+- `sort_order` column on `media_youtube` stores playlist index so rounds display R1 F9 → R1 B9 → … → Best Shots
+- 3A: full event coverage cards from `jomez_playlist_url` playlist (bypasses 15-video RSS cap)
+- 3B: creator preview cards (Aderhold, Goosage, Barela, Wysocki) from 6-day pre-event window
+
 ---
 
 ## In Progress
@@ -46,33 +68,17 @@ Project history, current state, and future direction for disc-golf-data.com.
 
 ## Upcoming
 
-### Phase 3 — Landing Page
+### Phase 3 — Landing Page (remaining steps)
 
-Full design specification: `docs/landing-page-design.md`
+**Step 4 — Podcast episode cards**
+- `etl/podcast.py` — RSS scraper for 4 shows → `podcast_episodes` table
+- Feeds: The Upshot, Tour Life, Grip Locked, Course Maintenance (confirmed RSS URLs in design doc)
+- Lambda fourth job; one card per show, most recent episode
 
-A "this week in disc golf" hub replacing the current placeholder tab.
-The vision: a single page that answers *who just won, what's next, who's leading the season,
-and where to watch* — without any interaction from the user.
-
-**Content sections:**
-1. **Triptych hero** — Last Result / Next Event / Season Standings (top 5 points)
-2. **Schedule strip** — horizontal scrollable 2026 calendar, color-coded by classification
-3. **Video coverage** — JomezPro + Gatekeeper YouTube thumbnail cards (no autoplay)
-4. **Podcast strip** — latest episode from The Upshot, Griplocked, Tour Life
-5. **Stat callout** — one large compelling number derived from current season data
-6. **Recent results table** — last 4 completed events
-
-**New ETL jobs (additive, no existing schema changes):**
-- `etl/youtube.py` — YouTube RSS feed scraper → `media_youtube` table
-- `etl/podcast.py` — Podcast RSS scraper → `podcast_episodes` table
-- `etl/standings.py` — DGPT points computation → `season_standings` table
-
-**Build sequence:**
-1. Static shell using existing RDS data (ships independently, no new ETL)
-2. DGPT Points Standings
-3. YouTube coverage cards
-4. Podcast episode cards
-5. Polish + mobile layout pass
+**Step 5 — Polish + mobile**
+- Responsive layout pass (triptych stacks vertically on mobile)
+- Serif font injection (Playfair Display) for stat callout number
+- Final `CLAUDE.md` and `roadmap.md` update
 
 ### Phase 4 — Text-to-SQL Search (deprioritized)
 

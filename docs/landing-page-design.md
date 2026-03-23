@@ -524,17 +524,26 @@ Build in this order. Each step is independently deployable.
 Implemented triptych (last result, next event, standings placeholder), schedule strip,
 stat callout, and recent results table using existing queries. Ships on the "This Week" tab.
 
-### Step 2 — DGPT Points Standings
+### ~~Step 2 — DGPT Points Standings~~ ✅ COMPLETE
 
-Add `season_standings` table + Alembic migration.
-Add standings computation to Lambda (`etl/standings.py`).
-Wire `get_season_standings_top5()` into the triptych.
+- `season_standings` table with `(season, pdga_id)` PK (supports tied-rank players)
+- `etl/standings.py`: POST to DGPT.com WordPress AJAX endpoint, regex-parse HTML `<tr data-pdgaid>` rows
+- Rank extracted from `class="DGPTStandings--table_rank"` span text (not `data-tied` attribute)
+- Triptych standings card: top 5, AMBER for rank 1, "Before [Next Event]" sublabel, Full Standings link
+- `make deploy-etl` Makefile target added for fast Lambda code updates
 
-### Step 3 — YouTube coverage cards
+### ~~Step 3 — YouTube coverage cards~~ ✅ COMPLETE
 
-Add `media_youtube` table + Alembic migration.
-Add `etl/youtube.py` (channel RSS fetch + parse).
-Wire `get_latest_youtube_videos()` into the video section.
+- `media_youtube` table with `sort_order INTEGER` (nullable) column
+- `etl/youtube.py`: RSS fetch for 5 channels + `fetch_jomez_playlist()` playlist scraper
+- Playlist scraper parses `ytInitialData` from `youtube.com/playlist?list=` page — no API key
+- Watch URLs (`watch?v=...&list=...`) normalized to playlist format via `_to_playlist_url()`
+- `sort_order` = playlist index; RSS videos get `sort_order = NULL`; display orders by `COALESCE(sort_order, 9999) ASC, published_at ASC`
+- ON CONFLICT preserves existing sort_order: `SET sort_order = COALESCE(EXCLUDED.sort_order, media_youtube.sort_order)`
+- 3A: JomezPro full event coverage cards, ordered by round sequence
+- 3B: creator preview cards (Aderhold, Goosage, Barela, Wysocki), 6-day pre-event window, no name matching needed
+- JomezPro videos filtered to MPO only (`LOWER(title) LIKE '%mpo%'`)
+- Purge scoped to `WHERE sort_order IS NULL` (RSS-only videos) to preserve playlist ordering data
 
 ### Step 4 — Podcast episode cards
 
@@ -555,9 +564,15 @@ Rename tab to "This Week." Update `roadmap.md` and `CLAUDE.md`.
    endpoint that returns a pre-rendered HTML fragment. POST to:
    `https://www.dgpt.com/wp-admin/admin-ajax.php`
    with form data `action=get_standings&page_id=29445&division=MPO&season=2026`.
-   Response is HTML with `<tr data-pdgaid="{pdga_id}" data-playerid="{pdga_id}">` rows.
-   Each row contains rank (`data-tied`), name, and total points (`data-sort-value`).
-   Parse with `html.parser` — no headless browser, no extra deps.
+   Response is HTML with `<tr data-pdgaid="{pdga_id}">` rows.
+   **Important:** rank is the `<span>` text inside `class="DGPTStandings--table_rank"` — NOT the
+   `data-tied` attribute (which is always "1" regardless of actual rank). PK is `(season, pdga_id)`
+   not `(season, rank)` to handle multiple players sharing the same rank. Points from `data-sort-value`.
+
+2. ✅ **YouTube RSS cap** — RSS feeds hard-cap at 15 most recent videos per channel. Full event weeks
+   have 20+ Jomez uploads (MPO + FPO + highlights), pushing R1 off the feed. Solution: scrape the
+   `jomez_playlist_url` playlist page using `ytInitialData` JSON embedded in the page HTML.
+   Watch URLs must be normalized to `youtube.com/playlist?list=` format before fetching.
 
 All other questions resolved:
 - ✅ **Tab name:** "This Week" confirmed
