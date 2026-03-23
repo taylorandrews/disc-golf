@@ -12,7 +12,7 @@ For ETL / data pipeline details see [etl.md](etl.md).
 ```bash
 brew install awscli
 npm install -g aws-cdk
-# Docker Desktop must be running for image builds and cdk deploy
+# Docker Desktop must be running for cdk deploy (Lambda bundling)
 aws sts get-caller-identity   # should return account 368365885895
 ```
 
@@ -26,6 +26,9 @@ aws sts get-caller-identity   # should return account 368365885895
 make start
 ```
 
+This starts RDS, waits for it to be available, then scales ECS back to 1.
+The Lambda ETL runs on its own schedule (06:00 UTC) — no action needed.
+
 ### After `make destroy` (full rebuild — ~20 min)
 
 Docker must be running (Lambda bundling requires it).
@@ -37,24 +40,17 @@ cd infra && cdk deploy --all
 # 2. Push Docker image + start ECS
 make build-push
 
-# 3. Get fresh DB credentials
-aws secretsmanager get-secret-value \
-    --secret-id $(aws cloudformation describe-stacks --stack-name DiscGolfDatabase \
-        --query 'Stacks[0].Outputs[?OutputKey==`DbSecretArn`].OutputValue' \
-        --output text) \
-    --query 'SecretString' --output text
-# copy the "password" field
+# 3. Run all schema migrations against RDS
+make migrate-prod
 
 # 4. Seed legacy data (~10 min, 194 rounds)
-DATABASE_URL=postgresql+psycopg://postgres:<PASSWORD>@<RDS_ENDPOINT>:5432/pdga_data \
-    alembic upgrade head
+#    alembic upgrade head runs the legacy load migration automatically via migrate-prod
 
-# 5. Seed 2026 tournament metadata
-DATABASE_URL=postgresql+psycopg://postgres:<PASSWORD>@<RDS_ENDPOINT>:5432/pdga_data \
-    python scripts/enrich_2026_tournaments.py
+# 5. Seed 2026 tournament metadata + load available rounds
+make seed-and-etl
 
-# 6. Load any 2026 rounds already available
-make invoke-etl
+# 6. Deploy Lambda code (CDK bundles it, but deploy-etl is faster for subsequent updates)
+make deploy-etl
 ```
 
 > **S3 bucket note:** The S3 data lake has `RemovalPolicy.RETAIN` and survives
@@ -67,8 +63,9 @@ make invoke-etl
 > make upload-legacy
 > ```
 
-> **Seeding gotcha:** Always prefix `alembic upgrade head` with `DATABASE_URL=...`.
-> Without it, Alembic silently hits localhost (already at head) and leaves RDS empty.
+> **Seeding gotcha:** `make migrate-prod` reads credentials from Secrets Manager using
+> `DB_SECRET_ARN` and `DB_HOST` from your `.env` file. If those aren't set, run
+> `make print-rds-config` to get the values and add them to `.env`.
 
 ---
 
@@ -96,20 +93,36 @@ make status
 ```bash
 make invoke-etl    # manually trigger nightly Lambda (RDS must be running)
 make logs-etl      # tail Lambda CloudWatch logs (last 30 min)
+make deploy-etl    # repackage + upload Lambda code without Docker/CDK (fast — ~30 sec)
+make migrate-prod  # run Alembic migrations against RDS (reads creds from Secrets Manager)
 ```
 
 **Adding a 2026 tournament:**
 1. Add a row to `data/seed/2026_tournaments.csv` (get ID from `pdga.com/tour/event/{id}`)
-2. `DATABASE_URL=... python scripts/enrich_2026_tournaments.py`
-3. `make invoke-etl` to load rounds immediately, or wait for nightly cron
+2. `make seed-and-etl` to enrich metadata + load any available rounds
+3. After the event, add `jomez_playlist_url` to the CSV row and re-run `make seed-and-etl`
+
+**After any ETL code change:**
+```bash
+make deploy-etl    # zip + upload to Lambda
+make invoke-etl    # test immediately (no need to wait for 06:00 UTC cron)
+```
+
+**After any schema change (new Alembic migration):**
+```bash
+make migrate-prod  # runs against RDS via Secrets Manager
+```
 
 ---
 
-## Deploy code changes
+## Deploy app changes
 
 ```bash
-git push origin main   # GitHub Actions builds + deploys automatically
+git push origin main   # GitHub Actions builds + deploys ECS automatically
 ```
+
+> Note: `git push` only deploys the Streamlit app (ECS). It does NOT redeploy the Lambda.
+> Use `make deploy-etl` separately after ETL code changes.
 
 ---
 
@@ -131,8 +144,9 @@ pip install -r requirements.txt
 cdk bootstrap aws://368365885895/us-east-1
 cdk deploy --all
 make build-push
-# then follow steps 3-6 of "After make destroy" above
-make upload-legacy   # archive legacy JSONs to S3 (one time)
+make migrate-prod    # runs all Alembic migrations (schema + legacy data load)
+make seed-and-etl    # seed 2026 tournament metadata + load available rounds
+make upload-legacy   # archive 2020-2025 JSONs to S3 (one time)
 ```
 
 ---
@@ -144,7 +158,9 @@ make upload-legacy   # archive legacy JSONs to S3 (one time)
 | ECS tasks failing | Check CloudWatch `/ecs/disc-golf`. Usually ECR empty → `make build-push` |
 | `cdk deploy` fails: bucket already exists | Delete S3 bucket (see S3 note above) |
 | `cdk deploy` fails: OIDC provider exists | See comment in `infra/stacks/app_stack.py` |
-| Site shows "relation tournament does not exist" | RDS not seeded — run `alembic upgrade head` with RDS `DATABASE_URL` |
-| Alembic ran but RDS still empty | You forgot the `DATABASE_URL=...` prefix — it ran against localhost |
+| Site shows "relation tournament does not exist" | RDS not migrated — run `make migrate-prod` |
+| `make migrate-prod` fails | Check `DB_SECRET_ARN` and `DB_HOST` in `.env` — run `make print-rds-config` to get values |
 | Lambda logs "RDS unavailable" | Run `make start` first |
-| `make invoke-etl` loads 0 rounds | Tournament not registered, or round not started yet |
+| `make invoke-etl` loads 0 rounds | Tournament not registered, round not started yet, or ETL code stale — try `make deploy-etl` first |
+| Lambda logs "Parsed 0 videos from JomezPro playlist" | Check that `jomez_playlist_url` is set for the tournament and the URL is a valid YouTube playlist |
+| New Lambda code not taking effect | Lambda update may be in progress — wait 30 sec and retry |
