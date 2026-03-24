@@ -553,11 +553,14 @@ stat callout, and recent results table using existing queries. Ships on the "Thi
 - Schedule strip pills wrapped in `<a>` tags linking to DGPT event pages (hover shadow effect)
 - `short_name` stored for future compact display use; not yet rendered
 
-### Step 5 — Podcast episode cards
+### ~~Step 5 — Podcast episode cards~~ ✅ COMPLETE
 
-Add `podcast_episodes` table + Alembic migration.
-Add `etl/podcast.py` (RSS feed fetch + parse).
-Wire `get_latest_podcast_episodes()` into the podcast section.
+- `podcast_episodes` table: `episode_guid` PK, `show_name` index
+- `etl/podcast.py`: fetches 5 most recent episodes per show, parses `itunes:duration`
+  (handles HH:MM:SS, MM:SS, and raw seconds); falls back to `<enclosure url>` if no `<link>`
+- Retention: ROW_NUMBER() DELETE keeps max 5 per show after each upsert
+- Card shows: show name (uppercase MUTED), episode title (3-line clamp), date + runtime, Listen ↗ link
+- Subtitle line omitted for now — show name + episode info is sufficient
 
 ### Step 6 — Polish, navigation, and mobile
 

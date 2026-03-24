@@ -76,10 +76,13 @@ Full design specification: `docs/landing-page-design.md`
 
 ### Phase 3 — Landing Page (remaining steps)
 
-**Step 5 — Podcast episode cards**
-- `etl/podcast.py` — RSS scraper for 4 shows → `podcast_episodes` table
-- Feeds: The Upshot, Tour Life, Grip Locked, Course Maintenance (confirmed RSS URLs in design doc)
-- Lambda fifth job; one card per show, most recent episode
+**Step 5 — Podcast episode cards** ✅ *complete*
+- `etl/podcast.py`: RSS scraper for 4 shows, fetches 5 most recent episodes per show
+- `podcast_episodes` table with `episode_guid` PK and `show_name` index
+- Retention: keeps max 5 per show via ROW_NUMBER() delete after upsert
+- Lambda fifth job (non-fatal); 18 episodes/run (5+5+5+3 — Course Maintenance has sparse feed)
+- `get_latest_podcast_episodes()`: DISTINCT ON show_name, priority-ordered (Upshot → Tour Life → Grip Locked → Course Maintenance)
+- Podcast cards rendered after video section; 220px fixed-width cards in horizontal scroll strip
 
 **Step 6 — Polish, navigation, and mobile**
 - Make "This Week" the default landing tab when the site loads
