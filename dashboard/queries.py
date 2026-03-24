@@ -148,7 +148,8 @@ def get_schedule_strip(season: int) -> pd.DataFrame:
             is_worlds,
             start_date,
             (start_date + (total_rounds - 1)) AS end_date,
-            location
+            location,
+            dgpt_url
         FROM tournament
         WHERE season = {season}
         ORDER BY start_date;

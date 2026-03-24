@@ -450,6 +450,8 @@ def inject_css():
         color: {MUTED};
         display: block;
     }}
+    a.sched-link {{ text-decoration: none; color: inherit; }}
+    a.sched-link:hover .sched-pill {{ box-shadow: 0 2px 6px rgba(0,0,0,0.12); }}
     .sched-completed .sched-pill-name {{ color: {MUTED}; }}
     .sched-current {{ background: {LIGHT_GREEN}; }}
     .sched-current .sched-pill-name {{ color: {GREEN}; }}
@@ -899,11 +901,12 @@ def _render_schedule_strip(season: int) -> None:
             state_cls = ""
             name_color = TEXT
 
-        pills += f"""
-        <span class="sched-pill {state_cls}" style="border-left-color:{color};">
-            <span class="sched-pill-name" style="color:{name_color};">{row["event_name"]}</span>
-            <span class="sched-pill-date">{date_str}</span>
-        </span>"""
+        pill = f"""<span class="sched-pill {state_cls}" style="border-left-color:{color};"><span class="sched-pill-name" style="color:{name_color};">{row["event_name"]}</span><span class="sched-pill-date">{date_str}</span></span>"""
+        dgpt_url = row.get("dgpt_url") or ""
+        if dgpt_url:
+            pills += f'<a class="sched-link" href="{dgpt_url}" target="_blank" rel="noopener">{pill}</a>'
+        else:
+            pills += pill
 
     st.markdown(f"""
     <div class="table-card">

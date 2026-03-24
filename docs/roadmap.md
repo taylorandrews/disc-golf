@@ -36,7 +36,7 @@ Project history, current state, and future direction for disc-golf-data.com.
 - Driver split: `psycopg2-binary` for ECS app, `pg8000` (pure Python) for Lambda — avoids CDK bundling platform issues on macOS
 - 2026 data flows into the existing Season tab automatically — no separate tab needed for now
 
-### Phase 3 — Landing Page (Steps 1–3 complete)
+### Phase 3 — Landing Page (Steps 1–4 complete)
 *In progress — March 2026*
 
 Full design specification: `docs/landing-page-design.md`
@@ -58,6 +58,12 @@ Full design specification: `docs/landing-page-design.md`
 - 3A: full event coverage cards from `jomez_playlist_url` playlist (bypasses 15-video RSS cap)
 - 3B: creator preview cards (Aderhold, Goosage, Barela, Wysocki) from 6-day pre-event window
 
+**Step 4 — Tournament schema additions + clickable schedule strip** ✅ *complete*
+- Added `short_name` and `dgpt_url` columns to `tournament` table
+- Schedule strip pills now link to official DGPT event pages (hover shadow, opens in new tab)
+- `enrich_tournaments.py` upserts both new columns on conflict
+- Seed CSV expanded to 11 columns
+
 ---
 
 ## In Progress
@@ -70,12 +76,12 @@ Full design specification: `docs/landing-page-design.md`
 
 ### Phase 3 — Landing Page (remaining steps)
 
-**Step 4 — Podcast episode cards**
+**Step 5 — Podcast episode cards**
 - `etl/podcast.py` — RSS scraper for 4 shows → `podcast_episodes` table
 - Feeds: The Upshot, Tour Life, Grip Locked, Course Maintenance (confirmed RSS URLs in design doc)
-- Lambda fourth job; one card per show, most recent episode
+- Lambda fifth job; one card per show, most recent episode
 
-**Step 5 — Polish + mobile**
+**Step 6 — Polish + mobile**
 - Responsive layout pass (triptych stacks vertically on mobile)
 - Serif font injection (Playfair Display) for stat callout number
 - Final `CLAUDE.md` and `roadmap.md` update

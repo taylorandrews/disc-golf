@@ -545,16 +545,24 @@ stat callout, and recent results table using existing queries. Ships on the "Thi
 - JomezPro videos filtered to MPO only (`LOWER(title) LIKE '%mpo%'`)
 - Purge scoped to `WHERE sort_order IS NULL` (RSS-only videos) to preserve playlist ordering data
 
-### Step 4 — Podcast episode cards
+### ~~Step 4 — Tournament schema additions + clickable schedule strip~~ ✅ COMPLETE
+
+- Added `short_name TEXT` and `dgpt_url TEXT` columns to `tournament` table
+- Seed CSV expanded to 11 columns (added `short_name`, `dgpt_url`)
+- `enrich_tournaments.py` upserts both new columns on conflict
+- Schedule strip pills wrapped in `<a>` tags linking to DGPT event pages (hover shadow effect)
+- `short_name` stored for future compact display use; not yet rendered
+
+### Step 5 — Podcast episode cards
 
 Add `podcast_episodes` table + Alembic migration.
 Add `etl/podcast.py` (RSS feed fetch + parse).
 Wire `get_latest_podcast_episodes()` into the podcast section.
 
-### Step 5 — Polish and mobile
+### Step 6 — Polish and mobile
 
 Responsive layout pass. Serif font injection. Hover states on video thumbnails.
-Rename tab to "This Week." Update `roadmap.md` and `CLAUDE.md`.
+Update `roadmap.md` and `CLAUDE.md`.
 
 ---
 

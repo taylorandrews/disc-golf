@@ -57,7 +57,7 @@ disc-golf/
 |   +-- run.py                       # Local runner: python -m etl.run
 |   +-- requirements.txt             # Lambda-only deps (no streamlit/black/etc)
 +-- scripts/
-|   +-- enrich_tournaments.py   # Seed tournament table from 6-col CSV
+|   +-- enrich_tournaments.py   # Seed tournament table from CSV
 +-- dashboard/
 |   +-- app.py                       # Streamlit entrypoint -- all UI lives here
 |   +-- queries.py                   # SQL query functions, all @st.cache_data cached
@@ -75,7 +75,7 @@ disc-golf/
 +-- data/                            # GITIGNORED
     +-- seed/
     |   +-- tournament_data.csv      # Legacy registry (2020-2025, 10 columns, do not modify)
-    |   +-- 2026_tournaments.csv     # 2026 registry (6 columns, manually maintained)
+    |   +-- 2026_tournaments.csv     # 2026 registry (11 columns, manually maintained)
     +-- pdga/                        # Legacy JSON round files (2020-2025)
 ```
 
@@ -95,6 +95,10 @@ disc-golf/
 - `has_finals` (Boolean)
 - `total_rounds` (Integer)
 - `director` (nullable)
+- `location` (nullable) -- "City, ST" string
+- `jomez_playlist_url` (nullable) -- YouTube playlist link for event coverage
+- `short_name` (nullable) -- e.g. "SFO", "BEO" -- compact display abbreviation
+- `dgpt_url` (nullable) -- official DGPT event page URL
 
 **`course`** -- One row per course layout per round (synthetic PK)
 - `course_id` -- synthetic: `LayoutID + year + round_num`
@@ -153,17 +157,21 @@ The Alembic migration `b90ec0cb8a47_load_data.py` must not be modified -- it is 
 Edit `data/seed/2026_tournaments.csv`. Find the tournament ID from the PDGA URL:
 `https://www.pdga.com/tour/event/{tournament_id}`
 
-CSV columns (6): `tournament_id, name, start_date, classification, is_worlds, total_rounds, has_finals`
+CSV columns (11): `tournament_id, name, short_name, start_date, location, classification, is_worlds, total_rounds, has_finals, jomez_playlist_url, dgpt_url`
 
 | Field | Notes |
 |---|---|
 | `tournament_id` | Integer from PDGA URL |
-| `name` | Short name you want shown in the dashboard |
+| `name` | Display name for the dashboard |
+| `short_name` | Abbreviation (e.g. "SFO", "BEO") -- for compact display |
 | `start_date` | ISO format: `2026-03-07` |
+| `location` | "City, ST" or "City, Country" |
 | `classification` | `Elite Series`, `Elite Series Plus`, `Major`, `Tour Championship`, etc. |
-| `is_worlds` | `0` or `1` |
+| `is_worlds` | `True` or `False` |
 | `total_rounds` | Total rounds including finals |
-| `has_finals` | `0` or `1` -- finals use PDGA API round 12 |
+| `has_finals` | `True` or `False` -- finals use PDGA API round 12 |
+| `jomez_playlist_url` | YouTube playlist URL for event coverage (add after event) |
+| `dgpt_url` | Official DGPT event page URL |
 
 #### Step 2: Enrich and seed the tournament table
 
@@ -173,7 +181,7 @@ DATABASE_URL=postgresql+psycopg://postgres:<pw>@<host>:5432/pdga_data \
 ```
 
 Fetches round 1 from PDGA to auto-fill `long_name`. Upserts into the `tournament` table.
-Safe to re-run -- `ON CONFLICT DO NOTHING`.
+Safe to re-run -- updates `location`, `jomez_playlist_url`, `short_name`, and `dgpt_url` on conflict.
 
 #### Step 3: Load round data (nightly Lambda or manual)
 
@@ -257,10 +265,11 @@ LIGHT_GREEN = "#EAF4EE"   # table row hover, subtle highlights
 ```
 
 ### Nav tabs (current)
-`Season` | `Landing Page` | `Search` | `State of Disc Golf` | `About`
+`Season` | `This Week` | `Search` | `State of Disc Golf` | `About`
 
-Season tab is implemented. All others are placeholder shells (`render_shell()`).
-2026 tab to be added in Phase 2.
+Season tab: year selector, stat cards, winners bar chart, events table.
+This Week tab (Phase 3): triptych, schedule strip, video coverage, stat callout, recent results.
+Search, State of Disc Golf, About: placeholder shells (`render_shell()`).
 
 ---
 
@@ -306,47 +315,25 @@ Season tab is implemented. All others are placeholder shells (`render_shell()`).
 
 Dockerize app -> CDK stack (VPC + RDS + ECS + ALB) -> GitHub Actions CI/CD -> live at ALB URL.
 
-### Phase 2 -- ETL Refactor + 2026 Season (in progress)
+### Phase 2 -- ETL Refactor + 2026 Season (complete)
 
-**Goal:** Automated nightly data import for 2026 season with legacy 2020-2025 data preserved.
+Automated nightly data import for 2026 season. S3 data lake, Lambda ETL, EventBridge cron.
+`etl/` module (parse, db, pdga, standings, youtube). Tournament seed CSV + enrich script.
+See `docs/etl.md` for full details.
 
-**Subphases:**
+### Phase 3 -- Landing Page (steps 1-4 complete)
 
-**2A -- S3 data lake + CDK infra (complete)**
-- S3 bucket `disc-golf-data-lake-{account}` added to AppStack (RemovalPolicy.RETAIN)
-- Lambda `disc-golf-nightly-etl` packaged from repo root: `etl/` + `helpers/` + pip deps
-- EventBridge cron at 06:00 UTC daily
-- IAM: Lambda has Secrets Manager read + S3 write
-- Lambda connects to RDS public endpoint -- no VPC config needed
-- `make upload-legacy` syncs legacy JSONs to `raw/pdga/legacy/`
-- `make invoke-etl` / `make logs-etl` for manual operation
+"This week in disc golf" hub on the "This Week" tab. Steps complete:
+1. Static shell (triptych, schedule strip, stat callout, recent results)
+2. DGPT Points Standings (scraped from DGPT.com AJAX endpoint)
+3. YouTube coverage cards (JomezPro playlist scraper + creator preview cards)
+4. Tournament schema additions + clickable schedule strip (short_name, dgpt_url)
 
-**2B -- ETL module (complete)**
-- `etl/parse.py`: parse logic extracted from Alembic migration (get_courses, get_players, get_holes_and_rounds)
-- `etl/db.py`: DB connection (DATABASE_URL or Secrets Manager), get_loaded_round_nums, upsert_all
-- `etl/pdga.py`: fetch_round, save_to_s3, api_round_num (handles finals=round 12)
-- `etl/lambda_handler.py`: handler -- queries 2026 tournaments, checks loaded rounds, fetches/loads new ones
-- `etl/run.py`: local runner for dev/testing
+Steps remaining:
+5. Podcast episode cards (`etl/podcast.py` -> `podcast_episodes` table)
+6. Polish + mobile layout pass
 
-**2C -- Tournament seed management (complete)**
-- `data/seed/2026_tournaments.csv`: 6-column file you maintain (tournament_id, name, start_date, classification, is_worlds, total_rounds, has_finals)
-- `scripts/enrich_tournaments.py`: reads CSV, fetches long_name from PDGA round 1 API, upserts into tournament table
-
-**2D -- Deploy and seed 2026 data (pending)**
-- `cdk deploy` to create S3 bucket + Lambda + EventBridge
-- Run `make upload-legacy` to archive legacy JSONs
-- Add 2026 tournament IDs to `data/seed/2026_tournaments.csv`
-- Run `scripts/enrich_tournaments.py` to seed tournament table
-- Run `make invoke-etl` to load any rounds already available
-
-**2E -- Dashboard 2026 tab (pending)**
-- Add "2026" tab to Streamlit using existing query patterns with `WHERE season = 2026`
-- Season standings, round results, same stat card design as existing Season tab
-
-### Phase 3 -- Landing Page
-
-"This week in disc golf" -- upcoming events, JomezPro video links, Tour Life Podcast,
-Ezra Aderhold + Aaron Goosage content, disc golf blog links. Requires Phase 2 data flowing.
+See `docs/landing-page-design.md` for full spec.
 
 ### Phase 4 -- Text-to-SQL Search (deprioritized)
 

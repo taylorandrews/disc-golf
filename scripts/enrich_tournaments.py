@@ -1,8 +1,9 @@
 """
 Enrich tournament seed data and upsert into the tournament table.
 
-Reads data/seed/{year}_tournaments.csv (6 columns you maintain):
-    tournament_id, name, start_date, classification, is_worlds, total_rounds, has_finals
+Reads data/seed/{year}_tournaments.csv. Columns:
+    tournament_id, name, short_name, start_date, location, classification,
+    is_worlds, total_rounds, has_finals, jomez_playlist_url, dgpt_url
 
 For each row:
   - Fetches round 1 from the PDGA live API to extract long_name from the layout Name field
@@ -146,6 +147,8 @@ def main() -> None:
             "has_finals": to_bool(row["has_finals"]),
             "location": row.get("location", "").strip() or None,
             "jomez_playlist_url": row.get("jomez_playlist_url", "").strip() or None,
+            "short_name": row.get("short_name", "").strip() or None,
+            "dgpt_url": row.get("dgpt_url", "").strip() or None,
         })
 
     with engine.begin() as conn:
@@ -159,6 +162,8 @@ def main() -> None:
                 set_={
                     "location": stmt.excluded.location,
                     "jomez_playlist_url": stmt.excluded.jomez_playlist_url,
+                    "short_name": stmt.excluded.short_name,
+                    "dgpt_url": stmt.excluded.dgpt_url,
                 },
             )
         )
