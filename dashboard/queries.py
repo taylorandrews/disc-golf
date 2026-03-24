@@ -279,7 +279,7 @@ def get_latest_podcast_episodes() -> pd.DataFrame:
     df = run_query(query)
     if not df.empty:
         show_order = {s: i for i, s in enumerate(
-            ["The Upshot", "Tour Life", "Grip Locked", "Course Maintenance"]
+            ["Course Maintenance", "Tour Life", "Grip Locked", "The Upshot"]
         )}
         df["_order"] = df["show_name"].map(show_order).fillna(99)
         df = df.sort_values("_order").drop(columns="_order").reset_index(drop=True)

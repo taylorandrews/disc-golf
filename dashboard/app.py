@@ -56,18 +56,35 @@ def inject_css():
     /* ── Brand bar ── */
     .dg-brand {{
         background: {GREEN};
-        padding: 0 4px;
+        padding: 28px 0 0 0;
         margin-bottom: 0;
-        display: flex;
-        align-items: center;
-        height: 44px;
     }}
-    .dg-brand-logo {{
+    .dg-brand-inner {{
+        display: flex;
+        align-items: flex-end;
+        gap: 8px;
+        padding: 0 0 14px 0;
+    }}
+    .dg-brand-title {{
         font-weight: 800;
-        font-size: 14px;
+        font-size: 22px;
         color: {WHITE};
-        letter-spacing: 1px;
-        text-transform: uppercase;
+        letter-spacing: -0.3px;
+        line-height: 1;
+    }}
+    .dg-brand-divider {{
+        width: 1px;
+        height: 16px;
+        background: rgba(255,255,255,0.35);
+        margin-bottom: 2px;
+        flex-shrink: 0;
+    }}
+    .dg-brand-sub {{
+        font-size: 12px;
+        font-weight: 500;
+        color: rgba(255,255,255,0.65);
+        letter-spacing: 0.5px;
+        margin-bottom: 1px;
     }}
 
     /* ── st.tabs styled as nav bar ── */
@@ -77,17 +94,18 @@ def inject_css():
         gap: 0;
         padding: 0;
         margin-bottom: 1.5rem;
+        border-top: 1px solid rgba(255,255,255,0.15);
     }}
     .stTabs [data-baseweb="tab"] {{
         background: none;
         border: none;
         border-radius: 0;
-        color: rgba(255,255,255,0.7);
+        color: rgba(255,255,255,0.65);
         font-weight: 600;
         font-size: 12px;
         text-transform: uppercase;
         letter-spacing: 1px;
-        height: 48px;
+        height: 44px;
         padding: 0 20px;
         border-bottom: 3px solid transparent;
         margin-bottom: 0;
@@ -1024,10 +1042,10 @@ def _render_video_section(last: dict, nxt: dict) -> None:
 
 
 _PODCAST_SHOW_URLS = {
-    "The Upshot": "https://rss.com/podcasts/thediscgolfupshot/",
+    "Course Maintenance": "https://rss.com/podcasts/coursemaintenance/",
     "Tour Life": "https://rss.com/podcasts/tourlife/",
     "Grip Locked": "https://rss.com/podcasts/griplocked/",
-    "Course Maintenance": "https://rss.com/podcasts/coursemaintenance/",
+    "The Upshot": "https://rss.com/podcasts/thediscgolfupshot/",
 }
 
 
@@ -1168,7 +1186,11 @@ def main():
 
     # ── Brand bar (above tabs) ────────────────────────────────────────────────
     st.markdown(
-        '<div class="dg-brand"><span class="dg-brand-logo">Disc Golf Pro Tour</span></div>',
+        '<div class="dg-brand"><div class="dg-brand-inner">'
+        '<span class="dg-brand-title">Disc Golf Pro Tour</span>'
+        '<span class="dg-brand-divider"></span>'
+        '<span class="dg-brand-sub">MPO Stats &amp; Coverage</span>'
+        '</div></div>',
         unsafe_allow_html=True,
     )
 
@@ -1185,16 +1207,18 @@ def main():
         col_year, _ = st.columns([2, 8])
         with col_year:
             season_options = list(reversed(seasons))
+            current_year = datetime.date.today().year
+            default_idx = 1 if len(season_options) > 1 and season_options[0] == current_year else 0
             selected = st.selectbox(
                 "Year",
                 options=season_options,
-                index=0,
+                index=default_idx,
                 label_visibility="collapsed",
             )
         render_season(int(selected))
 
     with tab_search:
-        render_shell("Search", "Player and event search — coming soon.")
+        render_shell("Search", "Coming soon.")
 
     with tab_about:
         render_about()
