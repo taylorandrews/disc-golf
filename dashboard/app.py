@@ -35,6 +35,7 @@ LIGHT_GREEN = "#EAF4EE"
 def inject_css():
     st.markdown(f"""
     <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&display=swap');
 
     /* ── Streamlit chrome ── */
     #MainMenu, footer, header {{ visibility: hidden; }}
@@ -54,8 +55,7 @@ def inject_css():
 
     /* ── Brand bar ── */
     .dg-brand {{
-        background: {WHITE};
-        border-bottom: 1px solid {BORDER};
+        background: {GREEN};
         padding: 0 4px;
         margin-bottom: 0;
         display: flex;
@@ -65,24 +65,24 @@ def inject_css():
     .dg-brand-logo {{
         font-weight: 800;
         font-size: 14px;
-        color: {GREEN};
+        color: {WHITE};
         letter-spacing: 1px;
         text-transform: uppercase;
     }}
 
     /* ── st.tabs styled as nav bar ── */
     .stTabs [data-baseweb="tab-list"] {{
-        background-color: {WHITE};
-        border-bottom: 3px solid {GREEN};
+        background-color: {GREEN};
+        border-bottom: none;
         gap: 0;
-        padding: 0 0 0 0;
+        padding: 0;
         margin-bottom: 1.5rem;
     }}
     .stTabs [data-baseweb="tab"] {{
         background: none;
         border: none;
         border-radius: 0;
-        color: {MUTED};
+        color: rgba(255,255,255,0.7);
         font-weight: 600;
         font-size: 12px;
         text-transform: uppercase;
@@ -90,16 +90,16 @@ def inject_css():
         height: 48px;
         padding: 0 20px;
         border-bottom: 3px solid transparent;
-        margin-bottom: -3px;
+        margin-bottom: 0;
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
     }}
     .stTabs [data-baseweb="tab"]:hover {{
-        color: {GREEN};
-        background: none;
+        color: {WHITE};
+        background: rgba(255,255,255,0.08);
     }}
     .stTabs [aria-selected="true"] {{
-        color: {GREEN} !important;
-        border-bottom: 3px solid {GREEN} !important;
+        color: {WHITE} !important;
+        border-bottom: 3px solid {AMBER} !important;
         background: none !important;
     }}
     .stTabs [data-baseweb="tab-highlight"] {{ display: none !important; }}
@@ -294,6 +294,10 @@ def inject_css():
         gap: 16px;
         margin-bottom: 24px;
         align-items: stretch;
+    }}
+    @media (max-width: 768px) {{
+        .trip-row {{ flex-direction: column; }}
+        .trip-card {{ width: 100%; }}
     }}
     .trip-card {{
         background: {WHITE};
@@ -553,6 +557,7 @@ def inject_css():
         line-height: 1;
         margin-bottom: 12px;
         letter-spacing: -3px;
+        font-family: 'Playfair Display', Georgia, serif;
     }}
     .stat-callout-subject {{
         font-size: 15px;
@@ -1018,6 +1023,14 @@ def _render_video_section(last: dict, nxt: dict) -> None:
             )
 
 
+_PODCAST_SHOW_URLS = {
+    "The Upshot": "https://rss.com/podcasts/thediscgolfupshot/",
+    "Tour Life": "https://rss.com/podcasts/tourlife/",
+    "Grip Locked": "https://rss.com/podcasts/griplocked/",
+    "Course Maintenance": "https://rss.com/podcasts/coursemaintenance/",
+}
+
+
 def _render_podcast_section() -> None:
     df = get_latest_podcast_episodes()
     if df.empty:
@@ -1030,16 +1043,11 @@ def _render_podcast_section() -> None:
         dur = row.get("duration_secs")
         dur_str = f" · {dur // 60} min" if dur else ""
         title = (row["episode_title"] or "").replace("'", "&#39;").replace('"', "&quot;")
-        url = row["episode_url"] or "#"
-        cards += f"""<div class="pod-card">
-            <div class="pod-show">{row["show_name"]}</div>
-            <div class="pod-title">{title}</div>
-            <div class="pod-meta">{date_str}{dur_str}</div>
-            <a class="pod-listen" href="{url}" target="_blank" rel="noopener">Listen ↗</a>
-        </div>"""
+        show_url = _PODCAST_SHOW_URLS.get(row["show_name"], row["episode_url"] or "#")
+        cards += f"""<div class="pod-card"><div class="pod-show">{row["show_name"]}</div><div class="pod-title">{title}</div><div class="pod-meta">{date_str}{dur_str}</div><a class="pod-listen" href="{show_url}" target="_blank" rel="noopener">Listen ↗</a></div>"""
 
     st.markdown(
-        f'<div class="vid-section-label">Latest Episodes</div>'
+        f'<div class="vid-section-label">Latest Podcast Episodes</div>'
         f'<div class="pod-strip">{cards}</div>',
         unsafe_allow_html=True,
     )
@@ -1113,6 +1121,28 @@ def render_landing_page() -> None:
     _render_recent_results()
 
 
+# ── About page ─────────────────────────────────────────────────────────────────
+def render_about() -> None:
+    st.markdown(f"""
+    <div class="table-card" style="max-width:680px;margin:0 auto;">
+        <div class="dg-section-header">About</div>
+        <p style="font-size:15px;color:{TEXT};line-height:1.7;margin-bottom:20px;">
+            An unofficial stats and content hub for the Disc Golf Pro Tour (DGPT), focused on the
+            MPO division. Stats are updated nightly from the PDGA live results API. Standings are
+            scraped from the official DGPT site. Video coverage and podcast links surface
+            automatically from YouTube and RSS feeds.
+        </p>
+        <div style="font-size:12px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:{MUTED};margin-bottom:10px;">Data Sources</div>
+        <ul style="font-size:14px;color:{TEXT};line-height:2;margin:0;padding-left:20px;">
+            <li><a href="https://www.pdga.com" target="_blank" style="color:{GREEN};">PDGA</a> — tournament results, player data, round scores</li>
+            <li><a href="https://www.dgpt.com" target="_blank" style="color:{GREEN};">DGPT</a> — official points standings</li>
+            <li><a href="https://www.youtube.com/@JomezPro" target="_blank" style="color:{GREEN};">JomezPro</a> — tournament video coverage</li>
+            <li>The Upshot · Tour Life · Grip Locked · Course Maintenance — podcast episodes</li>
+        </ul>
+    </div>
+    """, unsafe_allow_html=True)
+
+
 # ── Shell pages ────────────────────────────────────────────────────────────────
 def render_shell(title, description):
     st.markdown(f"""
@@ -1143,9 +1173,12 @@ def main():
     )
 
     # ── Top-level nav tabs ────────────────────────────────────────────────────
-    tab_season, tab_landing, tab_search, tab_state, tab_about = st.tabs(
-        ["Season", "This Week", "Search", "State of Disc Golf", "About"]
+    tab_landing, tab_season, tab_search, tab_about = st.tabs(
+        ["This Week", "Season", "Search", "About"]
     )
+
+    with tab_landing:
+        render_landing_page()
 
     # ── Season tab ────────────────────────────────────────────────────────────
     with tab_season:
@@ -1160,18 +1193,11 @@ def main():
             )
         render_season(int(selected))
 
-    # ── Shell tabs ────────────────────────────────────────────────────────────
-    with tab_landing:
-        render_landing_page()
-
     with tab_search:
         render_shell("Search", "Player and event search — coming soon.")
 
-    with tab_state:
-        render_shell("State of Disc Golf", "Coming soon.")
-
     with tab_about:
-        render_shell("About", "Coming soon.")
+        render_about()
 
 
 if __name__ == "__main__":
