@@ -265,11 +265,12 @@ LIGHT_GREEN = "#EAF4EE"   # table row hover, subtle highlights
 ```
 
 ### Nav tabs (current)
-`Season` | `This Week` | `Search` | `State of Disc Golf` | `About`
+`This Week` | `Season` | `Search` | `About`
 
+This Week tab (default): triptych, schedule strip, video coverage, podcast episodes, stat callout, recent results.
 Season tab: year selector, stat cards, winners bar chart, events table.
-This Week tab (Phase 3): triptych, schedule strip, video coverage, stat callout, recent results.
-Search, State of Disc Golf, About: placeholder shells (`render_shell()`).
+Search: placeholder shell.
+About: project description + data source attribution.
 
 ---
 

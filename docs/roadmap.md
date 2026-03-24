@@ -84,13 +84,14 @@ Full design specification: `docs/landing-page-design.md`
 - `get_latest_podcast_episodes()`: DISTINCT ON show_name, priority-ordered (Upshot → Tour Life → Grip Locked → Course Maintenance)
 - Podcast cards rendered after video section; 220px fixed-width cards in horizontal scroll strip
 
-**Step 6 — Polish, navigation, and mobile**
-- Make "This Week" the default landing tab when the site loads
-- Remove "State of Disc Golf" tab entirely
-- Build a simple About page (project description, data source attribution)
-- Style the header/nav bar with a darker green from the palette (GREEN `#1D6B44` or similar)
-- Responsive layout pass (triptych stacks vertically on mobile)
-- Serif font injection (Playfair Display) for stat callout number
+**Step 6 — Polish, navigation, and mobile** ✅ *complete*
+- "This Week" is now the default (first) tab; State of Disc Golf tab removed
+- About page: project description + data sources (PDGA, DGPT, YouTube, 4 podcasts)
+- Brand bar + tab list unified to GREEN background; white tab text; AMBER underline on active tab
+- Podcast listen links use show-level rss.com pages for consistent experience
+- "Latest Podcast Episodes" section label
+- Triptych stacks vertically on mobile (≤768px CSS media query)
+- Playfair Display serif font for stat callout number (Google Fonts @import)
 
 ### Phase 4 — Text-to-SQL Search (deprioritized)
 

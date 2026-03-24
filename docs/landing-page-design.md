@@ -562,14 +562,13 @@ stat callout, and recent results table using existing queries. Ships on the "Thi
 - Card shows: show name (uppercase MUTED), episode title (3-line clamp), date + runtime, Listen ↗ link
 - Subtitle line omitted for now — show name + episode info is sufficient
 
-### Step 6 — Polish, navigation, and mobile
+### ~~Step 6 — Polish, navigation, and mobile~~ ✅ COMPLETE
 
-- Make "This Week" the default landing tab when the site loads
-- Remove "State of Disc Golf" tab entirely
-- Build a simple About page (project description, data source attribution)
-- Style the header/nav bar with a darker green from the palette (GREEN `#1D6B44` or similar)
-- Responsive layout pass (triptych stacks vertically on mobile)
-- Serif font injection (Playfair Display) for stat callout number
+- "This Week" default tab; State of Disc Golf removed; About page added
+- Header/nav bar: GREEN background, white tab text, AMBER underline on selected tab
+- Podcast links: show-level rss.com pages for all 4 shows (consistent experience)
+- Triptych: stacks vertically on mobile via `@media (max-width: 768px)`
+- Playfair Display serif injected via Google Fonts `@import` for stat callout number
 
 ---
 
