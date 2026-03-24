@@ -63,7 +63,7 @@ def inject_css():
         display: flex;
         align-items: flex-end;
         gap: 8px;
-        padding: 0 0 14px 0;
+        padding: 0 0 14px 16px;
     }}
     .dg-brand-title {{
         font-weight: 800;
