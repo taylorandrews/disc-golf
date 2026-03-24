@@ -81,10 +81,13 @@ Full design specification: `docs/landing-page-design.md`
 - Feeds: The Upshot, Tour Life, Grip Locked, Course Maintenance (confirmed RSS URLs in design doc)
 - Lambda fifth job; one card per show, most recent episode
 
-**Step 6 — Polish + mobile**
+**Step 6 — Polish, navigation, and mobile**
+- Make "This Week" the default landing tab when the site loads
+- Remove "State of Disc Golf" tab entirely
+- Build a simple About page (project description, data source attribution)
+- Style the header/nav bar with a darker green from the palette (GREEN `#1D6B44` or similar)
 - Responsive layout pass (triptych stacks vertically on mobile)
 - Serif font injection (Playfair Display) for stat callout number
-- Final `CLAUDE.md` and `roadmap.md` update
 
 ### Phase 4 — Text-to-SQL Search (deprioritized)
 
@@ -125,12 +128,10 @@ These require a full season of 2026 data to be meaningful:
 
 | Tab / Page | Status | Notes |
 |---|---|---|
+| This Week | Live (Phase 3) | Default tab — triptych, schedule, video, standings |
 | Season (2020–2026) | Live | Year selector, stat cards, bar chart, events table |
-| 2026 | Live | Flows into Season tab automatically via nightly ETL |
-| Landing Page | Pending (Phase 3) | "This week in disc golf" content hub |
 | Search | Placeholder | Will drive player profiles in Phase 5 |
-| State of Disc Golf | Placeholder | Cross-season analytics — Phase 6 territory |
-| About | Placeholder | Project description, data source attribution |
+| About | Pending (Step 6) | Simple project description + data source attribution |
 | Player Profile | Not started | Per-player page via URL param |
 
 ---

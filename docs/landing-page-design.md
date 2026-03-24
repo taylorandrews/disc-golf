@@ -559,10 +559,14 @@ Add `podcast_episodes` table + Alembic migration.
 Add `etl/podcast.py` (RSS feed fetch + parse).
 Wire `get_latest_podcast_episodes()` into the podcast section.
 
-### Step 6 — Polish and mobile
+### Step 6 — Polish, navigation, and mobile
 
-Responsive layout pass. Serif font injection. Hover states on video thumbnails.
-Update `roadmap.md` and `CLAUDE.md`.
+- Make "This Week" the default landing tab when the site loads
+- Remove "State of Disc Golf" tab entirely
+- Build a simple About page (project description, data source attribution)
+- Style the header/nav bar with a darker green from the palette (GREEN `#1D6B44` or similar)
+- Responsive layout pass (triptych stacks vertically on mobile)
+- Serif font injection (Playfair Display) for stat callout number
 
 ---
 
