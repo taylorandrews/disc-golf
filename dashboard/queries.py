@@ -267,6 +267,25 @@ def get_season_standings_top5(season: int) -> pd.DataFrame:
     return run_query(query)
 
 
+@st.cache_data(ttl=3600)
+def get_latest_podcast_episodes() -> pd.DataFrame:
+    """Most recent episode per show, ordered by show priority."""
+    query = """
+        SELECT DISTINCT ON (show_name)
+            show_name, episode_title, published_at, duration_secs, episode_url
+        FROM podcast_episodes
+        ORDER BY show_name, published_at DESC;
+    """
+    df = run_query(query)
+    if not df.empty:
+        show_order = {s: i for i, s in enumerate(
+            ["The Upshot", "Tour Life", "Grip Locked", "Course Maintenance"]
+        )}
+        df["_order"] = df["show_name"].map(show_order).fillna(99)
+        df = df.sort_values("_order").drop(columns="_order").reset_index(drop=True)
+    return df
+
+
 @st.cache_data(ttl=300)
 def get_stat_callout(season: int) -> dict:
     """Returns the most interesting derived stat for the season.

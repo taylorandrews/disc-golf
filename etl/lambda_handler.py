@@ -19,6 +19,7 @@ import os
 from etl.db import get_engine, get_loaded_round_nums, get_active_tournaments, upsert_all, get_current_jomez_playlist_url
 from etl.parse import get_courses, get_players, get_holes_and_rounds
 from etl.pdga import api_round_num, fetch_round, save_to_s3
+from etl.podcast import fetch_all_shows, save_podcast_episodes
 from etl.standings import fetch_standings, save_standings
 from etl.youtube import fetch_all_channels, fetch_jomez_playlist, save_youtube_videos
 
@@ -137,6 +138,13 @@ def handler(event, context):
             logger.info("No JomezPro playlist URL found for %d — skipping", current_year)
     except Exception as exc:
         logger.warning("JomezPro playlist fetch failed (non-fatal): %s", exc)
+
+    # ── Podcast RSS fetch ────────────────────────────────────────────────────────
+    try:
+        episodes = fetch_all_shows()
+        save_podcast_episodes(engine, episodes)
+    except Exception as exc:
+        logger.warning("Podcast fetch failed (non-fatal): %s", exc)
 
     msg = f"ETL complete. Loaded {total_new} new round(s)."
     logger.info(msg)

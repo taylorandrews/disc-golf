@@ -9,6 +9,7 @@ from queries import (
     get_coverage_videos,
     get_events_for_season,
     get_last_result,
+    get_latest_podcast_episodes,
     get_next_event,
     get_preview_videos,
     get_recent_results,
@@ -564,6 +565,59 @@ def inject_css():
         color: {MUTED};
     }}
 
+    /* ── Landing page — podcast section ── */
+    .pod-strip {{
+        display: flex;
+        gap: 12px;
+        overflow-x: auto;
+        padding-bottom: 8px;
+        scrollbar-width: thin;
+        margin-bottom: 8px;
+    }}
+    .pod-card {{
+        flex: 0 0 220px;
+        background: {WHITE};
+        border: 1px solid {BORDER};
+        border-radius: 8px;
+        padding: 16px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    }}
+    .pod-show {{
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 1.4px;
+        text-transform: uppercase;
+        color: {MUTED};
+        margin-bottom: 8px;
+    }}
+    .pod-title {{
+        font-size: 13px;
+        font-weight: 600;
+        color: {TEXT};
+        line-height: 1.4;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        margin-bottom: 10px;
+        min-height: 54px;
+    }}
+    .pod-meta {{
+        font-size: 11px;
+        color: {MUTED};
+        margin-bottom: 10px;
+    }}
+    a.pod-listen {{
+        display: inline-block;
+        font-size: 11px;
+        font-weight: 700;
+        color: {GREEN};
+        text-decoration: none;
+        letter-spacing: 0.3px;
+    }}
+    a.pod-listen:hover {{ text-decoration: underline; }}
+
     /* ── Shell placeholder ── */
     .shell-block {{
         background: {WHITE};
@@ -964,6 +1018,33 @@ def _render_video_section(last: dict, nxt: dict) -> None:
             )
 
 
+def _render_podcast_section() -> None:
+    df = get_latest_podcast_episodes()
+    if df.empty:
+        return
+
+    cards = ""
+    for _, row in df.iterrows():
+        pub = pd.to_datetime(row["published_at"])
+        date_str = pub.strftime("%b %-d")
+        dur = row.get("duration_secs")
+        dur_str = f" · {dur // 60} min" if dur else ""
+        title = (row["episode_title"] or "").replace("'", "&#39;").replace('"', "&quot;")
+        url = row["episode_url"] or "#"
+        cards += f"""<div class="pod-card">
+            <div class="pod-show">{row["show_name"]}</div>
+            <div class="pod-title">{title}</div>
+            <div class="pod-meta">{date_str}{dur_str}</div>
+            <a class="pod-listen" href="{url}" target="_blank" rel="noopener">Listen ↗</a>
+        </div>"""
+
+    st.markdown(
+        f'<div class="vid-section-label">Latest Episodes</div>'
+        f'<div class="pod-strip">{cards}</div>',
+        unsafe_allow_html=True,
+    )
+
+
 def _render_stat_callout(season: int) -> None:
     stat = get_stat_callout(season)
     if not stat:
@@ -1027,6 +1108,7 @@ def render_landing_page() -> None:
     _render_triptych(last, nxt, standings)
     _render_schedule_strip(season)
     _render_video_section(last, nxt)
+    _render_podcast_section()
     _render_stat_callout(season)
     _render_recent_results()
 
