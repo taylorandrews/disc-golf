@@ -24,7 +24,7 @@ SERVICE      := disc-golf-service
 DB_ID        := disc-golf-db
 ETL_FUNCTION := disc-golf-nightly-etl
 
-.PHONY: start stop status build-push invoke-etl logs-etl upload-legacy destroy seed-and-etl print-rds-config migrate-prod deploy-etl
+.PHONY: start stop status build-push invoke-etl logs-etl upload-legacy destroy seed-and-etl print-rds-config migrate-prod deploy-etl query-log
 
 ## start: Start RDS and scale ECS service to 1  (takes 2-5 min for RDS to be ready)
 start:
@@ -178,6 +178,19 @@ deploy-etl:
 	    --region $(AWS_REGION) \
 	    --no-cli-pager
 	@echo "Done. Run 'make invoke-etl' to test."
+
+## query-log: Show recent search_log entries from RDS (out_of_scope + off_topic questions).
+##            Requires DB_SECRET_ARN and DB_HOST in .env and RDS to be running.
+query-log:
+	@SECRET=$$(aws secretsmanager get-secret-value \
+	    --secret-id $$(grep DB_SECRET_ARN .env | cut -d= -f2) \
+	    --region $(AWS_REGION) \
+	    --query SecretString --output text --no-cli-pager) && \
+	DB_USER=$$(echo "$$SECRET" | python3 -c "import sys,json; print(json.load(sys.stdin)['username'])") && \
+	DB_PASS=$$(echo "$$SECRET" | python3 -c "import sys,json; print(json.load(sys.stdin)['password'])") && \
+	DB_HOST=$$(grep DB_HOST .env | cut -d= -f2) && \
+	PGPASSWORD="$$DB_PASS" psql -h "$$DB_HOST" -U "$$DB_USER" -d pdga_data -c \
+	    "SELECT path, question, asked_at FROM search_log ORDER BY asked_at DESC LIMIT 50;"
 
 ## migrate-prod: Run alembic upgrade head against RDS using Secrets Manager credentials.
 ##               Requires DB_SECRET_ARN and DB_HOST in .env (run make print-rds-config first).

@@ -4,6 +4,7 @@ import pandas as pd
 
 import datetime
 
+from search import run_search, queries_remaining
 from queries import (
     get_available_seasons,
     get_coverage_videos,
@@ -1161,7 +1162,96 @@ def render_about() -> None:
     """, unsafe_allow_html=True)
 
 
-# ── Shell pages ────────────────────────────────────────────────────────────────
+# ── Search tab ─────────────────────────────────────────────────────────────────
+def render_search():
+    remaining = queries_remaining()
+
+    st.markdown("""
+    <div style="max-width:720px;margin:32px auto 0;">
+    """, unsafe_allow_html=True)
+
+    question = st.chat_input(
+        "Ask anything about DGPT MPO stats (2020–2026)",
+        disabled=(remaining == 0),
+    )
+
+    if remaining > 0:
+        st.markdown(
+            f'<p style="color:#6B7280;font-size:0.82rem;margin:6px 0 24px;">'
+            f'{remaining} question{"s" if remaining != 1 else ""} remaining this session</p>',
+            unsafe_allow_html=True,
+        )
+    else:
+        st.markdown(
+            '<p style="color:#6B7280;font-size:0.82rem;margin:6px 0 24px;">'
+            'Session limit reached — refresh to ask more questions.</p>',
+            unsafe_allow_html=True,
+        )
+
+    if question:
+        with st.spinner(""):
+            result = run_search(question)
+
+        path = result["path"]
+        response = result["response"]
+        df = result.get("df", pd.DataFrame())
+
+        # Question echo
+        st.markdown(
+            f'<div style="font-weight:600;margin-bottom:8px;">{question}</div>',
+            unsafe_allow_html=True,
+        )
+
+        # Response card
+        border_color = "#1D6B44" if path == "answered" else "#E5E7EB"
+        st.markdown(
+            f'<div style="background:#fff;border:1px solid {border_color};border-radius:8px;'
+            f'padding:16px 20px;margin-bottom:16px;line-height:1.6;">'
+            f'{response}'
+            f'</div>',
+            unsafe_allow_html=True,
+        )
+
+        # Data table (answered path with results)
+        if path == "answered" and not df.empty:
+            # Build a clean HTML table
+            headers = "".join(
+                f'<th style="text-align:left;padding:6px 12px;border-bottom:2px solid #E5E7EB;'
+                f'font-size:0.8rem;color:#6B7280;text-transform:uppercase;letter-spacing:0.05em;">'
+                f'{col}</th>'
+                for col in df.columns
+            )
+            rows = ""
+            for _, row in df.iterrows():
+                cells = "".join(
+                    f'<td style="padding:6px 12px;border-bottom:1px solid #F3F4F6;font-size:0.9rem;">'
+                    f'{val}</td>'
+                    for val in row
+                )
+                rows += f"<tr>{cells}</tr>"
+            st.markdown(
+                f'<div style="overflow-x:auto;margin-bottom:24px;">'
+                f'<table style="width:100%;border-collapse:collapse;background:#fff;'
+                f'border:1px solid #E5E7EB;border-radius:8px;overflow:hidden;">'
+                f'<thead><tr>{headers}</tr></thead>'
+                f'<tbody>{rows}</tbody>'
+                f'</table></div>',
+                unsafe_allow_html=True,
+            )
+
+        # Updated session counter
+        new_remaining = result.get("remaining", 0)
+        if path not in ("rate_limit",):
+            st.markdown(
+                f'<p style="color:#6B7280;font-size:0.82rem;">'
+                f'{new_remaining} question{"s" if new_remaining != 1 else ""} remaining this session</p>',
+                unsafe_allow_html=True,
+            )
+
+    st.markdown("</div>", unsafe_allow_html=True)
+
+
+# ── Shell pages ─────────────────────────────────────────────────────────────────
 def render_shell(title, description):
     st.markdown(f"""
     <div class="shell-block">
@@ -1218,7 +1308,7 @@ def main():
         render_season(int(selected))
 
     with tab_search:
-        render_shell("Search", "Coming soon.")
+        render_search()
 
     with tab_about:
         render_about()

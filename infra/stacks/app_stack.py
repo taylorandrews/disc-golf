@@ -72,6 +72,13 @@ class AppStack(cdk.Stack):
     ) -> None:
         super().__init__(scope, id, **kwargs)
 
+        # -- Anthropic API key (Secrets Manager) ------------------------------
+        anthropic_secret = secretsmanager.Secret.from_secret_name_v2(
+            self,
+            "AnthropicSecret",
+            "disc-golf-anthropic-key",
+        )
+
         # -- ECR repository ---------------------------------------------------
         self.ecr_repo = ecr.Repository(
             self,
@@ -109,6 +116,7 @@ class AppStack(cdk.Stack):
             secrets={
                 "DB_USER": ecs.Secret.from_secrets_manager(db_secret, "username"),
                 "DB_PASSWORD": ecs.Secret.from_secrets_manager(db_secret, "password"),
+                "ANTHROPIC_API_KEY": ecs.Secret.from_secrets_manager(anthropic_secret, "api_key"),
             },
             logging=ecs.LogDrivers.aws_logs(
                 stream_prefix="disc-golf",
@@ -116,6 +124,7 @@ class AppStack(cdk.Stack):
             ),
         )
         container.add_port_mappings(ecs.PortMapping(container_port=8501))
+        anthropic_secret.grant_read(task_def.task_role)
 
         # -- Fargate service --------------------------------------------------
         # assign_public_ip=True is required when running in a public subnet
