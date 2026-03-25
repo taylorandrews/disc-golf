@@ -16,91 +16,41 @@ Project history, current state, and future direction for disc-golf-data.com.
 - Season tab with year selector, hero stat cards, winners bar chart, events table
 - Legacy data (2020-2025) seeded via Alembic migrations — 194 tournament rounds
 
-### Phase 2A–C — ETL Foundation
+### Phase 2 — ETL Refactor + 2026 Season
 *Finished March 2026*
 
 - S3 data lake bucket (`disc-golf-data-lake-368365885895`, RemovalPolicy.RETAIN)
-- `etl/` module: parse logic extracted from Alembic into a standalone, Lambda-compatible package
-- Lambda `disc-golf-nightly-etl`: checks loaded rounds nightly at 06:00 UTC, fetches new rounds from PDGA, saves to S3, upserts into RDS
-- EventBridge cron + `make invoke-etl` for manual triggering
-- 6-column tournament seed CSV + `scripts/enrich_tournaments.py` for auto-filling metadata
+- `etl/` module: parse, db, pdga, standings, youtube, podcast — Lambda-compatible
+- Lambda `disc-golf-nightly-etl`: 06:00 UTC daily via EventBridge
+- `make deploy-etl` / `make invoke-etl` / `make migrate-prod` for fast iteration
+- 2026 tournament seed CSV + `scripts/enrich_tournaments.py`
+- Driver split: psycopg2-binary (ECS) / pg8000 (Lambda)
 
-### Phase 2D–E — 2026 season live
+### Phase 3 — Landing Page ("This Week" tab)
 *Finished March 2026*
-
-- `cdk deploy`: S3 bucket, Lambda, and EventBridge live in prod
-- `make upload-legacy` archived 2020–2025 JSONs to S3
-- 2026 tournament IDs seeded via `data/seed/2026_tournaments.csv`
-- `make seed-and-etl`: one command to enrich tournament table + kick ETL (uses Secrets Manager, no password in config)
-- ETL successfully loaded 2026 round data into RDS
-- Driver split: `psycopg2-binary` for ECS app, `pg8000` (pure Python) for Lambda — avoids CDK bundling platform issues on macOS
-- 2026 data flows into the existing Season tab automatically — no separate tab needed for now
-
-### Phase 3 — Landing Page (Steps 1–4 complete)
-*In progress — March 2026*
 
 Full design specification: `docs/landing-page-design.md`
 
-**Step 1 — Static shell** ✅ *complete*
-- "This Week" tab with triptych (Last Result / Next Event / standings placeholder), schedule strip, stat callout, recent results table
-- All data from existing RDS queries — no new ETL
-
-**Step 2 — DGPT Points Standings** ✅ *complete*
-- `etl/standings.py`: POSTs to DGPT.com WordPress AJAX endpoint, parses HTML standings table, upserts `season_standings`
-- `season_standings` table: PK is `(season, pdga_id)` to handle tied players
-- Triptych standings card live: top 5 with AMBER highlight for rank 1, "Before [Next Event]" label
-- `make deploy-etl` target for fast Lambda redeployment without Docker/CDK
-
-**Step 3 — YouTube coverage cards** ✅ *complete*
-- `etl/youtube.py`: RSS feed fetch (JomezPro + 4 creator channels) + JomezPro playlist scraper
-- Playlist scraper uses `ytInitialData` embedded in `youtube.com/playlist?list=` page HTML — no API key required; watch URLs normalized to playlist URL format automatically
-- `sort_order` column on `media_youtube` stores playlist index so rounds display R1 F9 → R1 B9 → … → Best Shots
-- 3A: full event coverage cards from `jomez_playlist_url` playlist (bypasses 15-video RSS cap)
-- 3B: creator preview cards (Aderhold, Goosage, Barela, Wysocki) from 6-day pre-event window
-
-**Step 4 — Tournament schema additions + clickable schedule strip** ✅ *complete*
-- Added `short_name` and `dgpt_url` columns to `tournament` table
-- Schedule strip pills now link to official DGPT event pages (hover shadow, opens in new tab)
-- `enrich_tournaments.py` upserts both new columns on conflict
-- Seed CSV expanded to 11 columns
+- **Step 1** — Static shell: triptych, schedule strip, stat callout, recent results
+- **Step 2** — DGPT Points Standings: scraped from DGPT.com AJAX endpoint, `season_standings` table with `(season, pdga_id)` PK
+- **Step 3** — YouTube coverage cards: JomezPro playlist scraper (bypasses 15-video RSS cap), `sort_order` for round sequence, creator preview cards
+- **Step 4** — Tournament schema: `short_name` + `dgpt_url` columns, clickable schedule strip pills
+- **Step 5** — Podcast episode cards: 4 shows, rss.com links, priority-ordered strip
+- **Step 6** — Polish: green header/nav bar, "This Week" as default tab, About page, mobile triptych stack, Playfair Display for stat callout
 
 ---
 
 ## In Progress
 
-*Nothing currently in progress.*
+### Phase 4 — Text-to-SQL Search
+
+Natural language query interface on the Search tab.
+
+See `docs/search-design.md` for full specification (to be written).
 
 ---
 
 ## Upcoming
-
-### Phase 3 — Landing Page (remaining steps)
-
-**Step 5 — Podcast episode cards** ✅ *complete*
-- `etl/podcast.py`: RSS scraper for 4 shows, fetches 5 most recent episodes per show
-- `podcast_episodes` table with `episode_guid` PK and `show_name` index
-- Retention: keeps max 5 per show via ROW_NUMBER() delete after upsert
-- Lambda fifth job (non-fatal); 18 episodes/run (5+5+5+3 — Course Maintenance has sparse feed)
-- `get_latest_podcast_episodes()`: DISTINCT ON show_name, priority-ordered (Upshot → Tour Life → Grip Locked → Course Maintenance)
-- Podcast cards rendered after video section; 220px fixed-width cards in horizontal scroll strip
-
-**Step 6 — Polish, navigation, and mobile** ✅ *complete*
-- "This Week" is now the default (first) tab; State of Disc Golf tab removed
-- About page: project description + data sources (PDGA, DGPT, YouTube, 4 podcasts)
-- Brand bar + tab list unified to GREEN background; white tab text; AMBER underline on active tab
-- Podcast listen links use show-level rss.com pages for consistent experience
-- "Latest Podcast Episodes" section label
-- Triptych stacks vertically on mobile (≤768px CSS media query)
-- Playfair Display serif font for stat callout number (Google Fonts @import)
-
-### Phase 4 — Text-to-SQL Search (deprioritized)
-
-Natural language query interface: "Show me Paul McBeth's scores at Worlds" → SQL → result table.
-
-- Claude API (`claude-sonnet-4-6`) generates SQL from user input
-- Read-only RDS user required for safety
-- Needs `docs/schema.md` with semantic column descriptions as system prompt context
-- Currently deprioritized — the data set isn't large enough yet to make this compelling
 
 ### Phase 5 — Player Profiles
 
@@ -120,7 +70,6 @@ without a separate routing layer. A player search box on the Search tab leads to
 
 These require a full season of 2026 data to be meaningful:
 
-- **DGPT Points Standings** — reconstruct points table from finish positions and classification weights
 - **Strokes Gained** — hole-by-hole performance vs. field average (requires `hole` table, already populated)
 - **Course difficulty ratings** — average score-to-par by hole, by layout, over time
 - **Cut analysis** — which events have true cuts vs. field thinning; track cut lines historically
@@ -132,11 +81,11 @@ These require a full season of 2026 data to be meaningful:
 
 | Tab / Page | Status | Notes |
 |---|---|---|
-| This Week | Live (Phase 3) | Default tab — triptych, schedule, video, standings |
+| This Week | Live | Default tab — triptych, schedule, video, podcast, standings |
 | Season (2020–2026) | Live | Year selector, stat cards, bar chart, events table |
-| Search | Placeholder | Will drive player profiles in Phase 5 |
-| About | Pending (Step 6) | Simple project description + data source attribution |
-| Player Profile | Not started | Per-player page via URL param |
+| Search | In progress (Phase 4) | Natural language stats query |
+| About | Live | Project description + data source attribution |
+| Player Profile | Not started | Per-player page via URL param (Phase 5) |
 
 ---
 
@@ -166,10 +115,9 @@ This also requires switching from HTTP to HTTPS in the GitHub Actions deploy URL
 
 - **Data completeness audit** — 2020 season has no shot-by-shot data (pre-UDisc era); document this clearly in the UI so users understand the hole table is empty for those years
 - **Round completion detection** — currently the ETL retries rounds that may never complete (e.g., cancelled events). Add a `round_complete` flag or smarter detection.
-- **`get_pdga_round.py` request pacing** — the legacy fetcher has no `time.sleep()` between requests; add 0.5s to match the ETL module before running it again
 
 **Future considerations:**
 
 - **FPO division** — the PDGA API supports `Division=FPO`. Adding FPO data would require schema changes (remove MPO assumption from views) and roughly double the data volume.
-- **Historical data pre-2021** — 2016-2020 PDGA data has no shot-by-shot scores. The hole table can't be populated for those years. A separate display mode for "tournament results only" (no hole-level stats) would be needed.
-- **Shot data** — UDisc Live has shot-by-shot tracking for some events. This is a separate API and a much larger data model change, but would unlock stroke-gained analysis.
+- **Historical data pre-2021** — 2016-2020 PDGA data has no shot-by-shot scores. The hole table can't be populated for those years.
+- **Shot data** — UDisc Live has shot-by-shot tracking for some events. Separate API, much larger data model change, but would unlock strokes-gained analysis.
