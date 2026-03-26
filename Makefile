@@ -2,14 +2,19 @@
 # disc-golf -- AWS infrastructure management
 #
 # Commands:
-#   make start         -> Start RDS + scale ECS to 1  (use after make stop)
-#   make stop          -> Scale ECS to 0 + stop RDS   (eliminates hourly charges)
-#   make status        -> Show current ECS and RDS state
-#   make build-push    -> Build Docker image and push to ECR (initial deploy / manual push)
-#   make invoke-etl    -> Manually run the nightly ETL Lambda
-#   make logs-etl      -> Tail the ETL Lambda's CloudWatch log group
-#   make upload-legacy -> One-time upload of data/pdga/ JSONs to S3 legacy prefix
-#   make destroy       -> Tear down ALL infrastructure via CDK  [warning: deletes data]
+#   make start            -> Start RDS + scale ECS to 1  (use after make stop)
+#   make stop             -> Scale ECS to 0 + stop RDS   (eliminates hourly charges)
+#   make status           -> Show current ECS and RDS state
+#   make build-push       -> Build Docker image and push to ECR (initial deploy / manual push)
+#   make invoke-etl       -> Manually run the nightly ETL Lambda
+#   make logs-etl         -> Tail the ETL Lambda's CloudWatch log group
+#   make deploy-etl       -> Package and deploy ETL Lambda from local source (faster than cdk deploy)
+#   make seed-and-etl     -> Seed tournament table from CSV then run the ETL Lambda
+#   make migrate-prod     -> Run alembic upgrade head against RDS (requires DB_SECRET_ARN + DB_HOST in .env)
+#   make print-rds-config -> Print DB_SECRET_ARN and DB_HOST values to paste into .env
+#   make query-log        -> Show recent search_log entries from RDS
+#   make upload-legacy    -> One-time upload of data/pdga/ JSONs to S3 legacy prefix
+#   make destroy          -> Tear down ALL infrastructure via CDK  [warning: deletes data]
 # -----------------------------------------------------------------------------
 
 AWS_REGION   := us-east-1
