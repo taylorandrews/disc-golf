@@ -7,7 +7,7 @@
 -- Replace 'CHANGE_ME' with the actual password before running.
 -- Store the resulting connection string as DG_READER_URL in .env and Secrets Manager.
 
-CREATE USER dg_reader WITH PASSWORD 'CHANGE_ME';
+CREATE USER dg_reader WITH PASSWORD 'CHANGEME';
 GRANT CONNECT ON DATABASE pdga_data TO dg_reader;
 GRANT USAGE ON SCHEMA public TO dg_reader;
 GRANT SELECT ON tournament, course, player, round, hole TO dg_reader;

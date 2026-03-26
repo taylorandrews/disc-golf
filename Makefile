@@ -188,7 +188,7 @@ query-log:
 	    --query SecretString --output text --no-cli-pager) && \
 	DB_USER=$$(echo "$$SECRET" | python3 -c "import sys,json; print(json.load(sys.stdin)['username'])") && \
 	DB_PASS=$$(echo "$$SECRET" | python3 -c "import sys,json; print(json.load(sys.stdin)['password'])") && \
-	DB_HOST=$$(grep DB_HOST .env | cut -d= -f2) && \
+	DB_HOST=$$(grep ^DB_HOST .env | cut -d= -f2) && \
 	PGPASSWORD="$$DB_PASS" psql -h "$$DB_HOST" -U "$$DB_USER" -d pdga_data -c \
 	    "SELECT path, question, asked_at FROM search_log ORDER BY asked_at DESC LIMIT 50;"
 
@@ -203,7 +203,7 @@ migrate-prod:
 	    --query SecretString --output text --no-cli-pager) && \
 	DB_USER=$$(echo "$$SECRET" | python3 -c "import sys,json; print(json.load(sys.stdin)['username'])") && \
 	DB_PASS=$$(echo "$$SECRET" | python3 -c "import sys,json; print(json.load(sys.stdin)['password'])") && \
-	DB_HOST=$$(grep DB_HOST .env | cut -d= -f2) && \
+	DB_HOST=$$(grep ^DB_HOST .env | cut -d= -f2) && \
 	DATABASE_URL="postgresql+psycopg2://$$DB_USER:$$DB_PASS@$$DB_HOST:5432/pdga_data" \
 	    alembic upgrade head
 	@echo "Done."
