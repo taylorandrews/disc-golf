@@ -44,9 +44,19 @@ Full design specification: `docs/landing-page-design.md`
 
 ### Phase 4 — Text-to-SQL Search
 
-Natural language query interface on the Search tab.
+Natural language query interface on the Search tab. Full specification: `docs/search-design.md`.
 
-See `docs/search-design.md` for full specification (to be written).
+**Completed:**
+- Alembic migration: `search_log` table
+- Read-only `dg_reader` PostgreSQL user (`scripts/create_dg_reader.sql`)
+- `DG_READER_URL` wired into `db_config.py` + ECS task via CDK / Secrets Manager
+- `ANTHROPIC_API_KEY` in Secrets Manager, injected into ECS environment
+- `dashboard/search.py`: Claude Haiku API call, SQL validation, query execution, logging
+- `render_search()` UI: chat input, response card, data table, session counter
+- `make query-log` Makefile target for reviewing `search_log` from RDS
+
+**In progress / tuning:**
+- Prompt and response quality improvements based on real query feedback
 
 ---
 

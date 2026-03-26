@@ -272,28 +272,31 @@ On the Search tab:
 
 ## Implementation Sequence
 
-### Step 1 — Infrastructure + logging table
+### Step 1 — Infrastructure + logging table ✓
 - Alembic migration: `search_log` table
-- Read-only `dg_reader` PostgreSQL user (SQL script, not migration)
-- CDK: wire `ANTHROPIC_API_KEY` secret into ECS task
-- `dashboard/helpers/db_config.py`: add `reader_engine` using `DG_READER_URL`
+- Read-only `dg_reader` PostgreSQL user (`scripts/create_dg_reader.sql`)
+- CDK: `ANTHROPIC_API_KEY` secret wired into ECS task environment
+- `dashboard/helpers/db_config.py`: `reader_engine` via `DG_READER_URL`
 
-### Step 2 — Claude integration + query engine
-- `dashboard/search.py`: Claude API call, SQL validation, query execution, response formatting
-- System prompt with full schema context and data boundaries
-- Rate limiting via `st.session_state`
+### Step 2 — Claude integration + query engine ✓
+- `dashboard/search.py`: Claude Haiku API call, SQL validation, query execution, logging
+- System prompt with full schema context and data scope boundaries
+- Rate limiting via `st.session_state` (10 queries/session, 3s cooldown)
 
-### Step 3 — Search tab UI
-- Replace `render_shell("Search", ...)` with `render_search()`
-- Text input, spinner, response card, session counter
-- Error handling for each failure mode
+### Step 3 — Search tab UI ✓
+- `render_search()` replaces shell placeholder
+- Chat input, spinner, response card (green border on answered), session counter
+- Explicit `color:#1C1C1E` on all rendered HTML to avoid Streamlit CSS inheritance issues
 
-### Step 4 — Log review tooling (lightweight)
-- A `make query-log` Makefile target that SSHes into RDS and dumps recent `out_of_scope` queries
-- Or: a local script that queries the log and prints a summary
+### Step 4 — Log review tooling ✓
+- `make query-log`: dumps recent `search_log` rows from RDS (path, question, asked_at)
 
 ---
 
-## Open Questions
+## Ongoing — Prompt Tuning
 
-- None currently — ready to build once Anthropic API key is available.
+With the feature live, improvements are driven by real query logs. Run `make query-log`
+to review what users are asking and where the system is failing. Common failure modes:
+- `error` path: SQL generated but failed validation or execution → refine schema description or add SQL examples
+- `out_of_scope` on questions we should be able to answer → expand system prompt scope
+- `answered` with wrong/confusing results → tighten SQL rules or add guardrails
