@@ -1198,7 +1198,7 @@ def render_search():
 
         # Question echo
         st.markdown(
-            f'<div style="font-weight:600;margin-bottom:8px;">{question}</div>',
+            f'<div style="font-weight:600;margin-bottom:8px;color:#1C1C1E;">{question}</div>',
             unsafe_allow_html=True,
         )
 
@@ -1206,7 +1206,7 @@ def render_search():
         border_color = "#1D6B44" if path == "answered" else "#E5E7EB"
         st.markdown(
             f'<div style="background:#fff;border:1px solid {border_color};border-radius:8px;'
-            f'padding:16px 20px;margin-bottom:16px;line-height:1.6;">'
+            f'padding:16px 20px;margin-bottom:16px;line-height:1.6;color:#1C1C1E;">'
             f'{response}'
             f'</div>',
             unsafe_allow_html=True,
@@ -1217,14 +1217,14 @@ def render_search():
             # Build a clean HTML table
             headers = "".join(
                 f'<th style="text-align:left;padding:6px 12px;border-bottom:2px solid #E5E7EB;'
-                f'font-size:0.8rem;color:#6B7280;text-transform:uppercase;letter-spacing:0.05em;">'
+                f'font-size:0.8rem;color:#6B7280;text-transform:uppercase;letter-spacing:0.05em;background:#fff;">'
                 f'{col}</th>'
                 for col in df.columns
             )
             rows = ""
             for _, row in df.iterrows():
                 cells = "".join(
-                    f'<td style="padding:6px 12px;border-bottom:1px solid #F3F4F6;font-size:0.9rem;">'
+                    f'<td style="padding:6px 12px;border-bottom:1px solid #F3F4F6;font-size:0.9rem;color:#1C1C1E;background:#fff;">'
                     f'{val}</td>'
                     for val in row
                 )
