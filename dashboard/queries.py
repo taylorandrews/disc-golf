@@ -114,7 +114,7 @@ def get_last_result() -> dict:
         ORDER BY ts.end_date DESC
         LIMIT 1;
     """
-    df = run_query(query)
+    df = pd.read_sql(query, engine)
     return df.iloc[0].to_dict() if not df.empty else {}
 
 
@@ -134,7 +134,7 @@ def get_next_event() -> dict:
         ORDER BY start_date
         LIMIT 1;
     """
-    df = run_query(query)
+    df = pd.read_sql(query, engine)
     return df.iloc[0].to_dict() if not df.empty else {}
 
 
@@ -154,7 +154,7 @@ def get_schedule_strip(season: int) -> pd.DataFrame:
         WHERE season = {season}
         ORDER BY start_date;
     """
-    return run_query(query)
+    return pd.read_sql(query, engine)
 
 
 @st.cache_data(ttl=300)
@@ -174,7 +174,7 @@ def get_recent_results(limit: int = 4) -> pd.DataFrame:
         ORDER BY ts.end_date DESC
         LIMIT {limit};
     """
-    return run_query(query)
+    return pd.read_sql(query, engine)
 
 
 _JOMEZ_CHANNEL = "UCmGyCEbHfY91NFwHgioNLMQ"
@@ -228,7 +228,7 @@ def get_coverage_videos(event_name: str) -> pd.DataFrame:
           AND {conditions}
         ORDER BY COALESCE(sort_order, 9999) ASC, published_at ASC;
     """
-    return run_query(query)
+    return pd.read_sql(query, engine)
 
 
 @st.cache_data(ttl=3600)
@@ -248,7 +248,7 @@ def get_preview_videos(start_date) -> pd.DataFrame:
           AND published_at <  '{start_date}'::date + INTERVAL '1 day'
         ORDER BY channel_id, published_at DESC;
     """
-    df = run_query(query)
+    df = pd.read_sql(query, engine)
     if not df.empty:
         df["_order"] = df["channel_id"].map(_PREVIEW_CHANNEL_ORDER)
         df = df.sort_values("_order").drop(columns="_order").reset_index(drop=True)
@@ -264,7 +264,7 @@ def get_season_standings_top5(season: int) -> pd.DataFrame:
         ORDER BY rank
         LIMIT 5;
     """
-    return run_query(query)
+    return pd.read_sql(query, engine)
 
 
 @st.cache_data(ttl=3600)
@@ -276,7 +276,7 @@ def get_latest_podcast_episodes() -> pd.DataFrame:
         FROM podcast_episodes
         ORDER BY show_name, published_at DESC;
     """
-    df = run_query(query)
+    df = pd.read_sql(query, engine)
     if not df.empty:
         show_order = {s: i for i, s in enumerate(
             ["Course Maintenance", "Tour Life", "Grip Locked", "The Upshot"]
@@ -304,7 +304,7 @@ def get_stat_callout(season: int) -> dict:
         ORDER BY ts.total_score ASC
         LIMIT 1;
     """
-    df = run_query(query)
+    df = pd.read_sql(query, engine)
     if df.empty:
         return {}
     row = df.iloc[0]
