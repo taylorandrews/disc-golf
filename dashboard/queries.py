@@ -233,25 +233,29 @@ def get_coverage_videos(event_name: str) -> pd.DataFrame:
 
 @st.cache_data(ttl=3600)
 def get_preview_videos(start_date) -> pd.DataFrame:
-    """Most recent video per preview channel posted in the 7 days before start_date.
+    """Up to 3 most recent videos per preview channel posted in the 9 days before start_date.
 
-    Returns up to 4 rows (one per channel) sorted by channel priority:
+    Returns up to 12 rows sorted by channel priority then recency:
     Aderhold → Goosage → Barela → Wysocki.
     """
     ch_list = ", ".join(f"'{c}'" for c in _PREVIEW_CHANNELS)
     query = f"""
-        SELECT DISTINCT ON (channel_id)
-            channel_id, channel_name, title, published_at, thumbnail_url, video_url
-        FROM media_youtube
-        WHERE channel_id IN ({ch_list})
-          AND published_at >= '{start_date}'::date - INTERVAL '6 days'
-          AND published_at <  '{start_date}'::date + INTERVAL '1 day'
+        SELECT channel_id, channel_name, title, published_at, thumbnail_url, video_url
+        FROM (
+            SELECT channel_id, channel_name, title, published_at, thumbnail_url, video_url,
+                   ROW_NUMBER() OVER (PARTITION BY channel_id ORDER BY published_at DESC) AS rn
+            FROM media_youtube
+            WHERE channel_id IN ({ch_list})
+              AND published_at >= '{start_date}'::date - INTERVAL '8 days'
+              AND published_at <  '{start_date}'::date + INTERVAL '1 day'
+        ) ranked
+        WHERE rn <= 3
         ORDER BY channel_id, published_at DESC;
     """
     df = pd.read_sql(query, engine)
     if not df.empty:
         df["_order"] = df["channel_id"].map(_PREVIEW_CHANNEL_ORDER)
-        df = df.sort_values("_order").drop(columns="_order").reset_index(drop=True)
+        df = df.sort_values(["_order", "published_at"], ascending=[True, False]).drop(columns="_order").reset_index(drop=True)
     return df
 
 
