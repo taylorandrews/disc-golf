@@ -447,20 +447,23 @@ def inject_css():
 
     /* ── Landing page — schedule strip ── */
     .sched-strip {{
+        display: flex;
+        align-items: stretch;
         overflow-x: auto;
-        white-space: nowrap;
-        padding: 4px 0 12px 0;
+        gap: 8px;
+        padding: 8px 0 12px 0;
         scrollbar-width: thin;
     }}
     .sched-pill {{
-        display: inline-block;
-        padding: 8px 14px;
-        margin-right: 8px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 14px 14px;
         border-radius: 6px;
         border: 1px solid {BORDER};
         background: {WHITE};
         cursor: pointer;
-        vertical-align: top;
+        flex-shrink: 0;
         border-left-width: 4px;
         border-left-style: solid;
     }}
@@ -481,7 +484,7 @@ def inject_css():
         color: {MUTED};
         display: block;
     }}
-    a.sched-link {{ text-decoration: none; color: inherit; }}
+    a.sched-link {{ text-decoration: none; color: inherit; display: flex; align-items: stretch; }}
     a.sched-link:hover .sched-pill {{ box-shadow: 0 2px 6px rgba(0,0,0,0.12); }}
     .sched-completed .sched-pill-name {{ color: {MUTED}; }}
     .sched-current {{ background: {LIGHT_GREEN}; }}
@@ -509,20 +512,6 @@ def inject_css():
     }}
     .cal-today {{ background: {TEXT}; color: {WHITE} !important; font-weight: 700; }}
     .cal-event {{ color: {WHITE} !important; font-weight: 600; }}
-    .cal-legend {{ display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }}
-    .cal-legend-item {{
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        font-size: 11px;
-        color: {MUTED};
-    }}
-    .cal-legend-dot {{
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        flex-shrink: 0;
-    }}
 
     /* ── Landing page — video section ── */
     .vid-section-label {{
@@ -1043,26 +1032,10 @@ def _build_calendar_html(df: pd.DataFrame) -> str:
                 cells += f'<td><span class="cal-day">{day}</span></td>'
         rows_html += f"<tr>{cells}</tr>"
 
-    # Legend: unique (color, name) pairs for events this month
-    seen: dict[str, str] = {}
-    for _, row in df.iterrows():
-        start = pd.to_datetime(row["start_date"]).date()
-        end = pd.to_datetime(row["end_date"]).date()
-        if not (start.year == year and start.month == month) and not (end.year == year and end.month == month):
-            continue
-        color = _classification_color(row["classification"], bool(row["is_worlds"]))
-        seen[color] = row["event_name"]
-    legend = "".join(
-        f'<span class="cal-legend-item"><span class="cal-legend-dot" style="background:{c};"></span>{n}</span>'
-        for c, n in seen.items()
-    )
-    legend_html = f'<div class="cal-legend">{legend}</div>' if legend else ""
-
     return (f'<div class="table-card">'
             f'<div class="dg-section-header">{month_label}</div>'
             f'<table class="cal-grid"><thead><tr>{headers}</tr></thead>'
             f'<tbody>{rows_html}</tbody></table>'
-            f'{legend_html}'
             f'</div>')
 
 
@@ -1072,37 +1045,41 @@ def _render_schedule_strip(season: int) -> None:
         return
 
     today = datetime.date.today()
-    pills = ""
+
+    def _pill_html(row: pd.Series, state_cls: str, name_color: str) -> str:
+        color = _classification_color(row["classification"], bool(row["is_worlds"]))
+        date_str = pd.to_datetime(row["start_date"]).strftime("%b %-d")
+        location = row.get("location") or ""
+        pill = (f'<span class="sched-pill {state_cls}" style="border-left-color:{color};">'
+                f'<span class="sched-pill-name" style="color:{name_color};">{row["event_name"]}</span>'
+                f'<span class="sched-pill-location">{location}</span>'
+                f'<span class="sched-pill-date">{date_str}</span>'
+                f'</span>')
+        dgpt_url = row.get("dgpt_url") or ""
+        if dgpt_url:
+            return f'<a class="sched-link" href="{dgpt_url}" target="_blank" rel="noopener">{pill}</a>'
+        return pill
+
+    # Upcoming/current first (ascending), completed last (most recent first)
+    upcoming, completed = [], []
     for _, row in df.iterrows():
         end = pd.to_datetime(row["end_date"]).date()
         start = pd.to_datetime(row["start_date"]).date()
-        color = _classification_color(row["classification"], bool(row["is_worlds"]))
-        date_str = pd.to_datetime(row["start_date"]).strftime("%b %-d")
-
         if end < today:
-            state_cls = "sched-completed"
-            name_color = MUTED
+            completed.append(_pill_html(row, "sched-completed", MUTED))
         elif start <= today <= end:
-            state_cls = "sched-current"
-            name_color = GREEN
+            upcoming.append(_pill_html(row, "sched-current", GREEN))
         else:
-            state_cls = ""
-            name_color = TEXT
+            upcoming.append(_pill_html(row, "", TEXT))
 
-        location = row.get("location") or ""
-        pill = f"""<span class="sched-pill {state_cls}" style="border-left-color:{color};"><span class="sched-pill-name" style="color:{name_color};">{row["event_name"]}</span><span class="sched-pill-location">{location}</span><span class="sched-pill-date">{date_str}</span></span>"""
-        dgpt_url = row.get("dgpt_url") or ""
-        if dgpt_url:
-            pills += f'<a class="sched-link" href="{dgpt_url}" target="_blank" rel="noopener">{pill}</a>'
-        else:
-            pills += pill
+    pills = "".join(upcoming) + "".join(reversed(completed))
 
     col_strip, col_cal = st.columns([3, 2])
     with col_strip:
         st.markdown(f"""
-        <div class="table-card">
+        <div class="table-card" style="display:flex;flex-direction:column;">
             <div class="dg-section-header">{season} Schedule</div>
-            <div class="sched-strip">{pills}</div>
+            <div class="sched-strip" style="flex:1;">{pills}</div>
         </div>
         """, unsafe_allow_html=True)
     with col_cal:
