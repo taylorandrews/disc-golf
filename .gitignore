@@ -8,6 +8,8 @@ data/
 notes/
 
 # Python
+dashboard/helpers/__pycache__/
+helpers/__pycache__
 __pycache__/
 *.pyc
 
