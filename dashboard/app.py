@@ -448,11 +448,11 @@ def inject_css():
     /* ── Landing page — schedule strip ── */
     .sched-strip {{
         display: flex;
-        align-items: stretch;
         overflow-x: auto;
         gap: 8px;
         padding: 8px 0 12px 0;
         scrollbar-width: thin;
+        min-height: 200px;
     }}
     .sched-pill {{
         display: flex;
@@ -463,7 +463,8 @@ def inject_css():
         border: 1px solid {BORDER};
         background: {WHITE};
         cursor: pointer;
-        flex-shrink: 0;
+        flex: none;
+        align-self: stretch;
         border-left-width: 4px;
         border-left-style: solid;
     }}
@@ -484,7 +485,7 @@ def inject_css():
         color: {MUTED};
         display: block;
     }}
-    a.sched-link {{ text-decoration: none; color: inherit; display: flex; align-items: stretch; }}
+    a.sched-link {{ text-decoration: none; color: inherit; display: flex; flex: none; align-self: stretch; }}
     a.sched-link:hover .sched-pill {{ box-shadow: 0 2px 6px rgba(0,0,0,0.12); }}
     .sched-completed .sched-pill-name {{ color: {MUTED}; }}
     .sched-current {{ background: {LIGHT_GREEN}; }}
@@ -1060,26 +1061,22 @@ def _render_schedule_strip(season: int) -> None:
             return f'<a class="sched-link" href="{dgpt_url}" target="_blank" rel="noopener">{pill}</a>'
         return pill
 
-    # Upcoming/current first (ascending), completed last (most recent first)
-    upcoming, completed = [], []
+    pills = ""
     for _, row in df.iterrows():
         end = pd.to_datetime(row["end_date"]).date()
         start = pd.to_datetime(row["start_date"]).date()
         if end < today:
-            completed.append(_pill_html(row, "sched-completed", MUTED))
-        elif start <= today <= end:
-            upcoming.append(_pill_html(row, "sched-current", GREEN))
-        else:
-            upcoming.append(_pill_html(row, "", TEXT))
-
-    pills = "".join(upcoming) + "".join(reversed(completed))
+            continue
+        state_cls = "sched-current" if start <= today <= end else ""
+        name_color = GREEN if state_cls else TEXT
+        pills += _pill_html(row, state_cls, name_color)
 
     col_strip, col_cal = st.columns([3, 2])
     with col_strip:
         st.markdown(f"""
-        <div class="table-card" style="display:flex;flex-direction:column;">
+        <div class="table-card">
             <div class="dg-section-header">{season} Schedule</div>
-            <div class="sched-strip" style="flex:1;">{pills}</div>
+            <div class="sched-strip">{pills}</div>
         </div>
         """, unsafe_allow_html=True)
     with col_cal:
