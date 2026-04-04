@@ -469,6 +469,12 @@ def inject_css():
         display: block;
         margin-bottom: 2px;
     }}
+    .sched-pill-location {{
+        font-size: 11px;
+        color: {MUTED};
+        display: block;
+        margin-bottom: 2px;
+    }}
     .sched-pill-date {{
         font-size: 11px;
         color: {MUTED};
@@ -979,7 +985,8 @@ def _render_schedule_strip(season: int) -> None:
             state_cls = ""
             name_color = TEXT
 
-        pill = f"""<span class="sched-pill {state_cls}" style="border-left-color:{color};"><span class="sched-pill-name" style="color:{name_color};">{row["event_name"]}</span><span class="sched-pill-date">{date_str}</span></span>"""
+        location = row.get("location") or ""
+        pill = f"""<span class="sched-pill {state_cls}" style="border-left-color:{color};"><span class="sched-pill-name" style="color:{name_color};">{row["event_name"]}</span><span class="sched-pill-location">{location}</span><span class="sched-pill-date">{date_str}</span></span>"""
         dgpt_url = row.get("dgpt_url") or ""
         if dgpt_url:
             pills += f'<a class="sched-link" href="{dgpt_url}" target="_blank" rel="noopener">{pill}</a>'
