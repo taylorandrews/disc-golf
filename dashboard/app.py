@@ -2,6 +2,7 @@ import streamlit as st
 import plotly.graph_objects as go
 import pandas as pd
 
+import calendar as cal_mod
 import datetime
 
 from search import run_search, queries_remaining
@@ -486,6 +487,43 @@ def inject_css():
     .sched-current {{ background: {LIGHT_GREEN}; }}
     .sched-current .sched-pill-name {{ color: {GREEN}; }}
 
+    /* ── Landing page — month calendar ── */
+    .cal-grid {{ width: 100%; border-collapse: collapse; }}
+    .cal-grid th {{
+        font-size: 11px;
+        color: {MUTED};
+        text-align: center;
+        padding: 4px 0 8px 0;
+        font-weight: 600;
+    }}
+    .cal-grid td {{ text-align: center; padding: 3px 0; }}
+    .cal-day {{
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        font-size: 13px;
+        color: {TEXT};
+    }}
+    .cal-today {{ background: {TEXT}; color: {WHITE} !important; font-weight: 700; }}
+    .cal-event {{ color: {WHITE} !important; font-weight: 600; }}
+    .cal-legend {{ display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }}
+    .cal-legend-item {{
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 11px;
+        color: {MUTED};
+    }}
+    .cal-legend-dot {{
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        flex-shrink: 0;
+    }}
+
     /* ── Landing page — video section ── */
     .vid-section-label {{
         font-size: 10px;
@@ -962,6 +1000,72 @@ def _render_triptych(last: dict, nxt: dict, standings: pd.DataFrame) -> None:
     )
 
 
+def _build_calendar_html(df: pd.DataFrame) -> str:
+    today = datetime.date.today()
+    year, month = today.year, today.month
+
+    # Map day -> (color, event_name) for every tournament day in this month
+    day_info: dict[int, tuple[str, str]] = {}
+    for _, row in df.iterrows():
+        start = pd.to_datetime(row["start_date"]).date()
+        end = pd.to_datetime(row["end_date"]).date()
+        color = _classification_color(row["classification"], bool(row["is_worlds"]))
+        name = row["event_name"]
+        d = start
+        while d <= end:
+            if d.year == year and d.month == month:
+                day_info[d.day] = (color, name)
+            d += datetime.timedelta(days=1)
+
+    month_label = today.strftime("%B %Y")
+    weeks = cal_mod.monthcalendar(year, month)
+
+    headers = "".join(f"<th>{h}</th>" for h in ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"])
+    rows_html = ""
+    for week in weeks:
+        cells = ""
+        for day in week:
+            if day == 0:
+                cells += "<td></td>"
+            elif day == today.day and day in day_info:
+                color, name = day_info[day]
+                cells += (f'<td title="{name}">'
+                          f'<span class="cal-day cal-event" style="background:{color};outline:2px solid {TEXT};outline-offset:2px;">'
+                          f'{day}</span></td>')
+            elif day == today.day:
+                cells += f'<td><span class="cal-day cal-today">{day}</span></td>'
+            elif day in day_info:
+                color, name = day_info[day]
+                cells += (f'<td title="{name}">'
+                          f'<span class="cal-day cal-event" style="background:{color};">'
+                          f'{day}</span></td>')
+            else:
+                cells += f'<td><span class="cal-day">{day}</span></td>'
+        rows_html += f"<tr>{cells}</tr>"
+
+    # Legend: unique (color, name) pairs for events this month
+    seen: dict[str, str] = {}
+    for _, row in df.iterrows():
+        start = pd.to_datetime(row["start_date"]).date()
+        end = pd.to_datetime(row["end_date"]).date()
+        if not (start.year == year and start.month == month) and not (end.year == year and end.month == month):
+            continue
+        color = _classification_color(row["classification"], bool(row["is_worlds"]))
+        seen[color] = row["event_name"]
+    legend = "".join(
+        f'<span class="cal-legend-item"><span class="cal-legend-dot" style="background:{c};"></span>{n}</span>'
+        for c, n in seen.items()
+    )
+    legend_html = f'<div class="cal-legend">{legend}</div>' if legend else ""
+
+    return (f'<div class="table-card">'
+            f'<div class="dg-section-header">{month_label}</div>'
+            f'<table class="cal-grid"><thead><tr>{headers}</tr></thead>'
+            f'<tbody>{rows_html}</tbody></table>'
+            f'{legend_html}'
+            f'</div>')
+
+
 def _render_schedule_strip(season: int) -> None:
     df = get_schedule_strip(season)
     if df.empty:
@@ -993,12 +1097,16 @@ def _render_schedule_strip(season: int) -> None:
         else:
             pills += pill
 
-    st.markdown(f"""
-    <div class="table-card">
-        <div class="dg-section-header">{season} Schedule</div>
-        <div class="sched-strip">{pills}</div>
-    </div>
-    """, unsafe_allow_html=True)
+    col_strip, col_cal = st.columns([3, 2])
+    with col_strip:
+        st.markdown(f"""
+        <div class="table-card">
+            <div class="dg-section-header">{season} Schedule</div>
+            <div class="sched-strip">{pills}</div>
+        </div>
+        """, unsafe_allow_html=True)
+    with col_cal:
+        st.markdown(_build_calendar_html(df), unsafe_allow_html=True)
 
 
 def _render_video_section(last: dict, nxt: dict) -> None:
