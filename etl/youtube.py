@@ -1,17 +1,21 @@
 """
-YouTube channel RSS scraper + JomezPro playlist scraper.
+YouTube channel scraper + JomezPro playlist scraper.
 
-RSS feeds (15 most recent per channel) cover the preview creator channels
-and supplement the Jomez coverage. The playlist scraper supplements the RSS
-by fetching all videos from the current event's JomezPro playlist, which
-ensures R1 and early-round videos aren't lost when Jomez posts 20+ videos
-in an event week.
+Primary fetch strategy: YouTube RSS feeds (15 most recent per channel).
+Fallback: channel /videos page scrape using ytInitialData (same technique
+as the Jomez playlist scraper) when RSS returns 4xx/5xx.
 
-sort_order (from playlist index) is used for display ordering in the
-coverage strip so rounds appear chronologically: R1 F9 → R1 B9 → R2 …
+The playlist scraper fetches all videos from the current event's JomezPro
+playlist so R1 and early-round videos aren't lost when Jomez posts 20+
+videos in an event week.
+
+sort_order (from playlist index) drives display ordering for Jomez coverage
+so rounds appear chronologically: R1 F9 → R1 B9 → R2 …
 """
+import datetime
 import json
 import logging
+import re
 import xml.etree.ElementTree as ET
 from urllib.parse import urlparse, parse_qs
 
@@ -81,15 +85,90 @@ def _parse_feed(xml_text: str, channel_id: str, channel_name: str) -> list[dict]
     return videos
 
 
+def _parse_relative_date(text: str) -> str:
+    """Convert a YouTube relative date string to an ISO-8601 timestamp.
+
+    YouTube publishes strings like '2 days ago', '1 week ago', '3 months ago'.
+    Converts to an absolute date by subtracting from today. Hours/minutes/seconds
+    map to today. Falls back to today on unrecognised formats.
+    """
+    today = datetime.date.today()
+    m = re.match(r"(\d+)\s+(second|minute|hour|day|week|month|year)s?\s+ago", text.lower().strip())
+    if not m:
+        return f"{today.isoformat()}T00:00:00+00:00"
+    n, unit = int(m.group(1)), m.group(2)
+    if unit == "day":
+        d = today - datetime.timedelta(days=n)
+    elif unit == "week":
+        d = today - datetime.timedelta(weeks=n)
+    elif unit == "month":
+        d = today - datetime.timedelta(days=n * 30)
+    elif unit == "year":
+        d = today - datetime.timedelta(days=n * 365)
+    else:  # hour / minute / second → today
+        d = today
+    return f"{d.isoformat()}T00:00:00+00:00"
+
+
+def fetch_channel_page(channel_id: str, channel_name: str) -> list[dict]:
+    """Scrape the channel /videos page using ytInitialData.
+
+    Falls back to when the RSS endpoint returns 4xx/5xx. Returns up to ~30
+    most recent videos with approximate published_at dates derived from the
+    relative time strings YouTube embeds in the page.
+    """
+    url = f"https://www.youtube.com/channel/{channel_id}/videos"
+    resp = requests.get(url, headers=_PAGE_HEADERS, timeout=20)
+    resp.raise_for_status()
+
+    marker = "ytInitialData = "
+    idx = resp.text.find(marker)
+    if idx < 0:
+        logger.warning("ytInitialData not found on channel page for %s", channel_name)
+        return []
+    try:
+        data, _ = json.JSONDecoder().raw_decode(resp.text, idx + len(marker))
+    except (json.JSONDecodeError, ValueError) as exc:
+        logger.warning("Failed to parse ytInitialData for %s: %s", channel_name, exc)
+        return []
+
+    videos = []
+    for renderer in _find_key(data, "videoRenderer"):
+        video_id = renderer.get("videoId", "")
+        if not video_id:
+            continue
+        title_runs = renderer.get("title", {}).get("runs", [])
+        title = title_runs[0].get("text", "").strip() if title_runs else ""
+        rel_text = renderer.get("publishedTimeText", {}).get("simpleText", "")
+        published_at = _parse_relative_date(rel_text) if rel_text else f"{datetime.date.today().isoformat()}T00:00:00+00:00"
+        videos.append({
+            "video_id": video_id,
+            "channel_id": channel_id,
+            "channel_name": channel_name,
+            "title": title,
+            "published_at": published_at,
+            "thumbnail_url": f"https://img.youtube.com/vi/{video_id}/mqdefault.jpg",
+            "video_url": f"https://www.youtube.com/watch?v={video_id}",
+            "sort_order": None,
+        })
+    return videos
+
+
 def fetch_all_channels() -> list[dict]:
     videos = []
     for channel_id, channel_name in CHANNELS:
         try:
             channel_videos = fetch_channel(channel_id, channel_name)
-            logger.info("Fetched %d videos from %s", len(channel_videos), channel_name)
+            logger.info("Fetched %d videos via RSS from %s", len(channel_videos), channel_name)
             videos.extend(channel_videos)
         except Exception as exc:
-            logger.warning("Failed to fetch %s: %s", channel_name, exc)
+            logger.warning("RSS failed for %s: %s — trying channel page", channel_name, exc)
+            try:
+                channel_videos = fetch_channel_page(channel_id, channel_name)
+                logger.info("Fetched %d videos via page scrape from %s", len(channel_videos), channel_name)
+                videos.extend(channel_videos)
+            except Exception as exc2:
+                logger.warning("Channel page also failed for %s: %s", channel_name, exc2)
     return videos
 
 
