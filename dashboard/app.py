@@ -1010,7 +1010,7 @@ def _build_calendar_html(df: pd.DataFrame) -> str:
     month_label = today.strftime("%B %Y")
     weeks = cal_mod.monthcalendar(year, month)
 
-    headers = "".join(f"<th>{h}</th>" for h in ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"])
+    headers = "".join(f"<th>{h}</th>" for h in ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"])
     rows_html = ""
     for week in weeks:
         cells = ""
