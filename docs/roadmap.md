@@ -110,6 +110,17 @@ These require a full season of 2026 data to be meaningful:
 
 This also requires switching from HTTP to HTTPS in the GitHub Actions deploy URL.
 
+**Estimated incremental cost (on top of the existing ~$50/month running stack):**
+
+| Item | Cost |
+|---|---|
+| ACM public certificate | $0 (free from AWS) |
+| Route 53 hosted zone (if DNS is moved to AWS) | ~$0.50/month + ~$0.40 per million queries |
+| Domain renewal | ~$10-15/year (registrar-dependent) |
+| ALB / ECS / data transfer | No change — HTTPS on the existing ALB is free |
+
+Keeping DNS at the current registrar (no Route 53) drops the incremental AWS cost to $0 — only the domain renewal remains.
+
 ---
 
 ## Recommendations
