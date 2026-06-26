@@ -29,6 +29,28 @@ make start
 This starts RDS, waits for it to be available, then scales ECS back to 1.
 The Lambda ETL runs on its own schedule (06:00 UTC) — no action needed.
 
+### Dormancy snapshot (2026-06-25 teardown)
+
+The stack was fully destroyed on **2026-06-25** for cost dormancy (~$0/month). Before
+teardown, a manual RDS snapshot was taken so the DB can be restored without re-running
+the ~10-min legacy data load:
+
+- **Snapshot ID:** `disc-golf-db-dormancy-2026-06-25` (region `us-east-1`, 20 GB)
+- **Also retained:** S3 data lake `disc-golf-data-lake-368365885895` (raw PDGA JSON)
+
+To restore the DB *from the snapshot* instead of reloading data, temporarily add
+`snapshot_identifier="disc-golf-db-dormancy-2026-06-25"` to the RDS construct in
+`infra/stacks/database_stack.py` before `cdk deploy`, then remove it after the first
+deploy. (When restoring from a snapshot, RDS ignores the generated master password —
+the DB keeps its original credentials, so `make migrate-prod`/`seed-and-etl` for the
+schema+data steps below are not needed; skip straight to app + Lambda deploy.)
+Otherwise follow the full rebuild below, which reloads from local JSON / S3.
+
+When you no longer need the safety net, delete the snapshot to stop its ~$0.40/month:
+```bash
+aws rds delete-db-snapshot --db-snapshot-identifier disc-golf-db-dormancy-2026-06-25 --region us-east-1
+```
+
 ### After `make destroy` (full rebuild — ~20 min)
 
 Docker must be running (Lambda bundling requires it).
